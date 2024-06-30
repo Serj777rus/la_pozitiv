@@ -223,8 +223,8 @@
         line-height: 100%;
         max-height: 80px;
         overflow: hidden;
-        -webkit-line-clamp: 3; /* Число отображаемых строк */
-    display: -webkit-box; /* Включаем флексбоксы */
+        -webkit-line-clamp: 3;
+    display: -webkit-box;
     -webkit-box-orient: vertical;
     }
     button {

@@ -5,7 +5,7 @@
             <div class="menus">
                 <router-link :to="{ name: 'home' }"><p>Главная</p></router-link>
                 <router-link :to="{ name: 'education' }"><p>Направления</p></router-link>
-                <p>Педагоги</p>
+                <router-link :to="{ name: 'teachers' }"><p>Педагоги</p></router-link>
                 <p>Наша жизнь</p>
                 <p>Цены</p>
                 <p>Контакты</p>
