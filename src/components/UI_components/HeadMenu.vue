@@ -7,7 +7,7 @@
                 <router-link :to="{ name: 'education' }"><p>Направления</p></router-link>
                 <router-link :to="{ name: 'teachers' }"><p>Педагоги</p></router-link>
                 <p>Наша жизнь</p>
-                <p>Цены</p>
+                <router-link :to="{ name: 'price' }"><p>Цены</p></router-link>
                 <p>Контакты</p>
             </div>
             <div class="button_div">

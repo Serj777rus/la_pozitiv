@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from './components/Home.vue'
 import Education from './components/Education.vue'
 import Teachers from './components/Teachers.vue'
+import Price from './components/Price.vue'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -33,6 +34,11 @@ const router = createRouter({
         path: '/teachers',
         component: Teachers,
         name: 'teachers'
+    },
+    {
+        path: '/price',
+        component: Price,
+        name: 'price'
     }],
     history: createWebHistory()
 })
