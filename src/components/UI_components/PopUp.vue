@@ -1,5 +1,5 @@
 <template>
-    <div class="popup" v-show="isShowPop" @openPop="openPop">
+    <div class="popup">
         <div class="popup_modal">
             <div class="zagolovki">
                 <p>Оставьте контакты</p>

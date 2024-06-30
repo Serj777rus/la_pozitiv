@@ -3,8 +3,8 @@
         <div class="headmenu_div">
             <img src="~@/assets/photos/logo.svg">
             <div class="menus">
-                <p>Главная</p>
-                <p>Направления</p>
+                <router-link :to="{ name: 'home' }"><p>Главная</p></router-link>
+                <router-link :to="{ name: 'education' }"><p>Направления</p></router-link>
                 <p>Педагоги</p>
                 <p>Наша жизнь</p>
                 <p>Цены</p>
@@ -78,5 +78,9 @@
         border-radius: 24px;
         transition: all 160ms ease;
         box-sizing: border-box;
+    }
+    a {
+        text-decoration: none;
+        color: #fff;
     }
 </style>

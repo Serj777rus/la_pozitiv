@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from './components/Home.vue'
+import Education from './components/Education.vue'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -21,6 +22,11 @@ const router = createRouter({
         path: '/',
         component: Home,
         name: 'home'
+    },
+    {
+        path: '/education',
+        component: Education,
+        name: 'education'
     }],
     history: createWebHistory()
 })
