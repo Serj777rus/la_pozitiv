@@ -231,6 +231,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         padding: 6px 20px;
         background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
         border-radius: 16px;
+        font-size: 20px;
     }
     .description_tab {
         margin-top: 32px;

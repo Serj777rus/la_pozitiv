@@ -5,6 +5,7 @@ import Home from './components/Home.vue'
 import Education from './components/Education.vue'
 import Teachers from './components/Teachers.vue'
 import Price from './components/Price.vue'
+import Concerts from './components/Concerts.vue'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -39,6 +40,11 @@ const router = createRouter({
         path: '/price',
         component: Price,
         name: 'price'
+    },
+    {
+        path: '/concerts',
+        component: Concerts,
+        name: 'concerts'
     }],
     history: createWebHistory()
 })

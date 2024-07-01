@@ -409,7 +409,6 @@
 .active {
     background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
     color: #fff;
-    border: 1px solid #494949;
     width: 80px;
     height: 80px;
 }
