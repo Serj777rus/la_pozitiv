@@ -264,16 +264,61 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         width: 360px;
         height: 480px;
         box-sizing: border-box;
-        padding: 24px;
+        padding: 32px;
         position: relative;
         background: linear-gradient(45deg, rgba(26, 26, 26, 0.4) 0%, rgba(55, 64, 132, 0.4) 50%, rgba(130, 40, 114, 0.4) 100%);
         border-radius: 24px;
         border: 1px solid #494949;
         box-shadow: 10px 10px 16px 0px rgba(0, 0, 0, .25);
+        display: flex;
+        flex-direction: column;
     }
     .card img {
         position: absolute;
         top: -38px;
         right: -38px;
+    }
+    .card p {
+        font-size: 16px;
+        font-weight: 200;
+        line-height: 100%;
+        margin-bottom: 12px;
+    }
+    .card h3 {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 100%;
+        margin-bottom: 56px;
+    }
+    .card span {
+        font-size: 48px;
+        font-weight: 500;
+        line-height: 100%;
+    }
+    .card ul {
+        margin-top: 56px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: 200;
+        list-style-position: inside;
+    }
+    .card button {
+        display: flex;
+        padding: 16px 32px;
+        background: transparent;
+        border-radius: 32px;
+        border: 1px solid #fff;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 100%;
+        color: #fff;
+        margin-top: auto;
+        align-self: center;
+        transition: all 200ms ease;
+    }
+    .card button:hover {
+        background: #fff;
+        color: #333;
     }
 </style>
