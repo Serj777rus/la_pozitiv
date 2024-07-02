@@ -226,6 +226,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         line-height: 100%;
         box-sizing: border-box;
         transition: all 160ms ease;
+        cursor: pointer;
     }
     .active {
         padding: 6px 20px;
@@ -321,5 +322,6 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     .card button:hover {
         background: #fff;
         color: #333;
+        transform: scale(1.1);
     }
 </style>
