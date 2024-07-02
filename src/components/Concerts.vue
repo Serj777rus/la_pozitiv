@@ -5,13 +5,17 @@
         <div class="year" v-for="years in year" :key="years" @click="sortMonth(years)">{{ years }}</div>
         <div class="month" v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)">{{ months }}</div>
         <div class="concert_block" v-for="partys in party" :key="partys.id">
-            <p>{{ partys.year }}</p>
-            <p>{{ partys.month }}</p>
-            <p>{{ partys.date }}</p>
-            <p>{{ partys.name }}</p>
-            <video :src="partys.video" controls muted></video>
-            <div class="party_photo">
-                <img v-for="photo in partys.photo" :key="photo" :src="photo">
+            <div class="partys_left_side">
+                <div class="partys_date">{{ partys.date }} {{ partys.month }}</div>
+                <span>{{ partys.name }}</span>
+                <p>{{ partys.place }}</p>
+                <button @click="showParty(partys.id)">Показать</button>
+            </div>
+            <div class="partys_right_side" v-show="isShowParty == partys.id">
+                <video :src="partys.video" controls muted></video>
+                <div class="party_photo">
+                    <img v-for="photo in partys.photo" :key="photo" :src="photo">
+                </div>
             </div>
         </div>
     </div>
@@ -39,7 +43,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
                 },
                 {
-                    id: 1,
+                    id: 11,
                     year: '2024',
                     month: 'Июнь',
                     date: '15',
@@ -132,7 +136,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     id: 10,
                     year: '2020',
                     month: 'Февраль',
-                    date: '14',
+                    date: '15',
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
@@ -144,7 +148,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 yearsmonth: {
                     year: '',
                     month: ''
-                }
+                },
+                isShowParty: null
             }
         },
         methods: {
@@ -174,7 +179,11 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                         this.party.push(el);
                     }
                 })
+                this.isShowParty = this.party[0].id;
                 console.log(this.party);
+            },
+            showParty(id) {
+                this.isShowParty = id;
             } 
         },
         mounted() {
