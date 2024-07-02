@@ -1,17 +1,25 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
 <HeadMenu></HeadMenu>
+<div class="concerts_main">
     <div class="years">
-        <div class="year" v-for="years in year" :key="years" @click="sortMonth(years)">{{ years }}</div>
-        <div class="month" v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)">{{ months }}</div>
-        <div class="concert_block" v-for="partys in party" :key="partys.id">
-            <div class="partys_left_side">
-                <div class="partys_date">{{ partys.date }} {{ partys.month }}</div>
-                <span>{{ partys.name }}</span>
-                <p>{{ partys.place }}</p>
-                <button @click="showParty(partys.id)">Показать</button>
+        <div class="year"><p v-for="years in year" :key="years" @click="sortMonth(years)">{{ years }}</p></div>
+        <div class="month"><p v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)">{{ months }}</p></div>
+        <div class="concert_block">
+            <div class="partys_table">
+                <div class="partys_left_side" v-for="partys in party" :key="partys.id">
+                    <div class="concert_data">
+                        <div class="partys_date">{{ partys.date }} {{ partys.month }}</div>
+                        <span>{{ partys.name }}</span>
+                        <p>{{ partys.place }}</p>
+                    </div>
+                    <div class="arrow_show" @click="showParty(partys.id)">
+                        <p>Показать</p>
+                        <img src="@/assets/photos/concerts/Arrow.svg">
+                    </div>
+                </div>
             </div>
-            <div class="partys_right_side" v-show="isShowParty == partys.id">
+            <div class="partys_right_side" v-for="partys in party" :key="partys.id" v-show="isShowParty == partys.id">
                 <video :src="partys.video" controls muted></video>
                 <div class="party_photo">
                     <img v-for="photo in partys.photo" :key="photo" :src="photo">
@@ -19,6 +27,7 @@
             </div>
         </div>
     </div>
+</div>
 <Footer></Footer>
 </template>
 
@@ -194,5 +203,93 @@ import HeadMenu from './UI_components/HeadMenu.vue';
 </script>
 
 <style scoped>
-
+    .concerts_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 80px;
+        flex-direction: column;
+    }
+    .years {
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+    }
+    .year {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .month {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 24px;
+        padding: 20px 0px;
+        box-sizing: border-box;
+        border-top: 1px solid #8c8c8c;
+    }
+    .concert_block {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        margin-top: 40px;
+        justify-content: space-between;
+        gap: 80px;
+    }
+    .partys_table {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 520px;  
+    }
+    .partys_left_side {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid #8c8c8c;
+        padding-bottom: 32px;
+        width: 100%;
+        height: auto;
+    }
+    .arrow_show {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 12px;
+        align-self: flex-end;
+        font-size: 16px;
+        font-weight: 200;
+    }
+    .concert_data {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .concert_data span {
+        font-size: 24px;
+        line-height: 100%;
+        font-weight: 500;
+    }
+    .concert_data p {
+        font-size: 16px;
+        line-height: 100%;
+        font-weight: 200;
+    }
+    .partys_date {
+        font-size: 16px;
+        font-weight: 200;
+    }
+    .partys_right_side {
+        width: 660px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .party_photo {
+    }
 </style>
