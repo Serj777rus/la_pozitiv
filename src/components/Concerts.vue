@@ -290,6 +290,23 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         flex-direction: column;
         gap: 32px;
     }
+    .partys_right_side video {
+        width: 600px;
+        object-fit: cover;
+        border-radius: 16px;
+        border: 1px solid #494949;
+    }
     .party_photo {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .party_photo img {
+        width: 80px;
+        height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
     }
 </style>
