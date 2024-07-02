@@ -4,6 +4,16 @@
     <div class="years">
         <div class="year" v-for="years in year" :key="years" @click="sortMonth(years)">{{ years }}</div>
         <div class="month" v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)">{{ months }}</div>
+        <div class="concert_block" v-for="partys in party" :key="partys.id">
+            <p>{{ partys.year }}</p>
+            <p>{{ partys.month }}</p>
+            <p>{{ partys.date }}</p>
+            <p>{{ partys.name }}</p>
+            <iframe :src="partys.video"></iframe>
+            <div class="party_photo">
+                <img v-for="photo in partys.photo" :key="photo" :src="photo">
+            </div>
+        </div>
     </div>
 <Footer></Footer>
 </template>
@@ -23,6 +33,16 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     year: '2024',
                     month: 'Июнь',
                     date: '14',
+                    name: 'Отчетный концерт',
+                    place: 'Зал "Радуга"',
+                    video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
+                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                },
+                {
+                    id: 1,
+                    year: '2024',
+                    month: 'Июнь',
+                    date: '15',
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
