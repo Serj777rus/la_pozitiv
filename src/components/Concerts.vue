@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="partys_right_side" v-for="partys in party" :key="partys.id" v-show="isShowParty == partys.id">
+            <div class="partys_right_side" v-for="partys in party" :key="partys.id" :class="{ active: isShowParty == partys.id }">
                 <video :src="partys.video" controls muted></video>
                 <div class="party_photo">
                     <img v-for="photo in partys.photo" :key="photo" :src="photo">
@@ -239,6 +239,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         margin-top: 40px;
         justify-content: space-between;
         gap: 80px;
+        overflow: hidden;
     }
     .partys_table {
         display: flex;
@@ -289,6 +290,11 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         display: flex;
         flex-direction: column;
         gap: 32px;
+        transform: translateX(600px);
+        transition: all 600ms ease;
+        position: absolute;
+        z-index: -1;
+        box-sizing: border-box;
     }
     .partys_right_side video {
         width: 600px;
@@ -308,5 +314,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         height: 80px;
         border-radius: 4px;
         object-fit: cover;
+    }
+    .active {
+        transform: translateX(0px);
+        position: relative;
+        z-index: 999;
+        box-sizing: border-box;
+        /* transition-delay: 600ms; */
     }
 </style>
