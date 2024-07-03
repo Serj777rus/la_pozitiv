@@ -3,8 +3,8 @@
 <HeadMenu></HeadMenu>
 <div class="concerts_main">
     <div class="years">
-        <div class="year"><p v-for="years in year" :key="years" @click="sortMonth(years)">{{ years }}</p></div>
-        <div class="month"><p v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)">{{ months }}</p></div>
+        <div class="year"><p v-for="years in year" :key="years" @click="sortMonth(years)" :class="{ yearactive: years == this.yearsmonth.year }">{{ years }}</p></div>
+        <div class="month"><p v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)" :class="{ yearactive: months == this.yearsmonth.month }">{{ months }}</p></div>
         <div class="concert_block">
             <div class="partys_table">
                 <div class="partys_left_side" v-for="partys in party" :key="partys.id">
@@ -22,9 +22,21 @@
             <div class="partys_right_side" v-for="partys in party" :key="partys.id" :class="{ active: isShowParty == partys.id }">
                 <video :src="partys.video" controls muted></video>
                 <div class="party_photo">
-                    <img v-for="photo in partys.photo" :key="photo" :src="photo">
+                    <img v-for="(photo, index) in partys.photo" :key="photo" :src="photo" @click="showBigPhoto(partys.id, index)">
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="photo_modal" v-show="isphotoModal !== null">
+    <div class="photo_block" v-for="photo in party" :key="photo.id" :class="{ activ: isphotoModal == photo.id }">
+        <img class="modalphoto" v-for="(photos, index) in photo.photo" :key="photos" :src="photos" :class="{ activephoto: index == showPhoto }">
+        <font-awesome-icon :icon="['fas', 'xmark']" style="color: #fff; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closePhotoModal" />
+        <div class="carusel_tab_prew" @click="tabsPrew(photo)">
+            <img src="@/assets/photos/about/prew.svg">
+        </div>
+        <div class="carusel_tab_next" @click="tabsNext(photo)">
+            <img src="@/assets/photos/about/next.svg">
         </div>
     </div>
 </div>
@@ -48,8 +60,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     date: '14',
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
-                    video: 'https://videocdn.cdnpk.net/videos/526eb1e2-9ac0-4021-bd1a-4d593fe8bda6/horizontal/previews/clear/large.mp4?token=exp=1719918599~hmac=6bcfade5d37ead7842c678d226de7d548dfe21005fbb783d870ef4f4bd04c385',
-                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    video: 'https://videocdn.cdnpk.net/videos/77f532e8-b596-46a4-ba5d-ffa4c5d6aec6/horizontal/previews/clear/large.mp4?token=exp=1720005032~hmac=6e7c74fd8545f9b9659fa15565683945e286b55fce025b357f654fb6090b1c85',
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380', 'https://img.freepik.com/free-photo/front-view-hands-holding-vinyl-disc_23-2149403580.jpg?t=st=1720002696~exp=1720006296~hmac=c98d65ef657196ec477421ab25653f3d2fe2c21ffc192f35938e6ea4b32cd279&w=1380']
                 },
                 {
                     id: 11,
@@ -59,7 +71,27 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
+                },
+                {
+                    id: 11,
+                    year: '2024',
+                    month: 'Январь',
+                    date: '15',
+                    name: 'Отчетный концерт',
+                    place: 'Зал "Радуга"',
+                    video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
+                },
+                {
+                    id: 11,
+                    year: '2024',
+                    month: 'Декабрь',
+                    date: '15',
+                    name: 'Отчетный концерт',
+                    place: 'Зал "Радуга"',
+                    video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 2,
@@ -69,7 +101,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 3,
@@ -79,7 +111,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 4,
@@ -89,7 +121,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 5,
@@ -99,7 +131,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 6,
@@ -109,7 +141,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 7,
@@ -119,7 +151,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 8,
@@ -129,7 +161,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 8,
@@ -139,7 +171,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 },
                 {
                     id: 10,
@@ -149,7 +181,17 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     name: 'Отчетный концерт',
                     place: 'Зал "Радуга"',
                     video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
-                    photo: ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fmimigram.ru%2Fblog%2Fchto-takoe-foto-tekhnologiya-ili-iskusstvo%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAE', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.canva.com%2Fru_ru%2Fobuchenie%2Ffotografii-prirody-50-sovetov%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAI', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.ru%2Fspecial%2Ffujifilm%2Fugaday-chto-na-foto%2F&psig=AOvVaw2POCYeVX-hwWbYmMJsmLb-&ust=1719948458561000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCX3MXJhocDFQAAAAAdAAAAABAS']
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
+                },
+                {
+                    id: 10,
+                    year: '2025',
+                    month: 'Февраль',
+                    date: '15',
+                    name: 'Отчетный концерт',
+                    place: 'Зал "Радуга"',
+                    video: 'https://youtu.be/G6DFj6m6jHA?si=m5OUSH27NfyObWND',
+                    photo: ['https://img.freepik.com/free-vector/realistic-russia-day-event_23-2148559618.jpg?t=st=1719918207~exp=1719921807~hmac=db07495bba9b15295418a3a5e200216e065de5bb3b6f1121fb0e9ff73b6cea32&w=1480', 'https://img.freepik.com/free-photo/desk-musician_23-2147670283.jpg?t=st=1719992664~exp=1719996264~hmac=804c117d5d58832077e548861a7d5e819e1ab011f639f56c06c9dbe57975115a&w=1380']
                 }],
                 year: [],
                 month: [],
@@ -158,7 +200,9 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     year: '',
                     month: ''
                 },
-                isShowParty: null
+                isShowParty: null,
+                isphotoModal: null,
+                showPhoto: null
             }
         },
         methods: {
@@ -167,16 +211,17 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 this.concerts.forEach(el => {
                     arr.push(el.year);
                 })
-                this.year = [...new Set(arr)];
+                this.year = [...new Set(arr)].sort(function(a, b) {return b - a});
                 this.sortMonth(this.year[0]);
             },
             sortMonth(years) {
                 let arr = [];
+                const monthsOrder = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
                 this.concerts.forEach(el => {
                     if (el.year == years) {
                         arr.push(el.month);
                     }
-                    this.month = [...new Set(arr)];
+                    this.month = [...new Set(arr)].sort((a, b) => monthsOrder.indexOf(a) - monthsOrder.indexOf(b));
                 })
                 this.yearsmonth.year = years;
                 this.sortDate(this.month[0], years);
@@ -189,11 +234,39 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     }
                 })
                 this.isShowParty = this.party[0].id;
+                this.yearsmonth.month = month;
                 console.log(this.party);
             },
             showParty(id) {
                 this.isShowParty = id;
-            } 
+            },
+            showBigPhoto(id, index) {
+                this.party.forEach(el => {
+                    if(el.id == id) {
+                        this.showPhoto = index;
+                    }
+                })
+                this.isphotoModal = id;
+            },
+            closePhotoModal() {
+                this.isphotoModal = null;
+            },
+            tabsPrew(photo) {
+                let arrLen = photo.photo.length;
+                if (this.showPhoto - 1 < 0) {
+                    this.showPhoto = arrLen - 1;
+                } else {
+                    this.showPhoto = this.showPhoto - 1;
+                }
+            },
+            tabsNext(photo){
+                let arrLen = photo.photo.length;
+                if (this.showPhoto + 1 > arrLen - 1) {
+                    this.showPhoto = 0
+                } else {
+                    this.showPhoto = this.showPhoto + 1;
+                }
+            }
         },
         mounted() {
             this.sortConcerts();
@@ -221,6 +294,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        font-size: 48px;
+        font-weight: 200;
+        line-height: 100%;
+    }
+    .yearactive {
+        border-bottom: 1px solid #fff;
     }
     .month {
         width: 100%;
@@ -231,6 +310,9 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         padding: 20px 0px;
         box-sizing: border-box;
         border-top: 1px solid #8c8c8c;
+        font-size: 24px;
+        font-weight: 200;
+        line-height: 100%;
     }
     .concert_block {
         display: flex;
@@ -290,12 +372,10 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         display: flex;
         flex-direction: column;
         gap: 32px;
-        transform: translateX(600px);
-        transition: all 600ms ease;
         position: absolute;
         z-index: -1;
         box-sizing: border-box;
-    }
+}
     .partys_right_side video {
         width: 600px;
         object-fit: cover;
@@ -316,10 +396,49 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         object-fit: cover;
     }
     .active {
-        transform: translateX(0px);
         position: relative;
         z-index: 999;
         box-sizing: border-box;
-        /* transition-delay: 600ms; */
+    }
+    .photo_modal {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        background: rgba(0, 0, 0, .7);
+    }
+    .photo_block {
+        width: 1200px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    .modalphoto {
+        height: 80vh;
+        object-fit: contain;
+        display: none;
+    }
+    .activ {
+        display: flex;
+    }
+    .activephoto {
+        display: flex;
+    }
+    .carusel_tab_prew {
+        position: absolute;
+        top: 50%;
+        left: 24px;
+        transform: translateY(-50%);
+    }
+    .carusel_tab_next {
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translateY(-50%);
     }
 </style>
