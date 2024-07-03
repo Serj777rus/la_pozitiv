@@ -297,6 +297,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         font-size: 48px;
         font-weight: 200;
         line-height: 100%;
+        cursor: pointer;
     }
     .yearactive {
         border-bottom: 1px solid #fff;
@@ -313,6 +314,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         font-size: 24px;
         font-weight: 200;
         line-height: 100%;
+        cursor: pointer;
     }
     .concert_block {
         display: flex;
@@ -347,6 +349,13 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         align-self: flex-end;
         font-size: 16px;
         font-weight: 200;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: all 300ms ease;
+    }
+    .arrow_show:hover {
+        padding: 8px;
+        border: 1px solid #fff;
     }
     .concert_data {
         display: flex;
@@ -394,6 +403,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         height: 80px;
         border-radius: 4px;
         object-fit: cover;
+        cursor: pointer;
     }
     .active {
         position: relative;

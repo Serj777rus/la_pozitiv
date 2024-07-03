@@ -8,7 +8,7 @@
                 <router-link :to="{ name: 'teachers' }"><p>Педагоги</p></router-link>
                 <router-link :to="{ name: 'concerts' }"><p>Наша жизнь</p></router-link>
                 <router-link :to="{ name: 'price' }"><p>Цены</p></router-link>
-                <p>Контакты</p>
+                <router-link :to="{ name: 'contact' }"><p>Контакты</p></router-link>
             </div>
             <div class="button_div">
                 <font-awesome-icon :icon="['fab', 'whatsapp']" style="align-self: center; font-size: 32px; color: green; cursor: pointer;" />

@@ -6,6 +6,7 @@ import Education from './components/Education.vue'
 import Teachers from './components/Teachers.vue'
 import Price from './components/Price.vue'
 import Concerts from './components/Concerts.vue'
+import Contact from './components/Contact.vue'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -13,12 +14,16 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
  
 library.add(fas);
 library.add(fab);
+library.add(far);
+library.add(faL);
 
 const router = createRouter({
     routes: [{
@@ -45,6 +50,11 @@ const router = createRouter({
         path: '/concerts',
         component: Concerts,
         name: 'concerts'
+    },
+    {
+        path: '/contact',
+        component: Contact,
+        name: 'contact'
     }],
     history: createWebHistory()
 })

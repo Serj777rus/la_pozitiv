@@ -36,26 +36,26 @@
             <div class="footer_right">
                 <p>Меню</p>
                 <div class="menus">
-                    <div class="menu">
+                    <router-link :to="{ name: 'home' }"><div class="menu">
                         <p>Главная</p>
                         <img src="@/assets/photos/footer/arrows.svg">
-                    </div>
-                    <div class="menu">
+                    </div></router-link>
+                    <router-link :to="{ name: 'teachers' }"><div class="menu">
                         <p>Команда</p>
                         <img src="@/assets/photos/footer/arrows.svg">
-                    </div>
-                    <div class="menu">
+                    </div></router-link>
+                    <router-link :to="{ name: 'education' }"><div class="menu">
                         <p>Направления</p>
                         <img src="@/assets/photos/footer/arrows.svg">
-                    </div>
-                    <div class="menu">
+                    </div></router-link>
+                    <router-link :to="{ name: 'price' }"><div class="menu">
                         <p>Цены</p>
                         <img src="@/assets/photos/footer/arrows.svg">
-                    </div>
-                    <div class="menu">
-                        <p>Педагоги</p>
+                    </div></router-link>
+                    <router-link :to="{ name: 'concerts' }"><div class="menu">
+                        <p>Наша жизнь</p>
                         <img src="@/assets/photos/footer/arrows.svg">
-                    </div>
+                    </div></router-link>
                 </div>
                 <div class="socials">
                     <font-awesome-icon :icon="['fab', 'whatsapp']" style="font-size: 32px; cursor: pointer;" />
@@ -195,5 +195,9 @@
         gap: 16px;
         align-items: center;
         justify-content: center;
+    }
+    a {
+        text-decoration: none;
+        color: #fff;
     }
 </style>
