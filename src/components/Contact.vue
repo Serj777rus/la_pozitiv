@@ -11,18 +11,20 @@
                             <p>Свяжитесь с нами</p>
                             <span>Оставьте заявку через форму или свяжитесь с нами любым удобным для Вас способом и мы подробно ответим Вам на все ваши вопросы</span>
                         </div>
-                        <div class="content_block">
+                        <div class="right_side">
+                            <div class="content_block">
                             <p>Посетите нас</p>
                             <span>г. Москва, 3-я хорошевская ул.,
                                 д.21 к2</span>
-                        </div>
-                        <div class="content_block">
-                            <p>Напишите нам</p>
-                            <span>info@example.com</span>
-                        </div>
-                        <div class="content_block">
-                            <p>Позвоните нам</p>
-                            <span>+7(495) 777 77 77</span>
+                            </div>
+                            <div class="content_block">
+                                <p>Напишите нам</p>
+                                <span>info@example.com</span>
+                            </div>
+                            <div class="content_block">
+                                <p>Позвоните нам</p>
+                                <span>+7(495) 777 77 77</span>
+                            </div>
                         </div>
                     </div>
                     <div class="info_contact_block_right">
@@ -86,6 +88,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         flex-direction: column;
         gap: 64px;
     }
+    .right_side {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+    }
     .content_block {
         display: flex;
         flex-direction: column;
@@ -142,5 +150,113 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         z-index: 2;
         border: 8px solid #252525;
         box-sizing: border-box;
+    }
+    @media all and (max-width: 430px) {
+    * {
+        box-sizing: border-box;
+    }
+    .contact_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 80px;
+        padding: 0px 10px;
+    }
+    .contact_div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+    }
+    .contact_div img {
+        width: 300px;
+        object-fit: cover;
+        display: flex;
+        align-self: center;
+        display: none;
+    }
+    .line {
+        width: 100%;
+        height: 1px;
+        background: #494949;
+        display: none;
+    }
+    .info_contact_block {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .info_contact_block_left {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .right_side {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
+    }
+    .content_block {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+    .content_block p {
+        font-size: 20px;
+        line-height: 100%;
+        font-weight: 700;
+    }
+    .content_block span {
+        font-size: 12px;
+        line-height: 100%;
+        font-weight: 200;
+    }
+    .info_contact_block_right {
+        width: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: none;
+    }
+    .info_contact_block_right img:nth-child(1) {
+        position: absolute;
+        width: 250px;
+        object-fit: cover;
+        top: 48px;
+        left: 0;
+    }
+    .info_contact_block_right img:nth-child(2) {
+        position: absolute;
+        width: 250px;
+        object-fit: cover;
+        top: 0;
+        right: 0;
+    }
+    .info_contact_block_right img:nth-child(3) {
+        position: absolute;
+        width: 250px;
+        object-fit: cover;
+        bottom: -80px;
+        left: 32px;
+        z-index: 3;
+        border: 8px solid #252525;
+        box-sizing: border-box;
+    }
+    .info_contact_block_right img:nth-child(4) {
+        position: absolute;
+        width: 250px;
+        object-fit: cover;
+        bottom: 0;
+        right: 32px;
+        z-index: 2;
+        border: 8px solid #252525;
+        box-sizing: border-box;
+    }
     }
 </style>

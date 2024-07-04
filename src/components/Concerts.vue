@@ -202,7 +202,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 },
                 isShowParty: null,
                 isphotoModal: null,
-                showPhoto: null
+                showPhoto: null,
+                windowSize: innerWidth
             }
         },
         methods: {
@@ -266,9 +267,13 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 } else {
                     this.showPhoto = this.showPhoto + 1;
                 }
+            },
+            resizeFunc() {
+                this.windowSize = window.innerWidth;
             }
         },
         mounted() {
+            window.addEventListener('resize', this.resizeFunc);
             this.sortConcerts();
             console.log(this.year);
         }
@@ -378,11 +383,11 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     }
     .partys_right_side {
         width: 660px;
-        display: flex;
+        display: none;
         flex-direction: column;
         gap: 32px;
-        position: absolute;
-        z-index: -1;
+        /* position: absolute;
+        z-index: -1; */
         box-sizing: border-box;
 }
     .partys_right_side video {
@@ -409,6 +414,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         position: relative;
         z-index: 999;
         box-sizing: border-box;
+        display: flex;
     }
     .photo_modal {
         width: 100%;
@@ -450,5 +456,189 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         top: 50%;
         right: 24px;
         transform: translateY(-50%);
+    }
+    @media all and (max-width: 430px) {
+        * {
+            box-sizing: border-box;
+        }
+        .concerts_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 80px;
+        flex-direction: column;
+        padding: 0px 10px;
+    }
+    .years {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .year {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        font-size: 32px;
+        font-weight: 200;
+        line-height: 100%;
+        cursor: pointer;
+        overflow-x: scroll;
+    }
+    .yearactive {
+        border-bottom: 1px solid #fff;
+    }
+    .month {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        margin-top: 24px;
+        padding: 20px 0px;
+        box-sizing: border-box;
+        border-top: 1px solid #8c8c8c;
+        font-size: 20px;
+        font-weight: 200;
+        line-height: 100%;
+        cursor: pointer;
+        overflow-x: scroll;
+    }
+    .concert_block {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        margin-top: 40px;
+        gap: 40px;
+    }
+    .partys_table {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        width: 100%;
+        white-space: nowrap;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+    }
+    .partys_left_side {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        gap: 32px;
+        border-bottom: 1px solid #8c8c8c;
+        padding-bottom: 32px;
+        width: 70%;
+        scroll-snap-align: start;
+    }
+    .arrow_show {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 12px;
+        align-self: flex-start;
+        font-size: 16px;
+        font-weight: 200;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: all 300ms ease;
+    }
+    .arrow_show:hover {
+        padding: 8px;
+        border: 1px solid #fff;
+    }
+    .concert_data {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .concert_data span {
+        font-size: 24px;
+        line-height: 100%;
+        font-weight: 500;
+    }
+    .concert_data p {
+        font-size: 16px;
+        line-height: 100%;
+        font-weight: 200;
+    }
+    .partys_date {
+        font-size: 16px;
+        font-weight: 200;
+    }
+    .partys_right_side {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 32px;
+        box-sizing: border-box;
+}
+    .partys_right_side video {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        border: 1px solid #494949;
+    }
+    .party_photo {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .party_photo img {
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+    .active {
+        box-sizing: border-box;
+        display: flex;
+    }
+    .photo_modal {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        background: rgba(0, 0, 0, .7);
+        padding: 0px 10px;
+    }
+    .photo_block {
+        width: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    .modalphoto {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: none;
+    }
+    .activ {
+        display: flex;
+    }
+    .activephoto {
+        display: flex;
+    }
+    .carusel_tab_prew {
+        position: absolute;
+        top: 50%;
+        left: 24px;
+        transform: translateY(-50%);
+    }
+    .carusel_tab_next {
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translateY(-50%);
+    }
     }
 </style>

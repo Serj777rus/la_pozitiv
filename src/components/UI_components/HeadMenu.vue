@@ -11,9 +11,9 @@
                 <router-link :to="{ name: 'contact' }"><p>Контакты</p></router-link>
             </div>
             <div class="button_div">
-                <font-awesome-icon :icon="['fab', 'whatsapp']" style="align-self: center; font-size: 32px; color: green; cursor: pointer;" />
-                <font-awesome-icon :icon="['fab', 'vk']" style="color: #74C0FC; font-size: 32px; align-self: center; cursor: pointer;" />
-                <button>Записаться</button>
+                <font-awesome-icon :icon="['fab', 'whatsapp']" style="align-self: center; font-size: 24px; color: green; cursor: pointer;" />
+                <font-awesome-icon :icon="['fab', 'vk']" style="color: #74C0FC; font-size: 24px; align-self: center; cursor: pointer;" />
+                <button @click="testGet">Записаться</button>
             </div>
         </div>
     </div>
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
     export default {
         data() {
             return {
@@ -56,7 +58,20 @@
         },
         methods: {
             handleResize() {
-                this.innerWidth = window.innerWidth;
+                this.mediaWidth = window.innerWidth;
+            },
+            async testGet() {
+                try {
+                    const response = await axios.get('http://192.168.0.102:3000/testroute');
+                    if (response.status == 200) {
+                        console.log(response.data)
+                    } else {
+                        console.log(response.data);
+                    }
+                }
+                catch(error) {
+                    console.log(`Ошибка ${error}`)
+                }
             }
         },
         mounted() {
@@ -144,7 +159,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 100;
+        z-index: 1000;
         display: flex;
         justify-content: end;
     }

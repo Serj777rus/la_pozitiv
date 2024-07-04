@@ -779,7 +779,8 @@ video {
 .tabs {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 12px;
     align-items: center;
     width: 100%;
 }

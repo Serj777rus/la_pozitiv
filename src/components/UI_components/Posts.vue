@@ -147,7 +147,8 @@
         justify-content: space-between;
         gap: 32px;
         margin-top: 40px;
-        overflow: scroll;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
     }
     .post {
         width: 300px;
@@ -157,6 +158,7 @@
         padding: 10px;
         background: #333;
         box-sizing: border-box;
+        scroll-snap-align: start;
     }
     .post img {
         width: 280px;
