@@ -37,9 +37,17 @@ app.get('/testroute', async (req, res) => {
 
     try {
         const response = await axios.get(url);
-        const data = response.data.values;
+        const rows = response.data.values;
 
-        if (data.length) {
+        if (rows.length) {
+            const keys = rows[0];
+            const data = rows.slice(1).map(row => {
+                let obj = {};
+                row.forEach((value, index) => {
+                    obj[keys[index]] = value;
+                });
+                return obj;
+            });
             res.status(200).json(data);
         } else {
             res.status(200).json({ message: 'No data found.' });
