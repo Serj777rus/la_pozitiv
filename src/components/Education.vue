@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-<div class="big_card" v-show="isShowCard">
+<div class="big_card" :class="{active: isShowCard}">
     <div class="big_card_body">
         <img :src="bigcard.image">
         <h3>{{ bigcard.name }}</h3>
@@ -122,10 +122,7 @@
         },
         methods: {
             showCardCourse(card) {
-                this.bigcard.image = card.image;
-                this.bigcard.name = card.name;
-                this.bigcard.price = card.price;
-                this.bigcard.description = card.description;
+                this.bigcard = card;
                 this.isShowCard = true;
             },
             closeCard() {
@@ -242,7 +239,13 @@
         position: fixed;
         top: 0;
         left: 0;
+        z-index: -1;
+        opacity: 0;
+        transition: all 500ms ease;
+    }
+    .active {
         z-index: 999;
+        opacity: 1;
     }
     .big_card_body {
         width: 370px;

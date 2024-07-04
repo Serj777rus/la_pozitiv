@@ -13,7 +13,7 @@
             <div class="button_div">
                 <font-awesome-icon :icon="['fab', 'whatsapp']" style="align-self: center; font-size: 24px; color: green; cursor: pointer;" />
                 <font-awesome-icon :icon="['fab', 'vk']" style="color: #74C0FC; font-size: 24px; align-self: center; cursor: pointer;" />
-                <button @click="testGet">Записаться</button>
+                <button>Записаться</button>
             </div>
         </div>
     </div>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
     export default {
         data() {
@@ -60,19 +59,6 @@ import axios from 'axios';
             handleResize() {
                 this.mediaWidth = window.innerWidth;
             },
-            async testGet() {
-                try {
-                    const response = await axios.get('http://192.168.0.102:3000/testroute');
-                    if (response.status == 200) {
-                        console.log(response.data)
-                    } else {
-                        console.log(response.data);
-                    }
-                }
-                catch(error) {
-                    console.log(`Ошибка ${error}`)
-                }
-            }
         },
         mounted() {
             window.addEventListener('resize', this.handleResize);

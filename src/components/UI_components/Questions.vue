@@ -3,15 +3,13 @@
     <div class="quest_answ">
         <div class="quest_answ_div">
             <h2>Часто задаваемые вопросы</h2>
-            <div class="quests" v-for="quest in questions" :key="quest.id" @click="showAnsw(quest.id)">
-                <div class="answ_plus_minus">
+            <div class="quests" v-for="quest in questions" :key="quest.id">
+                <div class="answ_plus_minus" @click="showAnsw(quest.id)">
                     <p>{{ quest.question }}</p>
                     <div class="plus" v-if="isShowAnswer == quest.id">+</div>
                     <div class="minus" v-else>-</div>
                 </div>
-                <transition name="fade">
-                    <span v-if="isShowAnswer === quest.id" class="answ">{{ quest.answer }}</span>
-                </transition>
+                    <span :class="{active: isShowAnswer === quest.id}" class="answ">{{ quest.answer }}</span>
             </div>
         </div>
     </div>
@@ -106,27 +104,25 @@
 }
 .answ {
     width: 1000px;
+    max-height: 0; /* Начальное состояние */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px 16px;
+    padding: 0px 16px;
     background: #494949;
     border: none;
     border-radius: 0px 0px 12px 12px;
     font-weight: 200;
     position: relative;
-    z-index: 2;
-}
-.fade-enter-active, .fade-leave-active {
-    transition: all 300ms ease;
-}
-.fade-enter, .fade-leave-to {
+    overflow: hidden; 
     transform: translateY(-100%);
-    opacity: 0;
+    z-index: 2;
+    transition: all 500ms ease;
 }
-.fade-enter-to, .fade-leave {
-    transform: translateY(0);
-    opacity: 1;
+.active {
+    max-height: 400px; /* Максимальная высота, при которой будет контент */
+    padding: 8px 16px; /* Восстановить padding при активном состоянии */
+    transform: translateY(0px);
 }
 @media all and (max-width: 440px) {
     .quest_answ {

@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="teacher_modal" v-show="isShowCard">
+    <div class="teacher_modal" :class="{active: isShowCard}">
         <div class="teacher_modal_div">
             <div class="card_left_side">
                 <div class="teacher_card_big">
@@ -298,9 +298,15 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 997;
+    z-index: -1;
+    opacity: 0;
     background: rgba(0, 0, 0, .7);
     color: #333;
+    transition: all 500ms ease;
+}
+.active {
+    opacity: 1;
+    z-index: 997;
 }
 .teacher_modal_div {
     width: 1200px;

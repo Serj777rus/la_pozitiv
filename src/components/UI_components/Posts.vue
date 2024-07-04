@@ -20,7 +20,6 @@
             </div>
         </div>
     </div>
-    <transition name="fade">
     <div class="modal_post" :class="{ active: isPostModalActive }">
         <div class="modal_div">
             <div class="text">
@@ -36,10 +35,10 @@
             <font-awesome-icon :icon="['fas', 'xmark']" style="color: #494949; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeModal" />
         </div>
     </div>
-    </transition>
 </template>
 
 <script>
+    import axios from 'axios';
     import Button from './Button.vue';
     export default {
         components: {
@@ -47,50 +46,14 @@
         },
         data() {
             return {
-                posts: [{
-                    id: 1,
-                    name: 'Дима Билан',
-                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an ',
-                    image: require ('@/assets/photos/posts/bilan.png'),
-                    date: '14 июня 2024г',
-                },
-                {
-                    id: 2,
-                    name: 'Полина Гагарина',
-                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an',
-                    image: require ('@/assets/photos/posts/gagarina.png'),
-                    date: '14 июня 2024г',
-                },
-                {
-                    id: 3,
-                    name: 'Как правильно тренировать связки',
-                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an ',
-                    image: require ('@/assets/photos/posts/voice.png'),
-                    date: '14 июня 2024г',
-                },
-                {
-                    id: 4,
-                    name: 'Как преодолеть страх выступплений',
-                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an ',
-                    image: require ('@/assets/photos/posts/mic.png'),
-                    date: '14 июня 2024г',
-                    place: 'Малый зал школы'
-                },
-                {
-                    id: 5,
-                    name: 'Как преодолеть страх выступплений',
-                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an ',
-                    image: require ('@/assets/photos/posts/mic.png'),
-                    date: '14 июня 2024г',
-                    place: 'Малый зал школы'
-                }],
+                posts: [],
                 postModal: {
                     name: '',
                     image: '',
                     description: '',
                     date: ''
                 },
-                isPostModalActive: false
+                isPostModalActive: false,
             }
         },
         methods: {
@@ -104,9 +67,23 @@
             closeModal() {
                 this.isPostModalActive = false;
             },
-            addAtr() {
-
-            } 
+            async testGet() {
+                try {
+                    const response = await axios.get('http://192.168.0.102:3000/testroute');
+                    if (response.status == 200) {
+                        console.log(response.data);
+                        this.posts = response.data;
+                    } else {
+                        // console.log(response.data);
+                    }
+                }
+                catch(error) {
+                    console.log(`Ошибка ${error}`)
+                }
+            }
+        },
+        mounted() {
+            this.testGet();
         }  
     }
 </script>
@@ -161,9 +138,10 @@
         scroll-snap-align: start;
     }
     .post img {
-        width: 280px;
-        height: 166px;
+        width: 100%;
+        max-height: 166px;
         border-radius: 22px 22px 0px 0px;
+        object-fit: cover;
     }
     .line_post {
         width: 100%;
@@ -205,9 +183,12 @@
         position: fixed;
         top: 0;
         left: 0;
-        display: none;
+        display: flex;
         justify-content: center;
         align-items: center;
+        z-index: -1;
+        opacity: 0;
+        transition: all 300ms ease;
     }
     .modal_div {
         width: 600px;
@@ -229,6 +210,8 @@
     }
     .img_date img {
         border-radius: 16px 16px 16px 16px;
+        width: 100%;
+        object-fit: cover;
     }
     .img_date p {
         color: #000;
@@ -250,7 +233,9 @@
         overflow-y: scroll;
     }
     .active {
-        display: flex;
+        /* display: flex; */
+        opacity: 1;
+        z-index: 999;
     }
     @media all and (max-width: 440px) {
         .posts_main {

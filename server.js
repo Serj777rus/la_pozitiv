@@ -31,6 +31,7 @@ app.use(cors({
 const RANGE = 'Лист1';
 const SPREADSHEET = process.env.SPREADSHEET_ID;
 const APIKEY = process.env.GOOGLE_API;
+const ALFA_TOKEN = process.env.ALFA_TOKEN;
 
 app.get('/testroute', async (req, res) => {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET}/values/${RANGE}?key=${APIKEY}`;
@@ -57,6 +58,23 @@ app.get('/testroute', async (req, res) => {
         res.status(500).send('An error occurred while fetching data.');
     }
 });
+
+app.post('/sendform', async(req, res) => {
+    const url = `https://lapozitiv.s20.online/api/1/lead/create?token=${ALFA_TOKEN}`;
+    const { name, phone } = req.body;
+    const lead = {
+        name: name,
+        phone: phone
+    }
+    try {
+        const response = await axios.post(url, lead);
+        res.status(201).json({message: 'Данные отправлены', data: response.data})
+    }
+    catch (error) {
+        console.error('Ошибка отправки', error);
+        res.status(500).json({message: 'Ошибка сохранения'})
+    }
+})
 
 // app.get('/testroute', (req, res) => {
 //     console.log(`запроc дошел до сервера`);

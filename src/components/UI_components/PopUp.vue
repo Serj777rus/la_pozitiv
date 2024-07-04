@@ -15,6 +15,7 @@
                     <input v-model="popupform.phone" type="text" id="phone" name="phone" required>
                 </div>
                 <Button type="submit"><slot>Отправить</slot></Button>
+                <div class="message">{{ message }}</div>
             </form>
             <font-awesome-icon :icon="['fas', 'xmark']" style="color: #494949; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closePop" />
         </div>
@@ -41,13 +42,23 @@
             closePop() {
                 this.$emit('closePop')
             },
-            async sendPopForm() {
+             async sendPopForm() {
                 try {
-                    const response = await axios.post()
-                    this.message = response.data
-                }
-                catch(error) {
-                    console.log(error)
+                    const response = await axios.post('http://192.168.0.102:3000/sendform', this.popupform);
+                    if (response.status == 201) {
+                        this.message = 'Данные отправлены';
+                        console.log(response.data);
+                        this.popupform.name = '',
+                        this.popupform.phone = '',
+                        setTimeout(() => {
+                            this.message = '';
+                            this.closePop();
+                        }, 1300)
+                    } else {
+                        this.message = `Ошибка ${response.data}`;
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
             }
         }
@@ -117,5 +128,8 @@
         font-size: 16px;
         top: -16px;
         left: 16px;
+    }
+    .message {
+        color: green;
     }
 </style>
