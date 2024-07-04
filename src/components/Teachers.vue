@@ -438,4 +438,255 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     border-radius: 16px;
     object-fit: contain;
 }
+@media all and (max-width: 430px) {
+    .teachers_main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    padding: 0px 10px;
+}
+.teachers_div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.teachers_div h2 {
+    font-size: 32px;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+.teachers_back {
+    width: 100%;
+    background: url('@/assets/photos/teachers/fon.png') 100% 100% / contain no-repeat,
+                #E7E4E4;
+    height: 216px;
+    border-radius: 32px;
+    margin-bottom: 40px;
+}
+.line {
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    margin-bottom: 64px;
+}
+.teachers_block {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+.teacher_card {
+    width: 100%;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    padding: 35px;
+    box-shadow: 10px 10px 16px 0px rgba(47, 46, 46, .4);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.back_grad {
+    width: 300px;
+    height: 330px;
+    border-radius: 4px;
+    background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+    position: relative;
+}
+.back_grad img {
+    position: absolute;
+    height: 400px;
+    object-fit: contain;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.about_teacher {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.names {
+    font-size: 24px;
+    font-weight: 700;
+    color: #494949;
+    text-align: center;
+}
+.about_teacher h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #494949;
+    text-align: center;
+}
+.teacher_modal {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 997;
+    background: rgba(0, 0, 0, .7);
+    color: #333;
+    padding: 10px;
+}
+.teacher_modal_div {
+    width: 100%;
+    height: 80vh;
+    background: #fff;
+    border: none;
+    border-radius: 32px;
+    padding: 12px;
+    box-shadow: 8px 8px 16px rgba(255, 255, 255, .3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    overflow-y: scroll;
+}
+.card_left_side {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+}
+.teacher_card_big {
+    width: 100%;
+    height: 480px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    padding: 24px;
+    box-shadow: 10px 10px 16px 0px rgba(47, 46, 46, .4);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.teacher_card_big p {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 200;
+}
+.back_grad_big {
+    width: 100%;
+    height: 320px;
+    border-radius: 4px;
+    background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+    position: relative;
+    z-index: 998;
+}
+.back_grad_big img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 120%;
+    z-index: 999;
+}
+.about_teacher_big {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 4px;
+}
+.about_teacher_big p {
+    font-size: 12px;
+    font-weight: 400;
+}
+.about_teacher_big span {
+    font-size: 12px;
+    font-weight: 700;
+}
+.socials {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px
+}
+.socials img {
+    width: 40px;
+    object-fit: contain;
+}
+.card_right_side {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+}
+.right_up {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.right_up h4 {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: start;
+}
+.right_up p {
+    font-size: 16px;
+    font-weight: 200;
+    text-align: start;
+}
+.right_down {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
+.right_down_left {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+}
+.right_down_left p {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: start;
+}
+.right_down_left ul li {
+    font-size: 16px;
+    font-weight: 400;
+    list-style-position: inside;
+}
+.right_down_right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+.right_down_right p {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 100%;
+    text-align: start;
+}
+.right_down_right video {
+    width: 100%;
+    border-radius: 16px;
+    object-fit: contain;
+}
+* {
+    box-sizing: border-box;
+}
+}
 </style>

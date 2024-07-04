@@ -289,4 +289,153 @@
     .big_card:nth-child(5) h3 {
         font-size: 24px;
     }
+    @media all and (max-width: 430px) {
+        .education_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 80px;
+        padding: 0px 10px;
+    }
+    .education_div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .education_div h3 {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .line {
+        width: 100%;
+        height: 1px;
+        background: #fff;
+        margin-bottom: 40px;
+    }
+    .education_cards {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+        row-gap: 32px;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+    .education_card {
+        width: 100%;
+        height: 480px;
+        border-radius: 32px;
+        border: 1px solid #494949;
+        background: #333;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+    .education_card img {
+        width: 100%;
+        border-radius: 22px 22px 0px 0px;
+    }
+    .descr_div {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .education_card:nth-child(9) h3 {
+        font-size: 24px;
+    }
+    .education_card:nth-child(5) h3 {
+        font-size: 24px;
+    }
+    .education_card h3 {
+        font-size: 32px;
+        text-align: start;
+        margin-bottom: 0px;
+        line-height: 100%;
+    }
+    .education_card h4 {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 100%;
+    }
+    .education_card h5 {
+        font-size: 16px;
+        font-weight: 200;
+        line-height: 100%;
+        max-height: 80px;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    }
+    button {
+        align-self: center;
+        justify-self: center;
+    }
+
+    .big_card {
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, .7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    }
+    .big_card_body {
+        width: 370px;
+        border-radius: 32px;
+        border: 1px solid #494949;
+        background: #333;
+        display: grid;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: flex-start;
+        box-sizing: border-box;
+    }
+    .big_card_body img {
+        width: 100%;
+        border-radius: 22px 22px 0px 0px;
+        margin-bottom: 12px;
+    }
+    .big_card_body h3 {
+        font-size: 32px;
+        text-align: start;
+        margin-bottom: 0px;
+        margin-bottom: 12px;
+        line-height: 100%;
+    }
+    .big_card_body h4 {
+        font-size: 24px;
+        margin-bottom: 12px;
+        font-weight: 500;
+        line-height: 100%;
+    }
+    .big_card_body h5 {
+        font-size: 16px;
+        font-weight: 200;
+        line-height: 100%;
+    }
+    .big_card_body button {
+        align-self: center;
+        justify-self: center;
+        margin-top: 32px;
+    }
+    .big_card:nth-child(9) h3 {
+        font-size: 24px;
+    }
+    .big_card:nth-child(5) h3 {
+        font-size: 24px;
+    }
+    * {
+    box-sizing: border-box;
+}
+    }
 </style>

@@ -119,4 +119,78 @@
         font-size: 16px;
         font-weight: 200;
     }
+    @media all and (max-width: 440px) {
+        .reviews {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 140px;
+        padding: 0px 10px;
+    }
+    .reviews_div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    .reviews_div h2 {
+        font-size: 32px;
+        font-weight: 900;
+    }
+    .all_cards {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 24px;
+        overflow: auto;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+    }
+    .review_card {
+        min-width: 80%;
+        height: auto;
+        border: 1px solid #494949;
+        border-radius: 32px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+        box-sizing: border-box;
+        scroll-snap-align: start;
+    }
+    .photo_name {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+    }
+    .photo_name img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        box-sizing: border-box;
+    }
+    .photo_name p {
+        font-size: 24px;
+        font-weight: 500;
+    }
+    .photo_name span {
+        font-size: 16px;
+        font-weight: 200;
+    }
+    .name_clas {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .review {
+        font-size: 16px;
+        font-weight: 200;
+    }
+    }
 </style>

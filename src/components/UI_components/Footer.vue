@@ -200,4 +200,130 @@
         text-decoration: none;
         color: #fff;
     }
+    @media all and (max-width: 440px) {
+        .footer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 140px;
+        background: #333;
+        padding: 0px 10px;
+    }
+    .footer_div {
+        width: 100%;
+        display: flex;
+        padding-top: 32px;
+        padding-bottom: 24px;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .footer_left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 32px;
+    }
+    .footer_left img {
+        width: 120px;
+        object-fit: contain;
+    }
+    .photo_text_left {
+        gap: 12px;
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+    }
+    .footer_center {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .footer_center p {
+        font-size: 24px;
+        font-weight: 900;
+        text-align: center;
+    }
+    .footer_form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+    .inputs {
+        display: flex;
+        width: 100%;
+        gap: 32px;
+        font-size: 16px;
+        font-weight: 700;
+        align-items: center;
+    }
+    .inputs input {
+        border: none;
+        border-bottom: #fff 1px solid;
+        background: transparent;
+        width: 100%;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 4px 12px;
+    }
+    .inputs input:focus {
+        outline: none;
+    }
+    .footer_form button {
+        padding: 8px 32px;
+        border-radius: 4px;
+        border: none;
+        font-size: 16px;
+        font-weight: 200;
+        cursor: pointer;
+    }
+    .footer_right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .footer_right p {
+        font-size: 24px;
+        font-weight: 700;
+        display: none;
+    }
+    .menus {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 32px;
+    }
+    .menu {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .menu p {
+        font-size: 16px;
+        display: none;
+    }
+    .socials {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        align-items: center;
+        justify-content: center;
+    }
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+    * {
+    box-sizing: border-box;
+}
+    }
 </style>

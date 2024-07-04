@@ -324,4 +324,163 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         color: #333;
         transform: scale(1.1);
     }
+    @media all and (max-width: 430px) {
+        * {
+    box-sizing: border-box;
+    }
+    .price_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 80px;
+        padding: 0px 10px;
+    }
+    .price_div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .price_div h2 {
+        font-size: 32px;
+        font-weight: 500;
+        text-align: center;
+    }
+    .descript_price {
+        margin-top: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .descript_price h5 {
+        width: 100%;
+        text-align: justify;
+        font-size: 16px;
+        line-height: 100%;
+        font-weight: 200;
+    }
+    .price_tabs {
+        padding: 12px 0px;
+        height: auto;
+        box-sizing: border-box;
+        border-top: 1px solid #707070;
+        border-bottom: 1px solid #707070;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 12px;
+        align-items: center;
+        margin-top: 40px;
+        box-sizing: border-box;
+    }
+    .tabs {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 100%;
+        box-sizing: border-box;
+        transition: all 160ms ease;
+        cursor: pointer;
+    }
+    .active {
+        padding: 6px 20px;
+        background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+        border-radius: 16px;
+        font-size: 20px;
+    }
+    .description_tab {
+        margin-top: 32px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+    .description_tab h5 {
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+        line-height: 100%;
+    }
+    .description_tab p {
+        font-size: 16px;
+        font-weight: 100;
+        text-align: center;
+        line-height: 100%;
+    }
+    .price_card {
+        margin-top: 80px;
+        display: flex;
+    }
+    .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        width: 100%;
+    }
+    .card {
+        width: 100%;
+        height: 480px;
+        box-sizing: border-box;
+        padding: 32px;
+        position: relative;
+        background: linear-gradient(45deg, rgba(26, 26, 26, 0.4) 0%, rgba(55, 64, 132, 0.4) 50%, rgba(130, 40, 114, 0.4) 100%);
+        border-radius: 24px;
+        border: 1px solid #494949;
+        box-shadow: 10px 10px 16px 0px rgba(0, 0, 0, .25);
+        display: flex;
+        flex-direction: column;
+    }
+    .card img {
+        position: absolute;
+        top: -38px;
+        right: -38px;
+    }
+    .card p {
+        font-size: 12px;
+        font-weight: 200;
+        line-height: 100%;
+        margin-bottom: 12px;
+    }
+    .card h3 {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 100%;
+        margin-bottom: 56px;
+    }
+    .card span {
+        font-size: 48px;
+        font-weight: 500;
+        line-height: 100%;
+    }
+    .card ul {
+        margin-top: 56px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: 200;
+        list-style-position: inside;
+    }
+    .card button {
+        display: flex;
+        padding: 16px 32px;
+        background: transparent;
+        border-radius: 32px;
+        border: 1px solid #fff;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 100%;
+        color: #fff;
+        margin-top: auto;
+        align-self: center;
+        transition: all 200ms ease;
+    }
+    .card button:hover {
+        background: #fff;
+        color: #333;
+        transform: scale(1.1);
+    }
+    }
 </style>

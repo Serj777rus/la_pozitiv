@@ -128,4 +128,80 @@
     transform: translateY(0);
     opacity: 1;
 }
+@media all and (max-width: 440px) {
+    .quest_answ {
+    margin-top: 140px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+}
+.quest_answ_div {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.quest_answ_div h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 32px;
+    text-align: center;
+}
+.quests {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.answ_plus_minus {
+    width: 100%;
+    padding: 20px;
+    background: #333;
+    border: 1px solid #494949;
+    border-radius: 12px;
+    align-self: flex-start;
+    font-size: 16px;
+    font-weight: 200;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 3;
+    line-height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.answ {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    background: #494949;
+    border: none;
+    border-radius: 0px 0px 12px 12px;
+    font-weight: 200;
+    position: relative;
+    z-index: 2;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: all 300ms ease;
+}
+.fade-enter, .fade-leave-to {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+.fade-enter-to, .fade-leave {
+    transform: translateY(0);
+    opacity: 1;
+}
+* {
+    box-sizing: border-box;
+}
+}
 </style>

@@ -254,7 +254,6 @@
                 this.isShowPopUp = false
             }
         }
-        
     }
 </script>
 
@@ -368,7 +367,7 @@
 }
 .img_block img {
     border-radius: 22px;
-    height: 420px;
+    height: 100%;
     width: 580px;
     object-fit: cover;
 }
@@ -405,6 +404,7 @@
     border: 1px solid #494949;
     background: #333;
     color: #fff;
+    transition: all 300ms ease;
 }
 .active {
     background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
@@ -734,21 +734,20 @@ video {
     justify-content: center;
     align-items: start;
     margin-top: 140px;
+    padding: 0px 10px;
 }
 .cards {
-    width: 1200px;
+    width: 100%;
     display: flex;
 }
 .card {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 32px;
-    justify-content: space-between;
 }
 .img_block {
-    width: 600px;
-    height: 440px;
+    width: 100%;
     background: #333;
     border-radius: 32px;
     border: 1px solid #494949;
@@ -759,8 +758,7 @@ video {
 }
 .img_block img {
     border-radius: 22px;
-    height: 420px;
-    width: 580px;
+    width: 100%;
     object-fit: cover;
 }
 .descript_card {
@@ -771,28 +769,29 @@ video {
     align-items: start;
 }
 .descript_card h3 {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 300;
 }
 .descript_card p {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 200;
 }
 .tabs {
     display: flex;
     flex-direction: row;
-    gap: 32px;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 .tabBtn {
-    width: 80px;
-    height: 60px;
+    width: 60px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bolder;
-    border-radius: 16px;
+    border-radius: 8px;
     border: 1px solid #494949;
     background: #333;
     color: #fff;
@@ -800,59 +799,61 @@ video {
 .active {
     background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
     color: #fff;
-    width: 80px;
-    height: 80px;
+    width: 48px;
+    height: 48px;
 }
 .about_school {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 140px;
+    padding: 0px 10px;
 }
 .about_div {
-    width: 1200px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 .about_div h3 {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 700;
 }
 .about_div p {
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 400;
-    width: 550px;
+    width: 100%;
 }
 .photo_video {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 32px;
     margin-top: 28px;
 }
 .about_video {
-    width: 550px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
     align-items: center;
-    border-radius: 32px;
+    border-radius: 16px;
 }
 video {
-    border-radius: 32px;
-    width: 550px;
+    border-radius: 16px;
+    width: 100%;
+    background-size: 100% 100%;
 }
 .video_text {
     width: 100%;
 }
 .video_text h3 {
-    font-size: 32px;
-    font-weight: bolder;
+    font-size: 24px;
+    font-weight: 400;
     text-align: center;
 }
 .about_photo {
-    width: 550px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -865,10 +866,9 @@ video {
     display: none;
 }
 .carusel img {
-    width: 550px;
-    height: 308px;
+    width: 100%;
     object-fit: cover;
-    border-radius: 32px;
+    border-radius: 16px;
 }
 .activec {
     display: block;
@@ -876,22 +876,22 @@ video {
 .carusel_tab_prew {
     position: absolute;
     top: 50%;
-    left: -240px;
+    left: 10px;
     transform: translateY(-50%);
 }
 .carusel_tab_prew img {
-    height: 64px;
+    height: 40px;
     object-fit: contain;
     cursor: pointer;
 }
 .carusel_tab_next {
     position: absolute;
     top: 50%;
-    right: -240px;
+    right: 10px;
     transform: translateY(-50%);
 }
 .carusel_tab_next img {
-    height: 64px;
+    height: 40px;
     object-fit: contain;
     cursor: pointer;
 }
@@ -909,15 +909,17 @@ video {
     justify-content: center;
     align-items: center;
     margin-top: 140px;
+    padding: 0px 10px;
 }
 .dop_utp_div {
-    width: 1200px;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
 }
 .utp_div {
-    width: 360px;
+    width: 90%;
     height: 500px;
     display: flex;
     flex-direction: column;
@@ -931,7 +933,7 @@ video {
     box-sizing: border-box;
 }
 .utp_div h3 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
 }
 .utp_div h4 {
@@ -954,9 +956,10 @@ video {
     justify-content: center;
     align-items: center;
     margin-top: 140px;
+    padding: 0px 10px;
 }
 .for_who_div {
-    width: 1200px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -967,54 +970,57 @@ video {
     margin-bottom: 40px;
 }
 .zglvk h3 {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 900;
 }
 .zglvk h4 {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
 }
 .who_all_blocks {
-    gap: 80px;
+    gap: 40px;
     display: flex;
     flex-direction: column;
 }
 .for_who_block {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 40px;
+    flex-direction: column;
+    gap: 24px;
 }
 .for_who_block:nth-child(2) {
-    flex-direction: row-reverse;
+    flex-direction: column;
 }
 .who_img {
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 32px;
     background: #333;
     border: 1px solid #494949;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: auto;
 }
 .who_img img {
-    width: 580px;
-    height: 380px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 22px;
 }
 .who_text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
+    gap: 12px;
 }
 .who_text h3 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
 }
 .who_text h4 {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 200;
 }
 .concert_video {
     width: 100%;
@@ -1022,21 +1028,24 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0px 10px;
 }
 .concert_video_div {
-    width: 1200px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 .concert_video_div h3 {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 900;
     line-height: 100%;
-    margin-bottom: 40px;
+    text-align: center;
 }
 .concert_video_div video {
     width: 100%;
-    margin-top: 40px;
+}
+* {
+    box-sizing: border-box;
 }
 }
 </style>

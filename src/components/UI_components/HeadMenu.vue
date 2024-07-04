@@ -186,4 +186,7 @@
         gap: 8px;
         align-self: center;
     }
+    * {
+    box-sizing: border-box;
+    }
 </style>
