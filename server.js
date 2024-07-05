@@ -29,6 +29,7 @@ app.use(cors({
 }));
 
 const RANGE = 'Посты';
+const RANGE_PRICE = 'Цены';
 const SPREADSHEET = process.env.SPREADSHEET_ID;
 const APIKEY = process.env.GOOGLE_API;
 const ALFA_TOKEN = process.env.ALFA_TOKEN;
@@ -58,6 +59,17 @@ app.get('/testroute', async (req, res) => {
         res.status(500).send('An error occurred while fetching data.');
     }
 });
+
+app.get('/getprice', async(req, res) => {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET}/values/${RANGE_PRICE}?key=${APIKEY}`;
+    try {
+        const response = await axios.get(url);
+        res.status(200).json(response.data.values);
+        console.log(response.data.values);
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 app.post('/sendform', async(req, res) => {
     const url = `https://lapozitiv.s20.online/api/1/lead/create?token=${ALFA_TOKEN}`;

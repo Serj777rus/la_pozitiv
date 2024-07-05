@@ -1,6 +1,6 @@
 <template>
     <div class="online_btn_main" @click="shows">
-        <font-awesome-icon :icon="['faL', 'address-card']" style="color: #ffffff;" />
+       <a href="https://lapozitiv.s20.online/common/1/wizard/embed?data_status=0&data_source=0&data_pc=%2359CD90&data_locale=ru"><font-awesome-icon :icon="['faL', 'address-card']" style="color: #ffffff;" /></a>
         <p>Online запись</p>
     </div>
 </template>
@@ -10,7 +10,7 @@
         methods: {
             shows() {
                 // Используем this.$el, чтобы работать с элементом компонента
-                document.querySelector('.line').classList.toggle('acti');
+                document.querySelector('.online_btn_main').classList.toggle('acti');
             }
         }
     }
@@ -18,9 +18,8 @@
 
 <style scoped>
 .online_btn_main {
-    padding: 12px 12px;
     border-radius: 50px;
-    background: transparent;
+    background: #252525;
     color: #fff;
     font-size: 16px;
     font-weight: 400;
@@ -31,10 +30,14 @@
     z-index: 1000;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
     animation: scales 1000ms infinite;
     cursor: pointer;
     transition: all 1000ms ease;
+    width: 180px;
+    height: 40px;
 }
 @keyframes scales {
     0% {

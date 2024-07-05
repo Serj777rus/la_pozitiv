@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
 
@@ -168,7 +169,22 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 if (this.isShowPrice !== name) {
                     this.isShowPrice = name;
                 }
+            },
+            async getPrice() {
+                try {
+                    const response = await axios.get('http://192.168.0.102:3000/getprice');
+                    if (response) {
+                        console.log(response.data)
+                    } else {
+                        console.log('oshibka');
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
             }
+        },
+        mounted() {
+            this.getPrice()
         }
     }
 </script>

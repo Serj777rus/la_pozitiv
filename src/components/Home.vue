@@ -151,6 +151,7 @@
     </div>
     <Questions></Questions>
     <ReviewCard></ReviewCard>
+    <Vidget></Vidget>
     <Footer></Footer>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
     <FixBtn></FixBtn>
@@ -165,6 +166,7 @@
     import Footer from './UI_components/Footer.vue'
     import PopUp from './UI_components/PopUp.vue'
     import FixBtn from './UI_components/FixBtn.vue'
+    import Vidget from './UI_components/Vidget.vue'
     export default {
         components: {
             HeadMenu,
@@ -174,7 +176,8 @@
             ReviewCard,
             Footer,
             PopUp,
-            FixBtn
+            FixBtn,
+            Vidget
         },
         data() {
             return {

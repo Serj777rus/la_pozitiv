@@ -46,7 +46,7 @@
                 try {
                     const response = await axios.post('http://192.168.0.102:3000/sendform', this.popupform);
                     if (response.status == 201) {
-                        this.message = 'Данные отправлены';
+                        this.message = response.data.message;
                         console.log(response.data);
                         this.popupform.name = '',
                         this.popupform.phone = '',
