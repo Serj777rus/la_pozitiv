@@ -153,6 +153,7 @@
     <ReviewCard></ReviewCard>
     <Footer></Footer>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
+    <FixBtn></FixBtn>
 </template>
 
 <script>
@@ -163,6 +164,7 @@
     import ReviewCard from './UI_components/ReviewCard.vue'
     import Footer from './UI_components/Footer.vue'
     import PopUp from './UI_components/PopUp.vue'
+    import FixBtn from './UI_components/FixBtn.vue'
     export default {
         components: {
             HeadMenu,
@@ -171,7 +173,8 @@
             Questions,
             ReviewCard,
             Footer,
-            PopUp
+            PopUp,
+            FixBtn
         },
         data() {
             return {

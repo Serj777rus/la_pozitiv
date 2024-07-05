@@ -28,7 +28,7 @@ app.use(cors({
     origin: 'http://192.168.0.102:8080'
 }));
 
-const RANGE = 'Лист1';
+const RANGE = 'Посты';
 const SPREADSHEET = process.env.SPREADSHEET_ID;
 const APIKEY = process.env.GOOGLE_API;
 const ALFA_TOKEN = process.env.ALFA_TOKEN;
