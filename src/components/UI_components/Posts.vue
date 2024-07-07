@@ -14,7 +14,7 @@
                     <h4>{{ post.name }}</h4>
                     <p>{{ post.date }}</p>
                     <h5>{{ post.description }}</h5>
-                    <Button @click="openPost(post)"><slot>Читать</slot></Button>
+                    <Button class="btn" @click="openPost(post)"><slot>Читать</slot></Button>
                 </div>
             </div>
             </div>
@@ -141,6 +141,11 @@
         box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
         box-sizing: border-box;
         scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+    }
+    .btn {
+        align-self: center;
     }
     .post img {
         width: 100%;

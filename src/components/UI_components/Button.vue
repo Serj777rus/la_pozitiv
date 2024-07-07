@@ -5,13 +5,13 @@
     </button>
 </template> -->
 <template>
-    <a href="#" class="button type--C">
+    <div class="button type--C">
         <div class="button__line"></div>
         <div class="button__line"></div>
         <span class="button__text"><slot></slot></span>
         <div class="button__drow1"></div>
         <div class="button__drow2"></div>
-    </a>
+    </div>
 </template>
 
 <script>
@@ -45,6 +45,7 @@
     color : #FFCEC2 ;
     letter-spacing : 2px ;
     transition : all .3s ease ;
+    cursor: pointer;
 }
 .button__text{
     display : flex ;
