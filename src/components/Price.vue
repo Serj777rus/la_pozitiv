@@ -226,8 +226,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         padding: 0px 12px;
         height: 64px;
         box-sizing: border-box;
-        border-top: 1px solid #707070;
-        border-bottom: 1px solid #707070;
+        border-top: 1px solid #FFCEC2;
+        border-bottom: 1px solid #FFCEC2;
         display: flex;
         flex-direction: row;
         width: 100%;
@@ -246,7 +246,9 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     }
     .active {
         padding: 6px 20px;
-        background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+        background: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(10px);
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
         border-radius: 16px;
         font-size: 20px;
     }
@@ -286,7 +288,6 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         position: relative;
         background: linear-gradient(45deg, rgba(26, 26, 26, 0.4) 0%, rgba(55, 64, 132, 0.4) 50%, rgba(130, 40, 114, 0.4) 100%);
         border-radius: 24px;
-        border: 1px solid #494949;
         box-shadow: 10px 10px 16px 0px rgba(0, 0, 0, .25);
         display: flex;
         flex-direction: column;

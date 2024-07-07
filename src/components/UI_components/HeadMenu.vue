@@ -80,8 +80,9 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px 24px;
-        background: #333;
-        border: 1px solid #494949;
+        background: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(10px);
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
         border-radius: 50px;
         box-sizing: border-box;
     }
@@ -94,6 +95,7 @@
         transition: all 160ms ease;
         padding: 6px 12px;
         cursor: pointer;
+        border-radius: 32px;
     }
     .button_div {
         display: flex;
@@ -115,7 +117,9 @@
         cursor: pointer;
     }
     .menus p:hover {
-        background: #515151;
+        background: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(10px);
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
         border-radius: 24px;
         transition: all 160ms ease;
         box-sizing: border-box;

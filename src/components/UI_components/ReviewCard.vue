@@ -76,17 +76,21 @@
         justify-content: space-between;
         gap: 32px;
         overflow: auto;
+        padding: 16px 0px;
+        overflow-y: hidden;
     }
     .review_card {
         min-width: 500px;
         height: 300px;
-        border: 1px solid #494949;
         border-radius: 32px;
         padding: 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+        background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
         box-sizing: border-box;
     }
     .photo_name {

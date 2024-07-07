@@ -59,6 +59,7 @@ export default {
 }
 html,
 body {
-  background: #252525;
+  /* background: #252525; */
+  background: -webkit-linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4);background: linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4);
 }
 </style>

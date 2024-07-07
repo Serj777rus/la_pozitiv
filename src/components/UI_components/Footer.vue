@@ -89,7 +89,10 @@
         display: flex;
         justify-content: center;
         margin-top: 140px;
-        background: #333;
+        background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
     }
     .footer_div {
         width: 1200px;

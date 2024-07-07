@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <HeadMenu></HeadMenu>
-    <div class="main_main">
+    <!-- <div class="main_main">
         <div class="main_div">
             <h2>ШКОЛА ВОКАЛА</h2>
             <div class="utp">
@@ -28,6 +28,38 @@
             <Button @click="showPop"><slot>Пробное занятие</slot></Button>
         </div>
         <img src="@/assets/photos/girl_main.png">
+    </div> -->
+    <div class="main_main">
+        <div class="main_div">
+            <div class="right_side_main">
+                <h2>ШКОЛА ВОКАЛА<br>И ТВОРЧЕСТВА</h2>
+                <div class="slogan">
+                    <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.</p>
+                </div>
+                <Button @click="showPop"><slot>Пробное занятие</slot></Button>
+            </div>
+            <div class="photomain_div">
+                <img src="@/assets/photos/girl_main.png">
+            </div>
+        </div>
+        <div class="utp_main">
+            <div class="utp">
+                <p>&#9989;</p>
+                <h3>Индивидуальный подход к каждому голосу</h3>
+            </div>
+            <div class="utp">
+                <p>&#9989;</p>
+                <h3>Практика выступлений на сцене</h3>
+            </div>
+            <div class="utp">
+                <p>&#9989;</p>
+                <h3>Профессиональная запись в стенах студии</h3>
+            </div>
+            <div class="utp">
+                <p>&#9989;</p>
+                <h3>Профессиональное оборудование</h3>
+            </div>
+        </div>
     </div>
     <div class="mission">
         <div class="cards" v-for="card in weare" :key="card.tab" v-show="isShowCard == card.id">
@@ -267,12 +299,66 @@
 .main_main {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 48px;
     position: relative;
+    gap: 32px;
 }
-.main_main img {
+.main_div {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    border-radius: 50px;
+    padding: 0px 32px;
+    box-sizing: border-box;
+}
+.right_side_main {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 48px;
+}
+.right_side_main h2 {
+    font-size: 96px;
+    font-weight: 900;
+    color: #FFCEC2;
+    line-height: 100%;
+}
+.slogan {
+    line-height: 100%;
+}
+.photomain_div {
+    display: flex;
+    align-self: flex-end;
+}
+.utp_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 32px;
+}
+.utp {
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    align-items: center;
+    background: transparent;
+    border: 2px solid #f5edf0;
+    border-radius: 32px;
+    gap: 12px;
+}
+
+/* .main_main img {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -280,18 +366,18 @@
     z-index: 2;
     height: 500px;
     object-fit: contain;
-}
-.main_div {
+} */
+/* .main_div {
     width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: url(../assets/photos/let_fonar.png) top left/514px no-repeat,
-                url(../assets/photos/right_fonar.png) top right/514px no-repeat,
-                linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%) top left/100% 100% no-repeat;
-    border: 2px solid #4a4a4a;
+                url(../assets/photos/right_fonar.png) top right/514px no-repeat;
+    backdrop-filter: blur(10px);
     border-radius: 50px;
     padding-bottom: 24px;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
 }
 .main_div button {
     z-index: 3;
@@ -301,8 +387,8 @@
     font-size: 132px;
     font-weight: 900;
     color: #FFCEC2;
-}
-.utp {
+} */
+/* .utp {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -323,8 +409,8 @@
 }
 .right_utp ul li {
     margin-top: 8px;
-}
-.slogan {
+} */
+/* .slogan {
     width: 800px;
     padding: 16px 32px;
     border-radius: 32px;
@@ -337,7 +423,7 @@
     text-align: center;
     font-size: 16px;
     font-weight: 200;
-}
+} */
 .tabBtn {
     padding: 4px 8px;
     cursor: pointer;
@@ -365,7 +451,11 @@
     height: 440px;
     background: #333;
     border-radius: 32px;
-    border: 1px solid #494949;
+    /* border: 1px solid #494949; */
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -407,13 +497,16 @@
     font-size: 36px;
     font-weight: bolder;
     border-radius: 16px;
-    border: 1px solid #494949;
-    background: #333;
+    border: 2px solid #fff;
+    background: transparent;
     color: #fff;
     transition: all 300ms ease;
 }
 .active {
-    background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;;
     color: #fff;
     width: 80px;
     height: 80px;
@@ -542,8 +635,10 @@ video {
     border: 1px solid #494949;
     background: url('../assets/photos/dop_utp/man_sing.png') bottom right/240px 300px no-repeat,
             url('../assets/photos/dop_utp/О.svg') center center/285px 252px no-repeat,
-            #333;
+            rgba(0, 0, 0, .5);
     box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
 }
 .utp_div h3 {
     font-size: 32px;
@@ -556,12 +651,12 @@ video {
 .utp_div:nth-child(2) {
     background: url('../assets/photos/dop_utp/guitar.png') bottom center/340px 200px no-repeat,
             url('../assets/photos/dop_utp/А.svg') center center/285px 252px no-repeat,
-            #333;
+            rgba(0, 0, 0, .5);
 }
 .utp_div:nth-child(3) {
     background: url('../assets/photos/dop_utp/hor.png') bottom center/300px 199px no-repeat,
             url('../assets/photos/dop_utp/П.svg') center center/285px 252px no-repeat,
-            #333;
+            rgba(0, 0, 0, .5);
 }
 .for_who {
     width: 100%;
@@ -607,8 +702,10 @@ video {
 .who_img {
     padding: 10px;
     border-radius: 50px;
-    background: #333;
-    border: 1px solid #494949;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;

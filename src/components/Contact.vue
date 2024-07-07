@@ -74,7 +74,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     .line {
         width: 100%;
         height: 1px;
-        background: #494949;
+        background: #FFCEC2;
     }
     .info_contact_block {
         width: 100%;
@@ -123,6 +123,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         object-fit: cover;
         top: 48px;
         left: 0;
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+        border-radius: 8px;
     }
     .info_contact_block_right img:nth-child(2) {
         position: absolute;
@@ -130,6 +132,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         object-fit: cover;
         top: 0;
         right: 0;
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+        border-radius: 8px;
     }
     .info_contact_block_right img:nth-child(3) {
         position: absolute;
@@ -138,8 +142,10 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         bottom: -80px;
         left: 32px;
         z-index: 3;
-        border: 8px solid #252525;
+        border: 8px solid transparent;
         box-sizing: border-box;
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+        border-radius: 8px;
     }
     .info_contact_block_right img:nth-child(4) {
         position: absolute;
@@ -148,8 +154,10 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         bottom: 0;
         right: 32px;
         z-index: 2;
-        border: 8px solid #252525;
+        border: 8px solid transparent;
         box-sizing: border-box;
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+        border-radius: 8px;
     }
     @media all and (max-width: 430px) {
     * {

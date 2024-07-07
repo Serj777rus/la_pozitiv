@@ -19,7 +19,10 @@
 <style scoped>
 .online_btn_main {
     border-radius: 50px;
-    background: #252525;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
     color: #fff;
     font-size: 16px;
     font-weight: 400;

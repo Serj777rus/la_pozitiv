@@ -120,20 +120,25 @@
     .posts {
         display: flex;
         width: 100%;
+        padding: 16px 0px;
         flex-direction: row;
         justify-content: space-between;
         gap: 32px;
         margin-top: 40px;
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
+        overflow-y: hidden;
+        box-sizing: border-box;
     }
     .post {
         width: 300px;
         height: 480px;
-        border: 1px solid #494949;
+        /* border: 1px solid #494949; */
         border-radius: 32px;
         padding: 10px;
-        background: #333;
+        background: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(10px);
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
         box-sizing: border-box;
         scroll-snap-align: start;
     }

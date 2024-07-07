@@ -88,8 +88,11 @@
 .answ_plus_minus {
     width: 100%;
     padding: 20px;
-    background: #333;
-    border: 1px solid #494949;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
+    /* border: 1px solid #494949; */
     border-radius: 12px;
     align-self: flex-start;
     font-size: 20px;
@@ -109,7 +112,10 @@
     justify-content: center;
     align-items: center;
     padding: 0px 16px;
-    background: #494949;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+    box-sizing: border-box;
     border: none;
     border-radius: 0px 0px 12px 12px;
     font-weight: 200;

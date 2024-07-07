@@ -24,7 +24,7 @@
         <h3>{{ bigcard.name }}</h3>
         <h4>{{ bigcard.price }}</h4>
         <h5>{{ bigcard.description }}</h5>
-        <Button @click="showPop"><slot>Поробовать</slot></Button>
+        <Button class="btn" @click="showPop"><slot>Поробовать</slot></Button>
         <font-awesome-icon :icon="['fas', 'xmark']" style="color: #ffffff; font-size: 32px; position: absolute; top: 48px; right: 48px; cursor: pointer;" @click="closeCard" />
     </div>
 </div>
@@ -179,11 +179,14 @@
         width: 370px;
         height: 480px;
         border-radius: 32px;
-        border: 1px solid #494949;
-        background: #333;
+        background: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(10px);
+        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         padding: 10px;
+        align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
     }
@@ -224,7 +227,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     }
-    button {
+    .btn {
         align-self: center;
         justify-self: center;
     }
@@ -281,7 +284,7 @@
         font-weight: 200;
         line-height: 100%;
     }
-    .big_card_body button {
+    .btn {
         align-self: center;
         justify-self: center;
         margin-top: 32px;
