@@ -333,8 +333,6 @@
         width: 100%;
         height: 480px;
         border-radius: 32px;
-        border: 1px solid #494949;
-        background: #333;
         display: flex;
         flex-direction: column;
         padding: 10px;
@@ -393,7 +391,6 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 999;
     }
     .big_card_body {
         width: 370px;

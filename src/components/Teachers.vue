@@ -472,6 +472,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     height: 216px;
     border-radius: 32px;
     margin-bottom: 40px;
+    display: none;
 }
 .line {
     width: 100%;
@@ -542,7 +543,6 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 997;
     background: rgba(0, 0, 0, .7);
     color: #333;
     padding: 10px;
@@ -552,7 +552,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     height: 80vh;
     background: #fff;
     border: none;
-    border-radius: 32px;
+    border-radius: 20px;
     padding: 12px;
     box-shadow: 8px 8px 16px rgba(255, 255, 255, .3);
     display: flex;

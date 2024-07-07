@@ -156,13 +156,11 @@
     .review_card {
         min-width: 80%;
         height: auto;
-        border: 1px solid #494949;
         border-radius: 32px;
         padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 24px;
-        background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
         box-sizing: border-box;
         scroll-snap-align: start;
     }

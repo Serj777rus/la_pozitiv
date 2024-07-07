@@ -294,10 +294,8 @@
     .post {
         width: 300px;
         height: 480px;
-        border: 1px solid #494949;
         border-radius: 32px;
         padding: 10px;
-        background: #333;
         box-sizing: border-box;
         scroll-snap-align: start;
     }

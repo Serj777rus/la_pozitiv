@@ -209,7 +209,6 @@
         display: flex;
         justify-content: center;
         margin-top: 140px;
-        background: #333;
         padding: 0px 10px;
     }
     .footer_div {

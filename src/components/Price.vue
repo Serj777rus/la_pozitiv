@@ -370,12 +370,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 12px;
     }
     .descript_price h5 {
         width: 100%;
         text-align: justify;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 100%;
         font-weight: 200;
     }
@@ -404,7 +404,6 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     }
     .active {
         padding: 6px 20px;
-        background: linear-gradient(45deg, #1A1A1A 0%, #374084 50%, #822872 100%);
         border-radius: 16px;
         font-size: 20px;
     }
@@ -443,9 +442,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         box-sizing: border-box;
         padding: 32px;
         position: relative;
-        background: linear-gradient(45deg, rgba(26, 26, 26, 0.4) 0%, rgba(55, 64, 132, 0.4) 50%, rgba(130, 40, 114, 0.4) 100%);
         border-radius: 24px;
-        border: 1px solid #494949;
         box-shadow: 10px 10px 16px 0px rgba(0, 0, 0, .25);
         display: flex;
         flex-direction: column;
