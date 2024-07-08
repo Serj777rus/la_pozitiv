@@ -359,9 +359,15 @@
 }
 .backimg {
     position: absolute;
-    top: 56%;
+    bottom: 0%;
     left: 50%;
-    animation: imgrotate 2s infinite;
+    transform: translate(-50%);
+    animation: 2s infinite;
+    z-index: 0;
+
+}
+.backimg img {
+    width: 200px;
 }
 @keyframes imgrotate {
     0% {
@@ -380,11 +386,12 @@
     flex-direction: row;
     justify-content: space-between;
     background: rgba(0, 0, 0, .5);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
     border-radius: 50px;
     padding: 0px 32px;
     box-sizing: border-box;
+    z-index: 1;
 }
 .right_side_main {
     display: flex;
@@ -412,6 +419,7 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 32px;
+    z-index: 2;
 }
 .utp {
     display: flex;
@@ -596,7 +604,7 @@
 }
 .about_div h3 {
     font-size: 48px;
-    font-weight: 700;
+    font-weight: 900;
 }
 .about_div p {
     font-size: 20px;
@@ -703,7 +711,6 @@ video {
     gap: 24px;
     border-radius: 32px;
     padding: 20px 16px;
-    border: 1px solid #494949;
     background: url('../assets/photos/dop_utp/man_sing.png') bottom right/240px 300px no-repeat,
             url('../assets/photos/dop_utp/О.svg') center center/285px 252px no-repeat,
             rgba(0, 0, 0, .5);

@@ -59,10 +59,7 @@
         methods: {
             openPost(post) {
                 this.isPostModalActive = true;
-                this.postModal.name = post.name
-                this.postModal.description = post.description
-                this.postModal.image = post.image
-                this.postModal.date = post.date
+                this.postModal = post;
             },
             closeModal() {
                 this.isPostModalActive = false;

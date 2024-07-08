@@ -33,8 +33,8 @@
         }
       };
     },
-    mounted() {
-      this.loadScript('//cdn.alfacrm.pro/enroll-widget/v2.0.0/widget-wizard-starter-v2.0.0.js')
+     async mounted() {
+       await this.loadScript('//cdn.alfacrm.pro/enroll-widget/v2.0.0/widget-wizard-starter-v2.0.0.js')
         .then(() => {
           console.log('Script loaded successfully.');
         })
@@ -43,14 +43,14 @@
         });
     },
     methods: {
-      loadScript(src) {
-        return new Promise((resolve, reject) => {
+        loadScript(src) {
+         return new Promise((resolve, reject) => {
           const script = document.createElement('script');
           script.src = src;
           script.async = true;
           script.onload = () => resolve();
           script.onerror = () => reject(new Error(`Failed to load script ${src}`));
-          document.head.appendChild(script);
+          document.body.appendChild(script);
         });
       },
       openWidget() {
@@ -64,7 +64,7 @@
     beforeUnmount() {
       const scripts = document.querySelectorAll('script[src="//cdn.alfacrm.pro/enroll-widget/v2.0.0/widget-wizard-starter-v2.0.0.js"]');
       scripts.forEach(script => {
-        document.head.removeChild(script);
+        document.body.removeChild(script);
       });
     }
   };

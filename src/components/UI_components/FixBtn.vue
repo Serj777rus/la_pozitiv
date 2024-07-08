@@ -1,6 +1,6 @@
 <template>
     <div class="online_btn_main" @click="shows">
-       <a href="https://lapozitiv.s20.online/common/1/wizard/embed?data_status=0&data_source=0&data_pc=%2359CD90&data_locale=ru"><font-awesome-icon :icon="['faL', 'address-card']" style="color: #ffffff;" /></a>
+       <a><font-awesome-icon :icon="['faL', 'address-card']" style="color: #ffffff;" /></a>
         <p>Online запись</p>
     </div>
 </template>
