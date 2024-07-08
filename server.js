@@ -60,8 +60,18 @@ app.get('/testroute', async (req, res) => {
 });
 
 app.get('/getprice', async(req, res) => {
-    // const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET}/values/${RANGE_PRICE}?key=${APIKEY}`;
     const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/prices?populate=*';
+    try {
+        const response = await axios.get(url);
+        res.status(200).json(response.data);
+        console.log(response.data);
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+app.get('/getquest', async(req, res) => {
+    const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/questansws';
     try {
         const response = await axios.get(url);
         res.status(200).json(response.data);
