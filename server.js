@@ -29,7 +29,6 @@ app.use(cors({
 }));
 
 const RANGE = 'Посты';
-const RANGE_PRICE = 'Цены';
 const SPREADSHEET = process.env.SPREADSHEET_ID;
 const APIKEY = process.env.GOOGLE_API;
 const ALFA_TOKEN = process.env.ALFA_TOKEN;
