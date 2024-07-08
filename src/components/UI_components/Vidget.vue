@@ -1,6 +1,7 @@
+<!-- eslint-disable vue/valid-template-root -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div>
+    <!-- <div>
       <a href="javascript:void(0)" @click="openWidget">Записаться на уроки</a>
       <div
         id="alfacrm-wizard-entry-point"
@@ -13,28 +14,21 @@
         :data-source="widgetData.source"
         :data-apiToken="widgetData.apiToken"
       ></div>
-    </div>
+    </div> -->
+    <!-- <script type="text/javascript" charset="UTF-8"></script> -->
   </template>
   
   <script>
-  // eslint-disable-next-line no-undef
-  /* global AlfaCRM */
   
   export default {
     name: 'BookingWidget',
     data() {
       return {
-        widgetData: {
-          pc: '#59CD90',
-          status: 0,
-          crm: 'https://lapozitiv.s20.online',
-          source: 0,
-          apiToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OSwiaWF0IjoxNzIwMjAwMjQ5LCJleHAiOjE3MjI3OTIyNDl9.lap1Vyme-eqYcbe4jVBEQgowV1faoWtWjEVHgGk4giw'
-        }
+
       };
     },
      async mounted() {
-       await this.loadScript('//cdn.alfacrm.pro/enroll-widget/v2.0.0/widget-wizard-starter-v2.0.0.js')
+       await this.loadScript('https://w1174915.yclients.com/widgetJS')
         .then(() => {
           console.log('Script loaded successfully.');
         })
@@ -53,16 +47,9 @@
           document.body.appendChild(script);
         });
       },
-      openWidget() {
-        if (typeof AlfaCRM !== 'undefined') {
-          AlfaCRM.OpenWizardWidget();
-        } else {
-          console.error('AlfaCRM is not defined');
-        }
-      }
     },
     beforeUnmount() {
-      const scripts = document.querySelectorAll('script[src="//cdn.alfacrm.pro/enroll-widget/v2.0.0/widget-wizard-starter-v2.0.0.js"]');
+      const scripts = document.querySelectorAll('script[src="https://w1174915.yclients.com/widgetJS"]');
       scripts.forEach(script => {
         document.body.removeChild(script);
       });
