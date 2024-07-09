@@ -58,6 +58,7 @@
         justify-content: center;
         align-items: center;
         margin-top: 140px;
+        overflow: hidden;
     }
     .reviews_div {
         width: 1200px;
@@ -73,9 +74,8 @@
         display: flex;
         width: 100%;
         flex-direction: row;
-        justify-content: space-between;
         gap: 32px;
-        overflow: auto;
+        overflow-x: scroll;
         padding: 16px 0px;
         overflow-y: hidden;
     }

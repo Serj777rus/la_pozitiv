@@ -236,7 +236,6 @@
     <ReviewCard></ReviewCard>
     <Footer></Footer>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
-    <!-- <FixBtn></FixBtn> -->
     <Vidget></Vidget>
 </template>
 
@@ -248,7 +247,6 @@
     import ReviewCard from './UI_components/ReviewCard.vue'
     import Footer from './UI_components/Footer.vue'
     import PopUp from './UI_components/PopUp.vue'
-    // import FixBtn from './UI_components/FixBtn.vue'
     import Vidget from './UI_components/Vidget.vue'
     export default {
         components: {
@@ -259,7 +257,6 @@
             ReviewCard,
             Footer,
             PopUp,
-            // FixBtn,
             Vidget
         },
         data() {
@@ -356,6 +353,7 @@
     margin-top: 48px;
     position: relative;
     gap: 32px;
+    overflow: hidden;
 }
 .backimg {
     position: absolute;

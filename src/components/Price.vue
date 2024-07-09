@@ -208,7 +208,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         text-align: center;
     }
     .descript_price {
-        margin-top: 80px;
+        margin-top: 40px;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -233,7 +233,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        margin-top: 80px;
+        margin-top: 40px;
         box-sizing: border-box;
     }
     .tabs {

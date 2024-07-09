@@ -54,6 +54,7 @@
                     date: ''
                 },
                 isPostModalActive: false,
+                serverUrl: process.env.VUE_APP_SERVER
             }
         },
         methods: {
@@ -66,7 +67,7 @@
             },
             async testGet() {
                 try {
-                    const response = await axios.get('http://192.168.0.102:3000/testroute');
+                    const response = await axios.get(`${this.serverUrl}/testroute`);
                     if (response.status == 200) {
                         console.log(response.data);
                         this.posts = response.data;
@@ -92,6 +93,7 @@
         justify-content: center;
         align-items: center;
         margin-top: 140px;
+        overflow: hidden;
     }
     .posts_div {
         width: 1200px;

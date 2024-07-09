@@ -17,14 +17,12 @@
 
 <script>
 import axios from 'axios';
-
-
-
     export default {
         data() {
             return {
                 questions: [],
-                isShowAnswer: null
+                isShowAnswer: null,
+                serverUrl: process.env.VUE_APP_SERVER
             }
         },
         methods: {
@@ -33,7 +31,7 @@ import axios from 'axios';
         },
         async getQuestion() {
             try {
-                const response = await axios.get('http://192.168.0.102:3000/getquest');
+                const response = await axios.get(`${this.serverUrl}/getquest`);
                 if (response.status == 200) {
                     this.questions = response.data.data;
                     console.log(response.data);
