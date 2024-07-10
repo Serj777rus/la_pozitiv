@@ -7,7 +7,7 @@
                 <h2>ШКОЛА ВОКАЛА<br>И ТВОРЧЕСТВА</h2>
                 <h3>"Ля Позитив"</h3>
                 <div class="slogan">
-                    <p>Ваш успех начинается здесь, в месте, где живет<br> творчество, красота и позитив!</p>
+                    <p>"Ваш успех начинается здесь, в месте, где живет<br> творчество, красота и позитив!"</p>
                 </div>
                 <Button class="btn" @click="showPop"><slot>Пробное занятие</slot></Button>
             </div>
@@ -46,8 +46,11 @@
                 <div class="descript_card">
                     <h3>{{ card.zglvk }}</h3>
                     <p>{{ card.description }}</p>
-                    <div class="tabs">
-                        <button class="tabBtn" v-for="tab in weare" :key="tab.id" @click="showCard(tab.id)" :id="tab.id" :class="{ active: isShowCard == tab.id }">{{ tab.tab }}</button>
+                    <div class="tabs_block">
+                        <div class="tabs" v-for="tab in weare" :key="tab.id" :id="tab.id">
+                            <button class="tabBtn" @click="showCard(tab.id)" :class="{ active: isShowCard == tab.id }">{{ tab.tab }}</button>
+                            <p>{{ tab.texttab }}</p>
+                    </div>
                     </div>
                     <Button @click="showPop"><slot>Хочу петь!</slot></Button>
                 </div>
@@ -239,35 +242,39 @@
                     zglvk: 'Наша история и миссия',
                     description: 'Наша миссия - делать людей чуточку счастливее, помогая людям всех возрастов раскрыть свой творческий потенциал и насладиться миром музыки. Мы создаём атмосферу, где каждый может найти своё увлечение, обучаясь вокалу, игре на гитаре или фортепиано, и где семейные ценности и традиции передаются от поколения к поколению. Наша студия - это место, где творчество и позитивные эмоции объединяются, чтобы помочь людям достичь новых высот в своём музыкальном развитии и стать чуточку счастливее!',
                     img: require ('@/assets/photos/_MG_8245bg.jpeg'),
-                    tab: '5'
+                    tab: '5',
+                    texttab: 'лет'
                 },
                 {
                     id: 2,
                     zglvk: 'Наши программы',
                     description: 'Наши программы обучения разработаны на основе опыта наших учителей, методик своих наставников и звездных педагогов . Проверенные на себе и в современно востребованы. Для нас важны потребности и интересы каждого ученика, поэтому наши программы гибкие и могут быть адаптированы под конкретные задачи и мечты. В процессе обучения мы уделяем внимание не только технике, но и творческому потенциалу. Поэтому наши ученики получают не только знания и навыки, но и возможность самовыражения через музыку. А если вы думаете, что это звучит слишком серьёзно, то помните, мы вас поддержим улыбкой и позитивным настроем!',
                     img: require ('@/assets/photos/_MG_8245bg.jpeg'),
-                    tab: '9'
+                    tab: '9',
+                    texttab: 'программ'
                 },
-                {
-                    id: 3,
-                    zglvk: 'Наша история и миссия',
-                    description: 'Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения. ',
-                    img: require ('@/assets/photos/_MG_8245bg.jpeg'),
-                    tab: '80'
-                },
+                // {
+                //     id: 3,
+                //     zglvk: 'Наша история и миссия',
+                //     description: 'Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения. ',
+                //     img: require ('@/assets/photos/_MG_8245bg.jpeg'),
+                //     tab: '80'
+                // },
                 {
                     id: 4,
                     zglvk: 'Наши ученики',
                     description: 'За пять лет работы нашей школы мы можем с гордостью отметить значительный прогресс и рост наших учеников. Они стали увереннее и амбициознее проявляться на отчетных концертах и музыкальных вечеринках студии. Улучшили свои навыки в учебе, продвинулись по карьерной лестнице, успешно выступили на различных конкурсах и фестивалях. Мы рады видеть, как наши ученики развиваются и достигают новых высот в своем творчестве, становясь профессиональными музыкантами и продолжая свой путь в мире музыки.',
                     img: require ('@/assets/photos/_MG_8245bg.jpeg'),
-                    tab: '200'
+                    tab: '700',
+                    texttab: 'учеников'
                 },
                 {
                     id: 5,
                     zglvk: 'Наши преподаватели',
                     description: 'Наши учителя - это не просто профессионалы своего дела, но и успешные, яркие, креативные артисты и музыканты, победители различных современных конкурсов, таких как &quot;Голос&quot;, &quot;Новая волна&quot; и другие. Они создают атмосферу, где каждый ученик может чувствовать себя комфортно и свободно выражать себя. Их энергия и страсть к музыке вдохновляют и мотивируют наших учеников, разжигает огонь творчества и блеск в глазах!.',
                     img: require ('@/assets/photos/_MG_8245bg.jpeg'),
-                    tab: '6'
+                    tab: '6',
+                    texttab: 'преподвателей'
                 }],
                 aboutphoto: [{
                     id: 1,
@@ -417,77 +424,6 @@
     font-size: 24px;
     line-height: 120%;
 }
-
-/* .main_main img {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    height: 500px;
-    object-fit: contain;
-} */
-/* .main_div {
-    width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: url(../assets/photos/let_fonar.png) top left/514px no-repeat,
-                url(../assets/photos/right_fonar.png) top right/514px no-repeat;
-    backdrop-filter: blur(10px);
-    border-radius: 50px;
-    padding-bottom: 24px;
-    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
-}
-.main_div button {
-    z-index: 3;
-}
-.main_div h2 {
-    margin-top: 80px;
-    font-size: 132px;
-    font-weight: 900;
-    color: #FFCEC2;
-} */
-/* .utp {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 32px;
-    z-index: 3;
-}
-.left_utp {
-    padding-left: 48px;
-    width: 400px;
-}
-.left_utp ul li {
-    margin-top: 8px;
-}
-.right_utp {
-    padding-right: 48px;
-    width: 400px;
-}
-.right_utp ul li {
-    margin-top: 8px;
-} */
-/* .slogan {
-    width: 800px;
-    padding: 16px 32px;
-    border-radius: 32px;
-    background: rgb(0,0,0, 0.7);
-    margin-top: 48px;
-    margin-bottom: 24px;
-    z-index: 3;
-}
-.slogan p {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 200;
-} */
-.tabBtn {
-    padding: 4px 8px;
-    cursor: pointer;
-}
 .mission {
     width: 100%;
     display: flex;
@@ -511,7 +447,6 @@
     height: 440px;
     background: #333;
     border-radius: 32px;
-    /* border: 1px solid #494949; */
     background: rgba(0, 0, 0, .5);
     backdrop-filter: blur(10px);
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
@@ -542,10 +477,16 @@
     font-size: 16px;
     font-weight: 400;
 }
-.tabs {
+.tabs_block {
     display: flex;
     flex-direction: row;
     gap: 32px;
+    align-items: center;
+}
+.tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     align-items: center;
 }
 .tabBtn {

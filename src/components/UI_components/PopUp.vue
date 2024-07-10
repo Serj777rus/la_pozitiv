@@ -16,7 +16,7 @@
                 </div>
                 <div class="inputs_sel">
                     <label for="phone">Возраст</label>
-                    <select>
+                    <select v-model="popupform.age" name="age" id="age">
                         <option value="Ребенок">Ребенок</option>
                         <option value="Подросток">Подросток</option>
                         <option value="Взрослый">Взрослый</option>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="inputs_sel">
                     <label for="phone">Программа обучения</label>
-                    <select>
+                    <select v-model="popupform.education" name="education" id="education">
                         <option value="Вокал">Вокал</option>
                         <option value="Вокал онлайн">Вокал онлайн</option>
                         <option value="Гитара">Гитара</option>
@@ -54,7 +54,9 @@
             return {
                 popupform: {
                     name: '',
-                    phone: ''
+                    phone: '',
+                    age: '',
+                    education: ''
                 },
                 message: ''
             }

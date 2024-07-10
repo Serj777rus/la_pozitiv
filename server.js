@@ -83,26 +83,13 @@ app.get('/getquest', async(req, res) => {
     }
 })
 
-app.post('/sendform', async(req, res) => {
-    const url = `https://lapozitiv.s20.online/api/1/lead/create?token=${ALFA_TOKEN}`;
-    const { name, phone } = req.body;
-    const lead = {
-        name: name,
-        phone: phone
-    }
-    try {
-        const response = await axios.post(url, lead);
-        res.status(201).json({message: 'Данные отправлены', data: response.data})
-    }
-    catch (error) {
-        console.error('Ошибка отправки', error);
-        res.status(500).json({message: 'Ошибка сохранения'})
-    }
-})
+// app.post('/sendform', async(req, res) => {
+//     try {
+//         const {  }
 
-// app.get('/testroute', (req, res) => {
-//     console.log(`запроc дошел до сервера`);
-//         return res.status(200).json('окей')
+//     } catch (error) {
+//         console.error(error);
+//     }
 // })
 
 server.listen(PORT, hostname, () => {
