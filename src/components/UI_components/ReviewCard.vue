@@ -3,49 +3,39 @@
         <div class="reviews_div">
             <h2>Отзывы наших учеников</h2>
             <div class="all_cards">
-                <div class="review_card" v-for="card in reviews" :key="card.id">
-                <div class="photo_name">
-                    <img :src="card.image">
-                    <div class="name_clas">
-                        <p>{{ card.name }}</p>
-                        <span>{{ card.clas }}</span>
-                    </div>
+                <div class="review_card" v-for="video in reviews" :key="video.id">
+                    <video v-for="url in video.attributes.video.data" :key="url" :src="url.attributes.url" controls></video>
                 </div>
-                <div class="review">
-                    <p>{{ card.review }}</p>
-                </div>
-            </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
     export default {
         data() {
             return {
-                reviews: [{
-                    id: 1,
-                    name: 'Раян Гослинг',
-                    clas: 'Ученик класса “Вокал”',
-                    image: require('@/assets/photos/reviews/gosling.png'),
-                    review: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy'
-                },
-                {
-                    id: 2,
-                    name: 'Брэд Питт',
-                    clas: 'Ученик класса “Вокал”',
-                    image: require('@/assets/photos/reviews/pitt.png'),
-                    review: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy'
-                },
-                {
-                    id: 3,
-                    name: 'Бьенсе',
-                    clas: 'Ученик класса “Вокал”',
-                    image: require('@/assets/photos/reviews/beunce.png'),
-                    review: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy'
-                }]
+                reviews: [],
+                server: process.env.VUE_APP_SERVER
             }
+        },
+        methods: {
+            async getReviws() {
+                try {
+                    const response = await axios.get(`${this.server}/getreviws`);
+                    if (response.status == 200) {
+                        this.reviews = response.data.data;
+                        console.log(response.data)
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        },
+        mounted() {
+            this.getReviws();
         }
         
     }
@@ -75,53 +65,23 @@
         width: 100%;
         flex-direction: row;
         gap: 32px;
-        overflow-x: scroll;
         padding: 16px 0px;
-        overflow-y: hidden;
+        overflow: auto;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
     }
     .review_card {
-        min-width: 500px;
-        height: 300px;
-        border-radius: 32px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background: rgba(0, 0, 0, .5);
-    backdrop-filter: blur(10px);
-    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
-    box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    .photo_name {
         width: 100%;
         display: flex;
         flex-direction: row;
-        gap: 12px;
+        gap: 32px;
+        scroll-snap-align: start;
     }
-    .photo_name img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: 1px solid #fff;
-        box-sizing: border-box;
-    }
-    .photo_name p {
-        font-size: 24px;
-        font-weight: 500;
-    }
-    .photo_name span {
-        font-size: 16px;
-        font-weight: 200;
-    }
-    .name_clas {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-    .review {
-        font-size: 16px;
-        font-weight: 200;
+    .review_card video {
+        width: 500px;
+        aspect-ratio: 16/9;
+        border-radius: 32px;
+        box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, .3);
     }
     @media all and (max-width: 440px) {
         .reviews {

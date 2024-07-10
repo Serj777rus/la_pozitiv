@@ -4,18 +4,20 @@
     <div class="teachers_main">
         <div class="teachers_div">
             <h2>Наши преподаватели</h2>
-            <div class="teachers_back"></div>
+            <div class="teachers_back">
+                <img src="../assets/photos/teachers/fon.png">
+            </div>
             <div class="line"></div>
             <div class="teachers_block">
                 <div class="teacher_card" v-for="card in teachers" :key="card.id">
                     <div class="back_grad">
-                        <img :src="card.image">
+                        <img :src="card.attributes.image.data.attributes.url">
                     </div>
                     <div class="about_teacher">
-                        <div class="names">{{ card.name }} {{ card.lastname }}</div>
-                        <h3>{{ card.study }}</h3>
+                        <div class="names">{{ card.attributes.name }} {{ card.attributes.lastname }}</div>
+                        <h3>{{ card.attributes.study }}</h3>
                     </div>
-                    <Button @click="showTeachCard(card.id)"><slot>Подробнее</slot></Button>
+                    <Button @click="showTeachCard(card)"><slot>Подробнее</slot></Button>
                 </div>
             </div>
         </div>
@@ -25,38 +27,37 @@
             <div class="card_left_side">
                 <div class="teacher_card_big">
                     <div class="back_grad_big">
-                        <img :src="teachcard.image">
+                        <img :src="teachcard.attributes.image.data.attributes.url">
                     </div>
-                    <p>{{ teachcard.article }}</p>
+                    <p>{{ teachcard.attributes.article }}</p>
                     <div class="about_teacher_big">
-                        <p>Имя: <span>{{ teachcard.name }} {{ teachcard.lastname }}</span></p>
-                        <p>Возраст: <span>{{ teachcard.age }}</span></p>
-                        <p>Специализация: <span>{{ teachcard.study }}</span></p>
+                        <p>Имя: <span>{{ teachcard.attributes.name }} {{ teachcard.attributes.lastname }}</span></p>
+                        <p>Возраст: <span>{{ teachcard.attributes.age }}</span></p>
+                        <p>Специализация: <span>{{ teachcard.attributes.study }}</span></p>
                     </div>
                     <div class="socials">
-                            <img src="@/assets/photos/teachers/Group.png">
-                            <img src="@/assets/photos/teachers/Group-1.png">
-                            <img src="@/assets/photos/teachers/Group-2.png">
+                            <a :href="teachcard.attributes.inst" target="_blank"><img src="@/assets/photos/teachers/instagram.svg"></a>
+                            <a :href="teachcard.attributes.vk" target="_blank"><img src="@/assets/photos/teachers/vk.svg"></a>
                     </div>
                 </div>
             </div>
             <div class="card_right_side">
                 <div class="right_up">
                     <h4>Обо мне:</h4>
-                    <p>{{ teachcard.bio }}</p>
+                    <p>{{ teachcard.attributes.bio }}</p>
                 </div>
                 <div class="right_down">
                     <div class="right_down_left">
                         <div class="skills">
                             <p>Достижения</p>
                             <ul>
-                                <li v-for="skill in teachcard.skills" :key="skill">{{ skill }}</li>
+                                <li v-for="skill in teachcard.attributes.skills" :key="skill">{{ skill.skill }}</li>
                             </ul>
                         </div>
                         <div class="skillses">
-                            <p>Достижения</p>
+                            <p>Skills</p>
                             <ul>
-                                <li v-for="dost in teachcard.dost" :key="dost">{{ dost }}</li>
+                                <li v-for="dost in teachcard.attributes.dost" :key="dost">{{ dost.dostigenia }}</li>
                             </ul>
                         </div>
                     </div>
@@ -73,133 +74,72 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Button from './UI_components/Button.vue';
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
 
-    export default {
-        components: {
-            HeadMenu,
-            Footer,
-            Button
-        },
-        data() {
-            return {
-                teachers: [{
-                    id: 1,
-                    name: 'Скарлет',
-                    lastname: 'Йохансон',
-                    study: 'Преподаватель по вокалу',
-                    image: require('@/assets/photos/teachers/scarlett.png'),
-                    age: '27',
-                    ins: 'htts://google.com',
-                    vk: '',
-                    twitter: '',
-                    youtube: '',
-                    bio: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
-                    dost: ['Голос', 'Битва Экстрасенсов', 'Танцы', 'Остров', 'Дом 2'],
-                    skills: ['Пение', 'Чтение', 'Рисование', 'Танцевание'],
-                    video: require('@/assets/videos/teacher.mp4'),
-                    article: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.'
-                },
-                {
-                    id: 2,
-                    name: 'Кира',
-                    lastname: 'Найтли',
-                    study: 'Преподаватель по фортепиано',
-                    image: require('@/assets/photos/teachers/kira_nitley.png'),
-                    age: '27',
-                    ins: 'htts://google.com',
-                    vk: '',
-                    twitter: '',
-                    youtube: '',
-                    bio: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
-                    dost: ['Голос', 'Битва Экстрасенсов', 'Танцы', 'Остров', 'Дом 2'],
-                    skills: ['Пение', 'Чтение', 'Рисование', 'Танцевание'],
-                    video: require('@/assets/videos/teacher.mp4')
-                },
-                {
-                    id: 3,
-                    name: 'Элтон',
-                    lastname: 'Джон',
-                    study: 'Преподаватель по сольфеджио',
-                    image: require('@/assets/photos/teachers/elton.png'),
-                    age: '27',
-                    ins: 'htts://google.com',
-                    vk: '',
-                    twitter: '',
-                    youtube: '',
-                    bio: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
-                    dost: ['Голос', 'Битва Экстрасенсов', 'Танцы', 'Остров', 'Дом 2'],
-                    skills: ['Пение', 'Чтение', 'Рисование', 'Танцевание'],
-                    video: require('@/assets/videos/teacher.mp4')
-                },
-                {
-                    id: 4,
-                    name: 'Джон',
-                    lastname: 'Ленон',
-                    study: 'Преподаватель по гитаре',
-                    image: require('@/assets/photos/teachers/jhon.png'),
-                    age: '27',
-                    ins: 'htts://google.com',
-                    vk: '',
-                    twitter: '',
-                    youtube: '',
-                    bio: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
-                    dost: ['Голос', 'Битва Экстрасенсов', 'Танцы', 'Остров', 'Дом 2'],
-                    skills: ['Пение', 'Чтение', 'Рисование', 'Танцевание'],
-                    video: require('@/assets/videos/teacher.mp4')
-                },
-                {
-                    id: 5,
-                    name: 'Джонни',
-                    lastname: 'Депп',
-                    study: 'Преподаватель по сценическому мастерству',
-                    image: require('@/assets/photos/teachers/jhonni.png'),
-                    age: '27',
-                    ins: 'htts://google.com',
-                    vk: '',
-                    twitter: '',
-                    youtube: '',
-                    bio: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
-                    dost: ['Голос', 'Битва Экстрасенсов', 'Танцы', 'Остров', 'Дом 2'],
-                    skills: ['Пение', 'Чтение', 'Рисование', 'Танцевание'],
-                    video: require('@/assets/videos/teacher.mp4')
-                },
-                {
-                    id: 6,
-                    name: 'Бьенсе',
-                    lastname: 'Иванова',
-                    study: 'Звукорежисер',
-                    image: require('@/assets/photos/teachers/beuonce.png'),
-                    age: '27',
-                    ins: 'htts://google.com',
-                    vk: '',
-                    twitter: '',
-                    youtube: '',
-                    bio: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
-                    dost: ['Голос', 'Битва Экстрасенсов', 'Танцы', 'Остров', 'Дом 2'],
-                    skills: ['Пение', 'Чтение', 'Рисование', 'Танцевание'],
-                    video: require('@/assets/videos/teacher.mp4')
-                }],
-                teachcard: {},
-                isShowCard: false
-            }
-        },
-        methods: {
-            showTeachCard(id) {
-                this.teachers.forEach(el => {
-                    if (el.id == id) {
-                        this.teachcard = el;
-                        this.isShowCard = true
-                    }
-                })
-            },
-            closeCard() {
-                this.isShowCard = false;
-            }
+export default {
+  components: {
+    HeadMenu,
+    Footer,
+    Button
+  },
+  data() {
+    return {
+      teachers: [],
+      teachcard: {
+        attributes: {
+          age: '',
+          article: '',
+          bio: '',
+          createdAt: '',
+          dost: [],
+          image: { data: { attributes: { url: '' } } },
+          inst: '',
+          lastname: '',
+          name: '',
+          publishedAt: '',
+          skills: [],
+          study: '',
+          updatedAt: '',
+          video: { data: '' },
+          vk: ''
         }
+      },
+      isShowCard: false,
+      url: process.env.VUE_APP_SERVER
+    };
+  },
+  methods: {
+    showTeachCard(card) {
+      console.log(card);
+      if (card.attributes.video.data == null) {
+        card.attributes.video.data = '';
+      }
+      this.teachcard = card;
+      this.isShowCard = true;
+      console.log(this.teachcard);
+    },
+    closeCard() {
+      this.isShowCard = false;
+    },
+    async getTeachersData() {
+      try {
+        const response = await axios.get(`${this.url}/getteachers`);
+        if (response.status == 200) {
+          this.teachers = response.data.data;
+          console.log(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
+  },
+  mounted() {
+    this.getTeachersData();
+  }
+};
 </script>
 
 <style scoped>
@@ -223,11 +163,19 @@ import HeadMenu from './UI_components/HeadMenu.vue';
 }
 .teachers_back {
     width: 100%;
-    background: url('@/assets/photos/teachers/fon.png'),
-                #E7E4E4;
+    background: linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4) no-repeat;;
     height: 500px;
     border-radius: 32px;
     margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.teachers_back img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
 }
 .line {
     width: 100%;
@@ -373,6 +321,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
 .about_teacher_big p {
     font-size: 16px;
     font-weight: 400;
+    text-align: start
 }
 .about_teacher_big span {
     font-size: 16px;
@@ -386,11 +335,15 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     align-items: center;
     gap: 12px
 }
+.socials img {
+    width: 48px;
+    object-fit: cover;
+}
 .card_right_side {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 60px;
 }
 .right_up {

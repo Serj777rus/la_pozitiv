@@ -119,7 +119,7 @@
     .posts {
         display: flex;
         width: 100%;
-        padding: 16px 0px;
+        padding-bottom: 16px;
         flex-direction: row;
         justify-content: space-between;
         gap: 32px;

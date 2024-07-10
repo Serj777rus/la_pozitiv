@@ -80,6 +80,27 @@ app.get('/getquest', async(req, res) => {
         console.error(error)
     }
 })
+app.get('/getreviws', async(req, res) => {
+    const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/reviews?populate=*';
+    try {
+        const response = await axios.get(url);
+        res.status(200).json(response.data);
+        console.log(response.data);
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+app.get('/getteachers', async(req, res) => {
+    const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/teachers?populate=*';
+    try {
+        const response = await axios.get(url);
+        res.status(200).json(response.data);
+        console.log(response.data);
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 app.post('/sendform', async (req, res) => {
     try {
