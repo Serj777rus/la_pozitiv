@@ -14,6 +14,27 @@
                     <label for="phone">Телефон</label>
                     <input v-model="popupform.phone" type="text" id="phone" name="phone" required>
                 </div>
+                <div class="inputs_sel">
+                    <label for="phone">Возраст</label>
+                    <select>
+                        <option value="Ребенок">Ребенок</option>
+                        <option value="Подросток">Подросток</option>
+                        <option value="Взрослый">Взрослый</option>
+                    </select>
+                </div>
+                <div class="inputs_sel">
+                    <label for="phone">Программа обучения</label>
+                    <select>
+                        <option value="Вокал">Вокал</option>
+                        <option value="Вокал онлайн">Вокал онлайн</option>
+                        <option value="Гитара">Гитара</option>
+                        <option value="Электрогитара">Электрогитара</option>
+                        <option value="Фортепиано">Фортепиано</option>
+                        <option value="Сольфеджио">Сольфеджио</option>
+                        <option value="Музыкальная литература">Музыкальная литература</option>
+                        <option value="Звукозапись">Звукозапись</option>
+                    </select>
+                </div>
                 <Button type="submit"><slot>Отправить</slot></Button>
                 <div class="message">{{ message }}</div>
             </form>
@@ -107,7 +128,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 48px;
+        gap: 32px;
     }
     .inputs {
         position: relative;
@@ -131,5 +152,22 @@
     }
     .message {
         color: green;
+    }
+    .inputs_sel {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        color: #494949;
+        gap: 4px;
+    }
+    .inputs_sel label {
+        padding-left: 20px;
+        line-height: 100%;
+    }
+    .inputs_sel select {
+        width: 100%;
+        padding: 16px 12px;
+        border-radius: 8px;
+        border: 1px solid #494949;
     }
 </style>

@@ -49,6 +49,11 @@ export default {
   src: url('~@/assets/Gilroy/Gilroy-Thin.ttf');
   font-weight: 100;
 }
+@font-face {
+  font-family: 'Gilroy';
+  src: url('~@/assets/Gilroy/Gilroy-LightItalic.ttf');
+  font-weight: 600;
+}
 
 #app {
   font-family: 'Gilroy', serif;

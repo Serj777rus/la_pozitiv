@@ -1,38 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <HeadMenu></HeadMenu>
-    <!-- <div class="main_main">
-        <div class="main_div">
-            <h2>ШКОЛА ВОКАЛА</h2>
-            <div class="utp">
-                <div class="left_utp">
-                    <ul>
-                        <li>Индивидуальный подход к каждому голосу</li>
-                        <li>Практика выступлений на сцене</li>
-                        <li>Авторские методики, результат после 8 урока</li>
-                        <li>Ваши музыкальные предпочтения в приоритете</li>
-                    </ul>
-                </div>
-                <div class="right_utp">
-                    <ul>
-                        <li>Профессиональная запись в стенах студии</li>
-                        <li>Участие в теплых концертах в стенах студии</li>
-                        <li>Профессиональное оборудование и все условия для комфортного обучения</li>
-                        <li>Атмосфера красоты и уюта</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="slogan">
-                <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.</p>
-            </div>
-            <Button @click="showPop"><slot>Пробное занятие</slot></Button>
-        </div>
-        <img src="@/assets/photos/girl_main.png">
-    </div> -->
     <div class="main_main">
         <div class="main_div">
             <div class="right_side_main">
                 <h2>ШКОЛА ВОКАЛА<br>И ТВОРЧЕСТВА</h2>
+                <h3>"Ля Позитив"</h3>
                 <div class="slogan">
                     <p>Ваш успех начинается здесь, в месте, где живет<br> творчество, красота и позитив!</p>
                 </div>
@@ -228,7 +201,7 @@
     <Posts></Posts>
     <div class="concert_video">
         <div class="concert_video_div">
-            <h3>Наши концерты</h3>
+            <h3>Welcome video</h3>
             <video src="../assets/videos/about_video.mp4" controls></video>
         </div>
     </div>
@@ -396,13 +369,21 @@
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    gap: 48px;
+    gap: 32px;
 }
 .right_side_main h2 {
     font-size: 96px;
     font-weight: 900;
     color: #FFCEC2;
     line-height: 100%;
+}
+.right_side_main h3 {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 100%;
+    background: -webkit-linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4); background: linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4) no-repeat;
+    background-clip: text;
+    color: transparent;
 }
 .slogan {
     line-height: 100%;

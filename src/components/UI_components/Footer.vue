@@ -30,6 +30,27 @@
                         <label for="name">Телефон</label>
                         <input v-model="footerform.phone" id="phone" type="text" name="phone" required>
                     </div>
+                    <div class="inputs_sel">
+                        <label for="phone">Возраст</label>
+                        <select>
+                            <option value="Ребенок">Ребенок</option>
+                            <option value="Подросток">Подросток</option>
+                            <option value="Взрослый">Взрослый</option>
+                        </select>
+                    </div>
+                    <div class="inputs_sel">
+                        <label for="phone">Программа обучения</label>
+                        <select>
+                            <option value="Вокал">Вокал</option>
+                            <option value="Вокал онлайн">Вокал онлайн</option>
+                            <option value="Гитара">Гитара</option>
+                            <option value="Электрогитара">Электрогитара</option>
+                            <option value="Фортепиано">Фортепиано</option>
+                            <option value="Сольфеджио">Сольфеджио</option>
+                            <option value="Музыкальная литература">Музыкальная литература</option>
+                            <option value="Звукозапись">Звукозапись</option>
+                        </select>
+                    </div>
                     <button type="submit">Отправить</button>
                 </form>
             </div>
@@ -155,6 +176,25 @@
         padding: 4px 12px;
     }
     .inputs input:focus {
+        outline: none;
+    }
+    .inputs_sel {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+        align-items: center;
+    }
+    .inputs_sel select {
+        padding: 4px 12px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #fff;
+        border-radius: 4px;
+        background: transparent;
+        color: #fff;
+    }
+    select:focus {
         outline: none;
     }
     .footer_form button {

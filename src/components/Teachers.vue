@@ -224,7 +224,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
 .teachers_back {
     width: 100%;
     background: url('@/assets/photos/teachers/fon.png'),
-                #E7E4E4,;
+                #E7E4E4;
     height: 500px;
     border-radius: 32px;
     margin-bottom: 40px;

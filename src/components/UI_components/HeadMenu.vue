@@ -1,7 +1,7 @@
 <template>
     <div class="headmenu_main" v-if="mediaWidth > 1180">
         <div class="headmenu_div">
-            <img src="~@/assets/photos/logo.svg">
+            <img src="~@/assets/photos/logo_painted.svg">
             <div class="menus">
                 <router-link :to="{ name: 'home' }"><p>Главная</p></router-link>
                 <router-link :to="{ name: 'education' }"><p>Направления</p></router-link>
@@ -85,6 +85,11 @@
         box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
         border-radius: 50px;
         box-sizing: border-box;
+    }
+    .headmenu_div img {
+        max-height: 60px;
+        object-fit: cover;
+        margin-left: 12px;
     }
     .menus {
         display: flex;
