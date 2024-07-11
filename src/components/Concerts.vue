@@ -45,12 +45,12 @@
         <h3>Наши вечеринки</h3>
         <div class="concerts_video_block">
             <div class="video" v-for="video in videos" :key="video.id">
-                <video :src="video.attributes.video.url" controls></video>
+                <video :src="video.attributes.url" controls></video>
                 <p></p>
             </div>
         </div>
         <div class="concerts_photo_block">
-            <img v-for="photo in photos" :key="photo.id" :src="photo.attributes.photo.url">
+            <img v-for="photo in photos" :key="photo.id" :src="photo.attributes.url">
         </div>
     </div>
 </div>
@@ -314,12 +314,13 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 try {
                     const response = await axios.get(`${this.url}/getphotosvideos`);
                     if (response.status == 200) {
-                        const data = response.data.data;
+                        // console.log(response.data.data[0].attributes.content.data)
+                        const data = response.data.data[0].attributes.content.data;
                         data.forEach(el => {
-                            if (el.attributes.photo !== null) {
+                            if (el.attributes.ext == '.JPG' || el.attributes.ext == '.jpeg') {
                                 this.photos.push(el)
                             } else {
-                                if (el.attributes.video !== null) {
+                                if (el.attributes.ext == '.mp4') {
                                     this.videos.push(el)
                                 }
                             }
@@ -327,6 +328,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                     } else {
                         console.log(response.status);
                     }
+                    console.log(this.photos);
+                    console.log(this.videos);
                 } catch (error) {
                     console.log(error)
                 }
