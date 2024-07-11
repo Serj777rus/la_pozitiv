@@ -5,7 +5,7 @@ const cors = require('cors');
 const axios = require('axios');
 const nodemailer = require('nodemailer');
 
-const hostname = '192.168.98.235';
+const hostname = '192.168.0.102';
 const PORT = 3000;
 const app = express();
 const server = http.createServer(app);
@@ -25,7 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 const SERVER_APP = process.env.SERVER_APP
 app.use(cors({
     credentials: true,
-    // origin: 'http://192.168.0.102:8080'
     origin: SERVER_APP
 }));
 

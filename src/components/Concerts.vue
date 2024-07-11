@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
 <HeadMenu></HeadMenu>
-<div class="concerts_main">
+<!-- <div class="concerts_main">
     <div class="years">
         <div class="year"><p v-for="years in year" :key="years" @click="sortMonth(years)" :class="{ yearactive: years == this.yearsmonth.year }">{{ years }}</p></div>
         <div class="month"><p v-for="months in month" :key="months" @click="sortDate(months, this.yearsmonth.year)" :class="{ yearactive: months == this.yearsmonth.month }">{{ months }}</p></div>
@@ -39,11 +39,25 @@
             <img src="@/assets/photos/about/next.svg">
         </div>
     </div>
+</div> -->
+<div class="concerts_main">
+    <div class="concerts_div">
+        <h3>Наши вечеринки</h3>
+        <div class="concerts_video_block">
+            <div class="video" v-for="video in videos" :key="video.id">
+                <video :src="video.attributes.video.url" controls></video>
+                <p></p>
+            </div>
+        </div>
+        <div class="concerts_photo_block">
+            <img v-for="photo in photos" :key="photo.id" :src="photo.attributes.photo.url">
+        </div>
+    </div>
 </div>
 <Footer></Footer>
 </template>
 
-<script>
+<!-- <script>
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
     export default {
@@ -278,10 +292,54 @@ import HeadMenu from './UI_components/HeadMenu.vue';
             console.log(this.year);
         }
     }
-</script>
+</script> -->
+<script>
+    import axios from 'axios';
+    import HeadMenu from './UI_components/HeadMenu.vue';
+    import Footer from './UI_components/Footer.vue';
+    export default {
+        components: {
+            HeadMenu,
+            Footer
+        },
+        data() {
+            return {
+                videos: [],
+                photos: [],
+                url: process.env.VUE_APP_SERVER
+            }
+        },
+        methods: {
+           async getPhotoVideo() {
+                try {
+                    const response = await axios.get(`${this.url}/getphotosvideos`);
+                    if (response.status == 200) {
+                        const data = response.data.data;
+                        data.forEach(el => {
+                            if (el.attributes.photo !== null) {
+                                this.photos.push(el)
+                            } else {
+                                if (el.attributes.video !== null) {
+                                    this.videos.push(el)
+                                }
+                            }
+                        })
+                    } else {
+                        console.log(response.status);
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        },
+        mounted() {
+            this.getPhotoVideo();
+        }
+    }
 
+</script>
 <style scoped>
-    .concerts_main {
+    /* .concerts_main {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -386,8 +444,6 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         display: none;
         flex-direction: column;
         gap: 32px;
-        /* position: absolute;
-        z-index: -1; */
         box-sizing: border-box;
 }
     .partys_right_side video {
@@ -638,5 +694,5 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         right: 24px;
         transform: translateY(-50%);
     }
-    }
+    } */
 </style>
