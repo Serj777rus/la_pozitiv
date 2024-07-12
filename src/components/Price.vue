@@ -9,10 +9,10 @@
                 <h5>В основе вокального мастерства лежат навыки, которые пригодятся ребенку в повседневной жизни – уверенность в себе, хорошая дикция, способность четко формулировать свои мысли и уметь их преподносить. Если ребенок, обращаясь к публике, обладает хорошо поставленным голосом, выразительной дикцией , его непременно услышат и оценят красоту его голоса!</h5>
             </div>
             <div class="price_tabs">
-                <div class="tabs" :class="{ active: isShowPrice ==  tab.clas}" v-for="tab in prices" :key="tab.id" @click="showPrice(tab.forwho)">{{ tab.forwho }}</div>
+                <div class="tabs" :class="{ active: isShowPrice ==  tab.forwho}" v-for="tab in prices" :key="tab.id" @click="showPrice(tab.forwho)">{{ tab.forwho }}</div>
             </div>
             <div class="description_tab" v-for="desc in prices" :key="desc.id" v-show="isShowPrice == desc.forwho">
-                <p v-for="categorys in desc.categorys" :key="categorys" @click="isShowCatPrice = `${categorys.name}`">{{ categorys.name }}</p>
+                <p :class="{ active: isShowCatPrice ==  categorys.name}" v-for="categorys in desc.categorys" :key="categorys" @click="isShowCatPrice = `${categorys.name}`">{{ categorys.name }}</p>
             </div>
             <div class="price_card">
                 <div class="cards" v-for="price in prices" :key="price.id" v-show="isShowPrice == price.forwho">
@@ -177,7 +177,7 @@ import PopUp from './UI_components/PopUp.vue';
         display: flex;
         flex-direction: row;
         width: 100%;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
         margin-top: 40px;
         box-sizing: border-box;
@@ -206,6 +206,7 @@ import PopUp from './UI_components/PopUp.vue';
         gap: 18px;
         flex-wrap: wrap;
         justify-content: center;
+        box-sizing: border-box;
     }
     .description_tab p {
         font-size: 20px;
@@ -213,6 +214,8 @@ import PopUp from './UI_components/PopUp.vue';
         text-align: center;
         line-height: 100%;
         cursor: pointer;
+        box-sizing: border-box;
+        transition: all 160ms ease;
     }
     .price_card {
         margin-top: 80px;

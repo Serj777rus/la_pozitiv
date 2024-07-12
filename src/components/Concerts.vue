@@ -790,6 +790,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         height: 100px;
         object-fit: cover;
         border-radius: 8px;
+        cursor: pointer;
     }
     .big_photo_modal {
         width: 100%;
