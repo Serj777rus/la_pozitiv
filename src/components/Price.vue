@@ -9,159 +9,49 @@
                 <h5>В основе вокального мастерства лежат навыки, которые пригодятся ребенку в повседневной жизни – уверенность в себе, хорошая дикция, способность четко формулировать свои мысли и уметь их преподносить. Если ребенок, обращаясь к публике, обладает хорошо поставленным голосом, выразительной дикцией , его непременно услышат и оценят красоту его голоса!</h5>
             </div>
             <div class="price_tabs">
-                <div class="tabs" :class="{ active: isShowPrice ==  tab.clas}" v-for="tab in prices" :key="tab.clas" @click="showPrice(tab.clas)">{{ tab.clas }}</div>
+                <div class="tabs" :class="{ active: isShowPrice ==  tab.clas}" v-for="tab in prices" :key="tab.id" @click="showPrice(tab.forwho)">{{ tab.forwho }}</div>
             </div>
-            <div class="description_tab" v-for="desc in prices" :key="desc.clas" v-show="isShowPrice == desc.clas">
-                <h5>{{ desc.inf }}</h5>
-                <p>{{ desc.moreinf }}</p>
+            <div class="description_tab" v-for="desc in prices" :key="desc.id" v-show="isShowPrice == desc.forwho">
+                <p v-for="categorys in desc.categorys" :key="categorys" @click="isShowCatPrice = `${categorys.name}`">{{ categorys.name }}</p>
             </div>
             <div class="price_card">
-                <div class="cards" v-for="price in prices" :key="price.clas" v-show="isShowPrice == price.clas">
-                    <div class="card" v-for="category in price.category" :key="category.name">
-                        <p>{{ category.utp }}</p>
-                        <h3>{{ category.name }}</h3>
-                        <span>{{ category.price }}</span>
-                        <ul>
-                            <li v-for="servise in category.services" :key="servise">{{ servise }}</li>
-                        </ul>
-                        <button>Купить</button>
-                        <img src="@/assets/photos/price/ribbon.png">
+                <div class="cards" v-for="price in prices" :key="price.id" v-show="isShowPrice == price.forwho">
+                    <div class="card_price" v-for="category in price.categorys" :key="category.name" v-show="isShowCatPrice == category.name">
+                        <div class="card" v-for="datas in category.details" :key="datas.type">
+                            <p>{{ datas.type }}</p>
+                            <span>{{ datas.price }}</span>
+                            <h4>{{ datas.description }}</h4>
+                            <button @click="showPop">Купить</button>
+                            <img src="@/assets/photos/price/ribbon.png">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <Footer></Footer>
+    <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
 </template>
 
 <script>
 import axios from 'axios';
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
+import PopUp from './UI_components/PopUp.vue';
 
     export default {
         components: {
             HeadMenu,
-            Footer
+            Footer,
+            PopUp
         },
         data() {
             return {
-                prices: [{
-                    clas: 'Вокал',
-                    inf: 'Эстрадный, Джазовый',
-                    moreinf: 'Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source',
-                    category: [{
-                        name: 'Пробное занятие',
-                        price: '700р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Абонемент',
-                        price: '14 000р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Разовое занятие',
-                        price: '2500р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    }]
-                },
-                {
-                    clas: 'Вокал online',
-                    inf: 'Эстрадный, Джазовый',
-                    moreinf: 'Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source',
-                    category: [{
-                        name: 'Пробное занятие',
-                        price: '500р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Абонемент',
-                        price: '13 000р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Разовое занятие',
-                        price: '2400р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    }]
-                },
-                {
-                    clas: 'Сольфеджио',
-                    inf: 'Эстрадный, Джазовый',
-                    moreinf: 'Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source',
-                    category: [{
-                        name: 'Пробное занятие',
-                        price: '800р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Абонемент',
-                        price: '15 000р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Разовое занятие',
-                        price: '2600р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    }]
-                },
-                {
-                    clas: 'Музыкальная литература',
-                    inf: 'Эстрадный, Джазовый',
-                    moreinf: 'Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source',
-                    category: [{
-                        name: 'Пробное занятие',
-                        price: '300р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Абонемент',
-                        price: '11 000р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Разовое занятие',
-                        price: '2200р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    }]
-                },
-                {
-                    clas: 'Инструменты',
-                    inf: 'Эстрадный, Джазовый',
-                    moreinf: 'Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source',
-                    category: [{
-                        name: 'Пробное занятие',
-                        price: '900р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Абонемент',
-                        price: '17 000р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    },
-                    {
-                        name: 'Разовое занятие',
-                        price: '2700р',
-                        utp: 'Почти даром',
-                        services: ['Что входит в занятие №1', 'Что входит в занятие №2', 'Что входит в занятие №3', 'Что входит в занятие №4']
-                    }]
-                }],
-                isShowPrice: 'Вокал'
+                prices: [],
+                isShowPrice: 'Дети',
+                isShowCatPrice: 'Абонементы',
+                url: process.env.VUE_APP_SERVER,
+                isShowPopUp: false,
             }
         },
         methods: {
@@ -171,16 +61,72 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 }
             },
             async getPrice() {
+                this.prices = [];
                 try {
-                    const response = await axios.get('http://192.168.0.102:3000/getprice');
-                    if (response) {
-                        console.log(response.data)
+                    const response = await axios.get(`${this.url}/getprice`);
+                    if (response && response.data && response.data.data) {
+                        console.log(response.data.data);
+                        let data = response.data.data;
+                        data.forEach(el => {
+                            let existingObj = this.prices.find(p => p.forwho === el.attributes.forwho);
+                            if (existingObj) {
+                                let existingCategory = existingObj.categorys.find(c => c.name === el.attributes.name);
+                                if (existingCategory) {
+                                    // Добавляем новый объект в массив категории, если такой объект ещё не существует
+                                    let existingDetails = existingCategory.details.find(d =>
+                                        d.type === el.attributes.type &&
+                                        d.description === el.attributes.description &&
+                                        d.price === el.attributes.price
+                                    );
+                                    if (!existingDetails) {
+                                        existingCategory.details.push({
+                                            type: el.attributes.type,
+                                            description: el.attributes.description,
+                                            price: el.attributes.price
+                                        });
+                                    }
+                                } else {
+                                    // Если категории с таким именем нет, добавляем новую категорию с деталями
+                                    let newCategory = {
+                                        name: el.attributes.name,
+                                        details: [{
+                                            type: el.attributes.type,
+                                            description: el.attributes.description,
+                                            price: el.attributes.price
+                                        }]
+                                    };
+                                    existingObj.categorys.push(newCategory);
+                                }
+                            } else {
+                                // Если объекта с таким forwho нет, создаём новый объект
+                                let newObj = {
+                                    id: el.id,
+                                    forwho: el.attributes.forwho,
+                                    categorys: [{
+                                        name: el.attributes.name,
+                                        details: [{
+                                            type: el.attributes.type,
+                                            description: el.attributes.description,
+                                            price: el.attributes.price
+                                        }]
+                                    }]
+                                };
+                                this.prices.push(newObj);
+                            }
+                        });
+                        console.log(this.prices);
                     } else {
-                        console.log('oshibka');
+                        console.log('Ошибка: данные не получены.');
                     }
                 } catch (error) {
-                    console.log(error)
+                    console.log(error);
                 }
+            },
+            showPop() {
+                this.isShowPopUp = true
+            },
+            closePop() {
+                this.isShowPopUp = false
             }
         },
         mounted() {
@@ -256,20 +202,17 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         margin-top: 32px;
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 18px;
-    }
-    .description_tab h5 {
-        font-size: 20px;
-        font-weight: 500;
-        text-align: center;
-        line-height: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .description_tab p {
-        font-size: 16px;
-        font-weight: 100;
+        font-size: 20px;
+        font-weight: 400;
         text-align: center;
         line-height: 100%;
+        cursor: pointer;
     }
     .price_card {
         margin-top: 80px;
@@ -279,6 +222,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         display: flex;
         justify-content: space-between;
         width: 100%;
+    }
+    .card_price {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
     }
     .card {
         width: 360px;
@@ -291,6 +240,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         box-shadow: 10px 10px 16px 0px rgba(0, 0, 0, .25);
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
     }
     .card img {
         position: absolute;
@@ -298,29 +248,21 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         right: -38px;
     }
     .card p {
-        font-size: 16px;
-        font-weight: 200;
+        font-size: 32px;
+        font-weight: 400;
         line-height: 100%;
         margin-bottom: 12px;
     }
-    .card h3 {
-        font-size: 32px;
-        font-weight: 700;
+    .card h4 {
+        font-size: 20px;
+        font-weight: 200;
         line-height: 100%;
         margin-bottom: 56px;
     }
     .card span {
         font-size: 48px;
-        font-weight: 500;
-        line-height: 100%;
-    }
-    .card ul {
-        margin-top: 56px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
         font-weight: 200;
-        list-style-position: inside;
+        line-height: 100%;
     }
     .card button {
         display: flex;
@@ -332,9 +274,9 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         font-weight: 400;
         line-height: 100%;
         color: #fff;
-        margin-top: auto;
         align-self: center;
         transition: all 200ms ease;
+        cursor: pointer;
     }
     .card button:hover {
         background: #fff;
