@@ -43,15 +43,26 @@
 <div class="concerts_main">
     <div class="concerts_div">
         <h3>Наши вечеринки</h3>
-        <div class="concerts_video_block">
-            <div class="video" v-for="video in videos" :key="video.id">
-                <video :src="video.attributes.url" controls></video>
-                <p></p>
+        <div class="photo_video_block">
+            <div class="concerts_video_block">
+            <p>Видео</p>
+            <div class="video">
+                <video v-for="video in videos" :key="video.id" :src="video.attributes.url" controls></video>
+            </div>
+            </div>
+            <div class="concerts_photo_block">
+                <p>Фотографии</p>
+                <div class="photo">
+                    <img v-for="photo in photos" :key="photo.id" :src="photo.attributes.url" @click="showBigPhoto(photo)">
+                </div>
             </div>
         </div>
-        <div class="concerts_photo_block">
-            <img v-for="photo in photos" :key="photo.id" :src="photo.attributes.url">
-        </div>
+    </div>
+</div>
+<div :class="{active: this.isShowPhoto !== ''}" class="big_photo_modal">
+    <div class="big_photo_modal_div">
+        <img :src="isShowPhoto">
+        <font-awesome-icon :icon="['fas', 'xmark']" style="color: #fff; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closePhotoModal" />
     </div>
 </div>
 <Footer></Footer>
@@ -306,7 +317,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
             return {
                 videos: [],
                 photos: [],
-                url: process.env.VUE_APP_SERVER
+                url: process.env.VUE_APP_SERVER,
+                isShowPhoto: ''
             }
         },
         methods: {
@@ -317,10 +329,10 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                         // console.log(response.data.data[0].attributes.content.data)
                         const data = response.data.data[0].attributes.content.data;
                         data.forEach(el => {
-                            if (el.attributes.ext == '.JPG' || el.attributes.ext == '.jpeg') {
+                            if (el.attributes.ext == '.JPG' || el.attributes.ext == '.jpeg' || el.attributes.ext == '.jpg' || el.attributes.ext == '.webp') {
                                 this.photos.push(el)
                             } else {
-                                if (el.attributes.ext == '.mp4') {
+                                if (el.attributes.ext == '.mp4' || el.attributes.ext == '.webm' || el.attributes.ext == '.avi' || el.attributes.ext == '.mpeg' || el.attributes.ext == '.MP4') {
                                     this.videos.push(el)
                                 }
                             }
@@ -333,6 +345,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 } catch (error) {
                     console.log(error)
                 }
+            },
+            showBigPhoto(photo) {
+                this.isShowPhoto = photo.attributes.url
+            },
+            closePhotoModal() {
+                this.isShowPhoto = ''
             }
         },
         mounted() {
@@ -698,4 +716,111 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         transform: translateY(-50%);
     }
     } */
+    .concerts_main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 80px;
+    }
+    .concerts_div {
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+    }
+    .concerts_div h3 {
+        font-size: 48px;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #FFCEC2;
+    }
+    .photo_video_block {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 40px;
+        gap: 32px;
+    }
+    .concerts_video_block {
+        display: flex;
+        width: 50%;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .concerts_video_block p {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+    }
+    .video {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+    .video video {
+        max-height: 240px;
+        border-radius: 12px;
+    }
+    .concerts_photo_block {
+        display: flex;
+        width: 50%;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .concerts_photo_block p {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+    }
+    .photo {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .photo img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .big_photo_modal {
+        width: 100%;
+        height: 100svh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        transform: scale(0);
+        transition: all 500ms ease;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: rgba(0, 0, 0, .9)
+    }
+    .active {
+        transform: scale(1);
+        opacity: 1;
+        z-index: 999;
+    }
+    .big_photo_modal_div {
+        width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .big_photo_modal_div img {
+        width: 100%;
+        max-height: 100svh;
+        object-fit: contain;
+        border-radius: 8px;
+    }
 </style>
