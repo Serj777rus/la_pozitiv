@@ -23,9 +23,11 @@
         <img v-for="image in bigcard.attributes.image.data" :key="image" :src="image.attributes.url">
         <h3>{{ bigcard.attributes.name }}</h3>
         <h4>{{ bigcard.attributes.price }}</h4>
-        <h5>{{ bigcard.attributes.description }}</h5>
+        <div class="big_card_desc">
+            <h5>{{ bigcard.attributes.description }}</h5>
+        </div>
         <Button class="btn" @click="showPop"><slot>Поробовать</slot></Button>
-        <font-awesome-icon :icon="['fas', 'xmark']" style="color: #ffffff; font-size: 32px; position: absolute; top: 48px; right: 48px; cursor: pointer;" @click="closeCard" />
+        <font-awesome-icon :icon="['fas', 'xmark']" style="color: #ffffff; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeCard" />
     </div>
 </div>
 <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
@@ -210,7 +212,7 @@
         opacity: 1;
     }
     .big_card_body {
-        width: 370px;
+        width: 600px;
         border-radius: 32px;
         border: 1px solid #494949;
         background: #333;
@@ -238,10 +240,9 @@
         font-weight: 500;
         line-height: 100%;
     }
-    .big_card_body h5 {
-        font-size: 16px;
-        font-weight: 200;
-        line-height: 100%;
+    .big_card_desc {
+        max-height: 240px;
+        overflow-y: scroll;
     }
     .btn {
         align-self: center;
@@ -260,7 +261,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 80px;
+        margin-top: 40px;
         padding: 0px 10px;
     }
     .education_div {

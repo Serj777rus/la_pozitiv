@@ -356,7 +356,7 @@ import PopUp from './UI_components/PopUp.vue';
         margin-top: 32px;
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 18px;
     }
     .description_tab h5 {
@@ -381,8 +381,14 @@ import PopUp from './UI_components/PopUp.vue';
         gap: 48px;
         width: 100%;
     }
-    .card {
+    .card_price {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .card {
+        width: 90%;
         height: 480px;
         box-sizing: border-box;
         padding: 32px;
@@ -398,29 +404,21 @@ import PopUp from './UI_components/PopUp.vue';
         right: -38px;
     }
     .card p {
-        font-size: 12px;
-        font-weight: 200;
+        font-size: 32px;
+        font-weight: 400;
         line-height: 100%;
         margin-bottom: 12px;
     }
-    .card h3 {
-        font-size: 24px;
-        font-weight: 700;
+    .card h4 {
+        font-size: 20px;
+        font-weight: 200;
         line-height: 100%;
         margin-bottom: 56px;
     }
     .card span {
         font-size: 48px;
-        font-weight: 500;
-        line-height: 100%;
-    }
-    .card ul {
-        margin-top: 56px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
         font-weight: 200;
-        list-style-position: inside;
+        line-height: 100%;
     }
     .card button {
         display: flex;
@@ -432,9 +430,9 @@ import PopUp from './UI_components/PopUp.vue';
         font-weight: 400;
         line-height: 100%;
         color: #fff;
-        margin-top: auto;
         align-self: center;
         transition: all 200ms ease;
+        cursor: pointer;
     }
     .card button:hover {
         background: #fff;

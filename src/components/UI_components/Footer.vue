@@ -3,7 +3,7 @@
     <div class="footer">
         <div class="footer_div">
             <div class="footer_left">
-                <img src="@/assets/photos/logo.svg">
+                <img src="@/assets/photos/logo80x80.png">
                 <h2>Школа вокала и творчества</h2>
                 <p>Привет. Свяжитесь с нами любым удобным способом или оставьте заявку и мы Вам перезвоним в ближайшее время</p>
                 <div class="photo_text_left">
@@ -131,7 +131,7 @@
         gap: 32px;
     }
     .footer_left img {
-        width: 120px;
+        width: 80px;
         object-fit: contain;
     }
     .photo_text_left {
@@ -267,7 +267,7 @@
         gap: 32px;
     }
     .footer_left img {
-        width: 120px;
+        width: 80px;
         object-fit: contain;
     }
     .photo_text_left {

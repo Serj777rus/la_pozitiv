@@ -7,7 +7,7 @@
                 <h2>ШКОЛА ВОКАЛА<br>И ТВОРЧЕСТВА</h2>
                 <h3>"Ля Позитив"</h3>
                 <div class="slogan">
-                    <p>"Ваш успех начинается здесь, в месте, где живет<br> творчество, красота и позитив!"</p>
+                    <p>"Ваш успех начинается здесь, в месте, где живет творчество, красота и позитив!"</p>
                 </div>
                 <Button class="btn" @click="showPop"><slot>Пробное занятие</slot></Button>
             </div>
@@ -66,14 +66,14 @@
                     <div class="video_text">
                         <h3>Видеообзор</h3>
                     </div>
-                    <video src="@/assets/videos/about_video.mp4" controls poster="@/assets/photos/poster.png"></video>
+                    <video v-for="video in aboutvideo" :key="video.id" :src="video.video" controls></video>
                 </div>
                 <div class="about_photo">
                     <div class="video_text">
                         <h3>Фото нашей студии</h3>
                     </div>
-                    <div class="carusel" v-for="img in aboutphoto" :key="img.id" :class="{ activec: isShowPhoto == img.id }">
-                        <img :src="img.img">
+                    <div class="carusel" v-for="(img, index) in aboutphoto" :key="img.id" :class="{ activec: isShowPhoto == index }">
+                        <img :src="img.image">
                         <div class="carusel_tab_prew" @click="tabsPrew">
                             <img src="@/assets/photos/about/prew.svg">
                         </div>
@@ -214,6 +214,7 @@
     import Footer from './UI_components/Footer.vue'
     import PopUp from './UI_components/PopUp.vue'
     import Vidget from './UI_components/Vidget.vue'
+    import axios from 'axios'
     export default {
         components: {
             HeadMenu,
@@ -259,25 +260,12 @@
                     tab: '6',
                     texttab: 'преподвателей'
                 }],
-                aboutphoto: [{
-                    id: 1,
-                    img: require ('@/assets/photos/about/_MG_8358.jpg')
-                },
-                {
-                    id: 2,
-                    img: require ('@/assets/photos/about/_MG_8497.jpg')
-                },
-                {
-                    id: 3,
-                    img: require ('@/assets/photos/about/_MG_8586.jpg')
-                },
-                {
-                    id: 4,
-                    img: require ('@/assets/photos/about/_MG_8654.jpg')
-                }],
+                aboutphoto: [],
+                aboutvideo: [],
                 isShowCard: 1,
-                isShowPhoto: 1,
+                isShowPhoto: 0,
                 isShowPopUp: false,
+                url: process.env.VUE_APP_SERVER
             }
         },
         methods: {
@@ -286,14 +274,14 @@
             },
             tabsPrew() {
                 this.isShowPhoto -= 1;
-                if (this.isShowPhoto == 0) {
-                    this.isShowPhoto = this.aboutphoto[this.aboutphoto.length - 1].id;
+                if (this.isShowPhoto < 0) {
+                    this.isShowPhoto = this.aboutphoto.length - 1;
                 }
             },
             tabsNext() {
                 this.isShowPhoto += 1;
-                if (this.isShowPhoto >= this.aboutphoto.length + 1) {
-                    this.isShowPhoto = this.aboutphoto[0].id;
+                if (this.isShowPhoto >= this.aboutphoto.length) {
+                    this.isShowPhoto = 0;
                 }
             },
             showPop() {
@@ -301,7 +289,49 @@
             },
             closePop() {
                 this.isShowPopUp = false
+            },
+            async getAboutMedia() {
+                try {
+                    const response = await axios.get(`${this.url}/getaboutmedia`)
+                    if (response.status == 200) {
+                        console.log(response.data.data)
+                        let data = response.data.data;
+                        let newArrPh = [];
+                        let newArrVi =[];
+                        for (let i = 0; i < data.length; i++) {
+                            let medias = data[i].attributes.mediadatas.data;
+                            medias.forEach(el => {
+                                if (el.attributes.ext == '.jpg' || el.attributes.ext == '.jpeg' || el.attributes.ext == '.JPG' || el.attributes.ext == '.JPEG') {
+                                    let objPhoto = {};
+                                    objPhoto = {
+                                        id: el.id,
+                                        image: el.attributes.url
+                                    };
+                                    newArrPh.push(objPhoto);
+                                } else {
+                                    if (el.attributes.ext == '.mpeg' || el.attributes.ext == '.MP4' || el.attributes.ext == '.mp4' || el.attributes.ext == '.avi' || el.attributes.ext == '.MOV') {
+                                        let objVid = {};
+                                        objVid = {
+                                            id: el.id,
+                                            video: el.attributes.url
+                                        }
+                                        newArrVi.push(objVid);
+                                    }
+                                }
+                            })
+                        }
+                        this.aboutphoto = newArrPh;
+                        this.aboutvideo = newArrVi;
+                        console.log(this.aboutphoto);
+                        console.log(this.aboutvideo);
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
             }
+        },
+        mounted() {
+            this.getAboutMedia();
         }
     }
 </script>
@@ -784,6 +814,10 @@ video {
     align-items: center;
     justify-content: space-between;
 }
+.right_side_main h3 {
+    font-size: 48px;
+    font-weight: 600;
+}
 .btn {
     z-index: 3;
     align-self: center;
@@ -805,9 +839,12 @@ video {
 .utp {
     width: auto;
     font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .slogan {
-    width: 90%;
+    width: 95%;
     padding: 16px 32px;
     border-radius: 32px;
     background: rgb(0,0,0, 0.7);
@@ -817,9 +854,22 @@ video {
     align-self: center;
 }
 .slogan p {
-    text-align: center;
+    text-align: justify;
     font-size: 12px;
     font-weight: 200;
+    line-height: 110%;
+}
+.backimg {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%);
+    animation: 2s infinite;
+    z-index: 0;
+
+}
+.backimg img {
+    width: 120px;
 }
 .tabBtn {
     padding: 4px 8px;
@@ -873,7 +923,7 @@ video {
 }
 .tabs {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* justify-content: space-between; */
     gap: 12px;
     align-items: center;

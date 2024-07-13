@@ -824,4 +824,58 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         object-fit: contain;
         border-radius: 8px;
     }
+    @media all and (max-width: 430px) {
+    .concerts_main {
+        width: 100%;
+        padding: 0px 10px;
+        margin-top: 40px;
+    }
+    .concerts_div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .concerts_div h3 {
+        font-size: 32px;
+        text-align: center;
+    }
+    .photo_video_block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 32px
+    }
+    .concerts_video_block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .video {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 12px;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+    }
+    .video video {
+        max-height: 200px;
+        scroll-snap-align: start;
+    }
+    .concerts_photo_block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .photo {
+        display: flex;
+        align-items: center;
+    }
+    .big_photo_modal_div {
+        width: 100%;
+    }
+    }
 </style>

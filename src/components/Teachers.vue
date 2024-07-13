@@ -566,6 +566,7 @@ export default {
 .about_teacher_big p {
     font-size: 12px;
     font-weight: 400;
+    text-align: start
 }
 .about_teacher_big span {
     font-size: 12px;
@@ -624,7 +625,7 @@ export default {
 }
 .right_down_left ul li {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 200;
     list-style-position: inside;
 }
 .right_down_right {

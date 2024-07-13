@@ -79,7 +79,6 @@ import axios from 'axios';
     }
     .review_card video {
         width: 500px;
-        aspect-ratio: 16/9;
         border-radius: 32px;
         box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, .3);
     }
@@ -114,45 +113,18 @@ import axios from 'axios';
         scroll-snap-type: x mandatory;
     }
     .review_card {
-        min-width: 80%;
+        width: 100%;
         height: auto;
         border-radius: 32px;
-        padding: 20px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 24px;
         box-sizing: border-box;
         scroll-snap-align: start;
     }
-    .photo_name {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-    }
-    .photo_name img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: 1px solid #fff;
-        box-sizing: border-box;
-    }
-    .photo_name p {
-        font-size: 24px;
-        font-weight: 500;
-    }
-    .photo_name span {
-        font-size: 16px;
-        font-weight: 200;
-    }
-    .name_clas {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-    .review {
-        font-size: 16px;
-        font-weight: 200;
+    .review_card video {
+        width: 320px;
+        border-radius: 12px;
     }
     }
 </style>

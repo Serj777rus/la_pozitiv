@@ -1,7 +1,7 @@
 <template>
     <div class="headmenu_main" v-if="mediaWidth > 1180">
         <div class="headmenu_div">
-            <img src="~@/assets/photos/logo_painted.svg">
+            <img src="~@/assets/photos/logo80x80.png">
             <div class="menus">
                 <router-link :to="{ name: 'home' }"><p>Главная</p></router-link>
                 <router-link :to="{ name: 'education' }"><p>Направления</p></router-link>
@@ -19,7 +19,7 @@
     </div>
     <div class="headmenu_mobile" v-if="mediaWidth < 440">
         <div class="menu_mobile">
-            <img src="~@/assets/photos/logo.svg">
+            <img src="~@/assets/photos/logo80x80.png">
             <font-awesome-icon :icon="['faL', 'bars']" style="font-size: 32px; " @click="isShowMenu = true"/>
         </div>
     </div>
@@ -147,6 +147,10 @@
         justify-content: space-between;
         cursor: pointer;
     }
+    .menu_mobile img {
+        height: 48px;
+        object-fit: cover;
+    }
     .menu_bar_main {
         width: 100%;
         height: 100vh;
@@ -154,7 +158,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 1000;
+        z-index: 9000;
         display: flex;
         justify-content: end;
     }

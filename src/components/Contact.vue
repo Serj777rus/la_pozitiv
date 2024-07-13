@@ -3,7 +3,7 @@
     <HeadMenu></HeadMenu>
         <div class="contact_main">
             <div class="contact_div">
-                <img src="@/assets/photos/logo.svg">
+                <img src="@/assets/photos/logo300x300.png">
                 <div class="line"></div>
                 <div class="info_contact_block">
                     <div class="info_contact_block_left">
