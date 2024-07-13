@@ -28,7 +28,7 @@ app.use(cors({
     origin: SERVER_APP
 }));
 
-app.get('/testroute', async (req, res) => {
+app.get('/api/testroute', async (req, res) => {
     const url = `https://supportive-heart-1886e94650.strapiapp.com/api/posts?populate=*`;
 
     try {
