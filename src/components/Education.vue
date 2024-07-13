@@ -7,11 +7,11 @@
         <div class="line"></div>
         <div class="education_cards">
             <div class="education_card" v-for="card in educations" :key="card.id">
-                <img :src="card.image">
+                <img v-for="image in card.attributes.image.data" :key="image" :src="image.attributes.url">
                 <div class="descr_div">
-                    <h3>{{ card.name }}</h3>
-                    <h4>{{ card.price }}</h4>
-                    <h5>{{ card.description }}</h5>
+                    <h3>{{ card.attributes.name }}</h3>
+                    <h4>{{ card.attributes.price }}</h4>
+                    <h5>{{ card.attributes.description }}</h5>
                 </div>
                 <Button @click="showCardCourse(card)"><slot>Подробнее</slot></Button>
             </div>
@@ -20,10 +20,10 @@
 </div>
 <div class="big_card" :class="{active: isShowCard}">
     <div class="big_card_body">
-        <img :src="bigcard.image">
-        <h3>{{ bigcard.name }}</h3>
-        <h4>{{ bigcard.price }}</h4>
-        <h5>{{ bigcard.description }}</h5>
+        <img v-for="image in bigcard.attributes.image.data" :key="image" :src="image.attributes.url">
+        <h3>{{ bigcard.attributes.name }}</h3>
+        <h4>{{ bigcard.attributes.price }}</h4>
+        <h5>{{ bigcard.attributes.description }}</h5>
         <Button class="btn" @click="showPop"><slot>Поробовать</slot></Button>
         <font-awesome-icon :icon="['fas', 'xmark']" style="color: #ffffff; font-size: 32px; position: absolute; top: 48px; right: 48px; cursor: pointer;" @click="closeCard" />
     </div>
@@ -37,6 +37,7 @@
     import Footer from './UI_components/Footer.vue';
     import Button from './UI_components/Button.vue';
     import PopUp from './UI_components/PopUp.vue';
+    import axios from 'axios';
     export default {
         components: {
             HeadMenu,
@@ -46,84 +47,25 @@
         },
         data() {
             return {
-                educations: [{
-                    id: 1,
-                    name: 'Вокал',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/vocal.png')
-                },
-                {
-                    id: 2,
-                    name: 'Вокал online',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/vocal_online.png')
-                },
-                {
-                    id: 3,
-                    name: 'Фортепиано',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/fortepiano.png')
-                },
-                {
-                    id: 4,
-                    name: 'Сольфеджио',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/solfedgio.png')
-                },
-                {
-                    id: 5,
-                    name: 'Музыкальная литература',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/literature.png')
-                },
-                {
-                    id: 6,
-                    name: 'Гитара',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/guitar.png')
-                },
-                {
-                    id: 7,
-                    name: 'Электрогитара',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/electroguitar.png')
-                },
-                {
-                    id: 8,
-                    name: 'Звукозапись',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/zapis.png')
-                },
-                {
-                    id: 9,
-                    name: 'Сценическое мастерство',
-                    price: 'от 700р/урок',
-                    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                    image: require('@/assets/photos/education/acter.png')
-                }
-                ],
+                educations: [],
                 bigcard: {
-                    image: '',
-                    name: '',
-                    price: '',
-                    description: ''
+                    attributes: {
+                        image: '',
+                        name: '',
+                        price: '',
+                        description: ''
+                    }
                 },
                 isShowCard: false,
-                isShowPopUp: false
+                isShowPopUp: false,
+                url: process.env.VUE_APP_SERVER
             }
         },
         methods: {
             showCardCourse(card) {
                 this.bigcard = card;
                 this.isShowCard = true;
+                console.log(this.bigcard)
             },
             closeCard() {
                 this.isShowCard = false
@@ -136,7 +78,24 @@
             },
             closePop() {
                 this.isShowPopUp = false
+            },
+            async getEducation() {
+                try {
+                    const response = await axios.get(`${this.url}/geteducation`);
+                    if (response.status == 200) {
+                        console.log(response.data);
+                        this.educations = response.data.data;
+                    } else {
+                        // console.log(response.data);
+                    }
+                }
+                catch(error) {
+                    console.log(`Ошибка ${error}`)
+                }
             }
+        },
+        mounted() {
+            this.getEducation();
         }
         
     }

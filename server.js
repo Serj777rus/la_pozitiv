@@ -112,6 +112,17 @@ app.get('/getphotosvideos', async(req, res) => {
     }
 })
 
+app.get('/geteducation', async(req, res) => {
+    const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/educations?populate=*';
+    try {
+        const response = await axios.get(url);
+        res.status(200).json(response.data);
+        // console.log(response.data);
+    } catch (error) {
+        console.error(error)
+    }
+})
+
 app.post('/sendform', async (req, res) => {
     try {
         const { name, phone, age, education } = req.body;
