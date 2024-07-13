@@ -28,30 +28,12 @@ app.use(cors({
     origin: SERVER_APP
 }));
 
-const RANGE = 'Посты';
-const SPREADSHEET = process.env.SPREADSHEET_ID;
-const APIKEY = process.env.GOOGLE_API;
-
 app.get('/testroute', async (req, res) => {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET}/values/${RANGE}?key=${APIKEY}`;
+    const url = `https://supportive-heart-1886e94650.strapiapp.com/api/posts?populate=*`;
 
     try {
         const response = await axios.get(url);
-        const rows = response.data.values;
-
-        if (rows.length) {
-            const keys = rows[0];
-            const data = rows.slice(1).map(row => {
-                let obj = {};
-                row.forEach((value, index) => {
-                    obj[keys[index]] = value;
-                });
-                return obj;
-            });
-            res.status(200).json(data);
-        } else {
-            res.status(200).json({ message: 'No data found.' });
-        }
+        res.status(200).json(response.data);
     } catch (error) {
         console.error('Error fetching data from Google Sheets:', error.response ? error.response.data : error.message);
         res.status(500).send('An error occurred while fetching data.');

@@ -8,12 +8,12 @@
             </div>
             <div class="posts">
                 <div class="post" v-for="post in posts" :key="post.id">
-                <img :src="post.image">
+                <img :src="post.attributes.image.data.attributes.url">
                 <div class="line_post"></div>
                 <div class="post_text">
-                    <h4>{{ post.name }}</h4>
-                    <p>{{ post.date }}</p>
-                    <h5>{{ post.description }}</h5>
+                    <h4>{{ post.attributes.name }}</h4>
+                    <p>{{ post.attributes.date }}</p>
+                    <h5>{{ post.attributes.description }}</h5>
                     <Button class="btn" @click="openPost(post)"><slot>Читать</slot></Button>
                 </div>
             </div>
@@ -24,12 +24,12 @@
         <div class="modal_div">
             <div class="text">
                 <div class="img_date">
-                    <img :src="postModal.image">
-                    <p>{{ postModal.date }}</p>
+                    <img :src="postModal.attributes.image.data.attributes.url">
+                    <p>{{ postModal.attributes.date }}</p>
                 </div>
-                <h5>{{ postModal.name }}</h5>
+                <h5>{{ postModal.attributes.name }}</h5>
                 <div class="modal_desc">
-                    <h6>{{ postModal.description }}</h6>
+                    <h6>{{ postModal.attributes.description }}</h6>
                 </div>
             </div>
             <font-awesome-icon :icon="['fas', 'xmark']" style="color: #494949; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeModal" />
@@ -48,10 +48,18 @@
             return {
                 posts: [],
                 postModal: {
-                    name: '',
-                    image: '',
-                    description: '',
-                    date: ''
+                    attributes: {
+                        name: '',
+                        image: {
+                            data: {
+                                attributes: {
+                                    url: ''
+                                }
+                            }
+                        },
+                        description: '',
+                        date: ''
+                    }
                 },
                 isPostModalActive: false,
                 serverUrl: process.env.VUE_APP_SERVER
@@ -59,8 +67,9 @@
         },
         methods: {
             openPost(post) {
-                this.isPostModalActive = true;
                 this.postModal = post;
+                this.isPostModalActive = true;
+                console.log(this.postModal)
             },
             closeModal() {
                 this.isPostModalActive = false;
@@ -69,8 +78,8 @@
                 try {
                     const response = await axios.get(`${this.serverUrl}/testroute`);
                     if (response.status == 200) {
-                        console.log(response.data);
-                        this.posts = response.data;
+                        console.log(response.data.data);
+                        this.posts = response.data.data;
                     } else {
                         // console.log(response.data);
                     }
@@ -148,7 +157,7 @@
     }
     .post img {
         width: 100%;
-        max-height: 166px;
+        height: 166px;
         border-radius: 22px 22px 0px 0px;
         object-fit: cover;
     }

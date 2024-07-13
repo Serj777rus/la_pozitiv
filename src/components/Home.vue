@@ -294,7 +294,6 @@
                 try {
                     const response = await axios.get(`${this.url}/getaboutmedia`)
                     if (response.status == 200) {
-                        console.log(response.data.data)
                         let data = response.data.data;
                         let newArrPh = [];
                         let newArrVi =[];
@@ -322,8 +321,6 @@
                         }
                         this.aboutphoto = newArrPh;
                         this.aboutvideo = newArrVi;
-                        console.log(this.aboutphoto);
-                        console.log(this.aboutvideo);
                     }
                 } catch (error) {
                     console.log(error)
