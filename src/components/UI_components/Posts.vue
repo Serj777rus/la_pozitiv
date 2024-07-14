@@ -76,7 +76,7 @@
             },
             async testGet() {
                 try {
-                    const response = await axios.get('/api/testroute');
+                    const response = await axios.get(`${this.serverUrl}/testroute`);
                     if (response.status == 200) {
                         console.log(response.data.data);
                         this.posts = response.data.data;
