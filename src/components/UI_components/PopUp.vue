@@ -63,7 +63,8 @@
                     education: ''
                 },
                 message: '',
-                buttonChange: 'wait'
+                buttonChange: 'wait',
+                url: process.env.VUE_APP_SERVER
             }
         },
         methods: {
@@ -73,7 +74,7 @@
              async sendPopForm() {
                 this.buttonChange = 'sending';
                 try {
-                    const response = await axios.post('http://192.168.0.102:3000/sendform', this.popupform);
+                    const response = await axios.post(`${this.url}/sendform`, this.popupform);
                     if (response.status == 200) {
                         this.buttonChange = 'done';
                         this.message = response.data.message;
