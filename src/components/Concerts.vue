@@ -42,7 +42,7 @@
 </div> -->
 <div class="concerts_main">
     <div class="concerts_div">
-        <h3>Наши вечеринки</h3>
+        <h3>Отчетные студийные концерты и тематические вечеринки</h3>
         <div class="photo_video_block">
             <div class="concerts_video_block">
             <p>Видео</p>

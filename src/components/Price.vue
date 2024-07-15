@@ -22,7 +22,7 @@
                             <span>{{ datas.price }}</span>
                             <h4>{{ datas.description }}</h4>
                             <button @click="showPop">Купить</button>
-                            <img src="@/assets/photos/price/ribbon.png">
+                            <!-- <img src="@/assets/photos/price/ribbon.png"> -->
                         </div>
                     </div>
                 </div>

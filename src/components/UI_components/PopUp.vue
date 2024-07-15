@@ -18,7 +18,6 @@
                     <label for="phone">Возраст</label>
                     <select v-model="popupform.age" name="age" id="age" required>
                         <option value="Ребенок">Ребенок</option>
-                        <option value="Подросток">Подросток</option>
                         <option value="Взрослый">Взрослый</option>
                     </select>
                 </div>
@@ -33,6 +32,7 @@
                         <option value="Сольфеджио">Сольфеджио</option>
                         <option value="Музыкальная литература">Музыкальная литература</option>
                         <option value="Звукозапись">Звукозапись</option>
+                        <option value="Сценическое движение">Сценическое движение</option>
                     </select>
                 </div>
                 <button class="btns" type="submit">

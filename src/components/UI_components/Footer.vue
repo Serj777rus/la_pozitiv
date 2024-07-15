@@ -34,7 +34,6 @@
                         <label for="phone">Возраст</label>
                         <select>
                             <option value="Ребенок">Ребенок</option>
-                            <option value="Подросток">Подросток</option>
                             <option value="Взрослый">Взрослый</option>
                         </select>
                     </div>
@@ -49,6 +48,7 @@
                             <option value="Сольфеджио">Сольфеджио</option>
                             <option value="Музыкальная литература">Музыкальная литература</option>
                             <option value="Звукозапись">Звукозапись</option>
+                            <option value="Сценическое движение">Сценическое движение</option>
                         </select>
                     </div>
                     <button type="submit">Отправить</button>
@@ -82,7 +82,7 @@
                     <a href="https://wa.me/79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'whatsapp']" style="font-size: 32px; cursor: pointer;" /></a>
                     <a href="https://t.me/+79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'telegram']" style="font-size: 32px; cursor: pointer;" /></a>
                     <a href="https://vk.com/la_pozitiv" target="_blank"><font-awesome-icon :icon="['fab', 'vk']" style="font-size: 32px; cursor: pointer;" /></a>
-                    <font-awesome-icon :icon="['fab', 'square-instagram']" style="font-size: 32px; cursor: pointer;" />
+                    <!-- <font-awesome-icon :icon="['fab', 'square-instagram']" style="font-size: 32px; cursor: pointer;" /> -->
                     <a href="https://www.youtube.com/channel/UC-iB3N4cTpyCtjpgSowge6A" target="_blank"><font-awesome-icon :icon="['fab', 'youtube']" style="font-size: 32px; cursor: pointer;" /></a>
                 </div>
                 <div class="dogovor">
