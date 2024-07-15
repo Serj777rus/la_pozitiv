@@ -4,19 +4,19 @@
         <div class="footer_div">
             <div class="footer_left">
                 <img src="@/assets/photos/logo80x80.png">
-                <h2>Школа вокала и творчества</h2>
-                <p>Привет. Свяжитесь с нами любым удобным способом или оставьте заявку и мы Вам перезвоним в ближайшее время</p>
+                <h2>Школа вокала и творчества<br>"Ля Позитив"</h2>
+                <p>ИП ЧЕРЕМИСИНА ЕЛЕНА ВАСИЛЬЕВНА<br>ИНН 212905574769<br>ОГРН 319774600318063</p>
                 <div class="photo_text_left">
                     <font-awesome-icon :icon="['fas', 'location-dot']" style="font-size: 24px;" />
                     <p>Россия, г. Москва, 3-я Хорошевская ул., 21 к2</p>
                 </div>
                 <div class="photo_text_left">
                     <font-awesome-icon :icon="['fas', 'envelope']" style="font-size: 24px;" />
-                    <p>example@example.com</p>
+                    <p>vocal@la-pozitiv.ru</p>
                 </div>
                 <div class="photo_text_left">
                     <font-awesome-icon :icon="['fas', 'phone-volume']" style="font-size: 24px;" />
-                    <p>+7(495) 777-77-77</p>
+                    <p>+7 (968) 921-39-07</p>
                 </div>
             </div>
             <div class="footer_center">
@@ -79,11 +79,14 @@
                     </div></router-link>
                 </div>
                 <div class="socials">
-                    <font-awesome-icon :icon="['fab', 'whatsapp']" style="font-size: 32px; cursor: pointer;" />
-                    <font-awesome-icon :icon="['fab', 'telegram']" style="font-size: 32px; cursor: pointer;" />
-                    <font-awesome-icon :icon="['fab', 'vk']" style="font-size: 32px; cursor: pointer;" />
+                    <a href="https://wa.me/79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'whatsapp']" style="font-size: 32px; cursor: pointer;" /></a>
+                    <a href="https://t.me/+79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'telegram']" style="font-size: 32px; cursor: pointer;" /></a>
+                    <a href="https://vk.com/la_pozitiv" target="_blank"><font-awesome-icon :icon="['fab', 'vk']" style="font-size: 32px; cursor: pointer;" /></a>
                     <font-awesome-icon :icon="['fab', 'square-instagram']" style="font-size: 32px; cursor: pointer;" />
-                    <font-awesome-icon :icon="['fab', 'youtube']" style="font-size: 32px; cursor: pointer;" />
+                    <a href="https://www.youtube.com/channel/UC-iB3N4cTpyCtjpgSowge6A" target="_blank"><font-awesome-icon :icon="['fab', 'youtube']" style="font-size: 32px; cursor: pointer;" /></a>
+                </div>
+                <div class="dogovor">
+                    <a href="#" target="_blank">Договор оферты</a>
                 </div>
             </div>
         </div>
@@ -242,6 +245,9 @@
     a {
         text-decoration: none;
         color: #fff;
+    }
+    .dogovor {
+        align-self: end;
     }
     @media all and (max-width: 440px) {
         .footer {

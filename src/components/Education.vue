@@ -26,7 +26,7 @@
         <div class="big_card_desc">
             <h5>{{ bigcard.attributes.description }}</h5>
         </div>
-        <Button class="btn" @click="showPop"><slot>Поробовать</slot></Button>
+        <Button class="btn" @click="showPop"><slot>Попробовать</slot></Button>
         <font-awesome-icon :icon="['fas', 'xmark']" style="color: #ffffff; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeCard" />
     </div>
 </div>

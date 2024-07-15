@@ -19,7 +19,7 @@
                             </div>
                             <div class="content_block">
                                 <p>Напишите нам</p>
-                                <span>info@example.com</span>
+                                <span>vocal@la-pozitiv.ru</span>
                             </div>
                             <div class="content_block">
                                 <p>Позвоните нам</p>

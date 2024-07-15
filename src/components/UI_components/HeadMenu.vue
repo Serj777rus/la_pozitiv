@@ -11,9 +11,10 @@
                 <router-link :to="{ name: 'contact' }"><p>Контакты</p></router-link>
             </div>
             <div class="button_div">
-                <font-awesome-icon :icon="['fab', 'whatsapp']" style="align-self: center; font-size: 24px; color: green; cursor: pointer;" />
-                <font-awesome-icon :icon="['fab', 'vk']" style="color: #74C0FC; font-size: 24px; align-self: center; cursor: pointer;" />
-                <button>Записаться</button>
+                <a href="https://wa.me/79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'whatsapp']" style="align-self: center; font-size: 24px; color: green; cursor: pointer;" /></a>
+                <a href="https://vk.com/la_pozitiv" target="_blank"><font-awesome-icon :icon="['fab', 'vk']" style="color: #74C0FC; font-size: 24px; align-self: center; cursor: pointer;" /></a>
+                <a href="https://t.me/+79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'telegram']" style="font-size: 24px; cursor: pointer; align-self: center;" /></a>
+                <!-- <button>Записаться</button> -->
             </div>
         </div>
     </div>
@@ -35,11 +36,11 @@
                 <router-link :to="{ name: 'contact' }"><p>Контакты</p></router-link>
             </div>
             <div class="menu_social">
-                <font-awesome-icon :icon="['fab', 'whatsapp']" style="font-size: 32px; cursor: pointer;" />
-                <font-awesome-icon :icon="['fab', 'telegram']" style="font-size: 32px; cursor: pointer;" />
-                <font-awesome-icon :icon="['fab', 'vk']" style="font-size: 32px; cursor: pointer;" />
+                <a href="https://wa.me/79689213907" target="_blank">\<font-awesome-icon :icon="['fab', 'whatsapp']" style="font-size: 32px; cursor: pointer;" /></a>
+                <a href="https://t.me/+79689213907" target="_blank"><font-awesome-icon :icon="['fab', 'telegram']" style="font-size: 32px; cursor: pointer;" /></a>
+                <a href="https://vk.com/la_pozitiv" target="_blank"><font-awesome-icon :icon="['fab', 'vk']" style="font-size: 32px; cursor: pointer;" /></a>
                 <font-awesome-icon :icon="['fab', 'square-instagram']" style="font-size: 32px; cursor: pointer;" />
-                <font-awesome-icon :icon="['fab', 'youtube']" style="font-size: 32px; cursor: pointer;" />
+                <a href="https://www.youtube.com/channel/UC-iB3N4cTpyCtjpgSowge6A" target="_blank"><font-awesome-icon :icon="['fab', 'youtube']" style="font-size: 32px; cursor: pointer;" /></a>
             </div>
             <font-awesome-icon :icon="['fas', 'xmark']" style="color: #fff; font-size: 32px; position: absolute; top: 12px; right: 10px; cursor: pointer; z-index: 101;" @click="isShowMenu = false" />
         </div>
