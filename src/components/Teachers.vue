@@ -103,7 +103,12 @@ export default {
           skills: [],
           study: '',
           updatedAt: '',
-          video: { data: '' },
+          video: { 
+            data: 
+                {attributes: 
+                    {url: ''}
+                } 
+            },
           vk: ''
         }
       },
