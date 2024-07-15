@@ -63,7 +63,7 @@
                     </div>
                     <div class="right_down_right">
                         <p>Видеовизитка</p>
-                        <video :src="teachcard.video" controls></video>
+                        <video :src="teachcard.attributes.video.data.attributes.url" controls></video>
                     </div>
                 </div>
             </div>
