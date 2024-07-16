@@ -76,10 +76,7 @@
             },
             async testGet() {
                 try {
-                    const response = await axios.get(`${this.serverUrl}/testroute`, {headers: {
-                        'Origin': 'https://la-pozitiv.ru', // Замените на ваш домен
-                        'Credentials': 'true'
-                        }});
+                    const response = await axios.get(`${this.serverUrl}/testroute`);
                     if (response.status == 200) {
                         console.log(response.data.data);
                         this.posts = response.data.data;
