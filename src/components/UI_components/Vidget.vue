@@ -22,7 +22,7 @@ export default {
   
   <style scoped>
   .vidget {
-    display: flex;
+    display: none;
     width: 100%;
     height: 100svh;
     position: fixed;

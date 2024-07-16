@@ -63,7 +63,7 @@
                     </div>
                     <div class="right_down_right">
                         <p>Видеовизитка</p>
-                        <video :src="teachcard.attributes.video.data.attributes.url" controls></video>
+                        <video :src="teachcard.attributes.video.data.attributes.url || teachcard.attributes.video.data" controls></video>
                     </div>
                 </div>
             </div>
@@ -118,11 +118,37 @@ export default {
   },
   methods: {
     showTeachCard(card) {
-      console.log(card);
-      if (card.attributes.video.data == null) {
-        card.attributes.video.data = '';
-      }
-      this.teachcard = card;
+        this.teachcard = {
+    attributes: {
+      age: card.attributes.age || 'Неизвестно',
+      article: card.attributes.article || 'Нет данных',
+      bio: card.attributes.bio || 'Нет данных',
+      createdAt: card.attributes.createdAt || '',
+      dost: card.attributes.dost || [],
+      image: {
+        data: {
+          attributes: {
+            url: card.attributes.image?.data?.attributes?.url || 'default-image-url.jpg'
+          }
+        }
+      },
+      inst: card.attributes.inst || '#',
+      lastname: card.attributes.lastname || '',
+      name: card.attributes.name || 'Неизвестно',
+      publishedAt: card.attributes.publishedAt || '',
+      skills: card.attributes.skills || [],
+      study: card.attributes.study || 'Неизвестно',
+      updatedAt: card.attributes.updatedAt || '',
+      video: {
+        data: {
+          attributes: {
+            url: card.attributes.video?.data?.attributes?.url || ''
+          }
+        } || 'google.com'
+      },
+      vk: card.attributes.vk || '#'
+    }
+  };
       this.isShowCard = true;
       console.log(this.teachcard);
     },
@@ -370,12 +396,14 @@ export default {
     display: flex;
     flex-direction: row;
     gap: 120px;
+    overflow: hidden;
 }
 .right_down_left {
     display: flex;
     height: 100%;
     flex-direction: column;
     gap: 60px;
+    overflow-y: scroll;
 }
 .right_down_left p {
     font-size: 32px;
