@@ -26,6 +26,7 @@ library.add(far);
 library.add(faL);
 
 const router = createRouter({
+    mode: 'hash',
     routes: [{
         path: '/',
         component: Home,
