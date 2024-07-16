@@ -1,3 +1,4 @@
+/* eslint-disable vue/multi-word-component-names */
 import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
@@ -62,7 +63,7 @@ const router = createRouter({
 const app = createApp(App);
 
 // Регистрируем компонент fontawesome globally
-app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.use(router)
 app.mount('#app')
