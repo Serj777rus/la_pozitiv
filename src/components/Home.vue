@@ -1,4 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/no-duplicate-attributes -->
+<!-- eslint-disable vue/no-parsing-error -->
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <HeadMenu></HeadMenu>
     <div class="main_main">
@@ -202,7 +205,7 @@
     <ReviewCard></ReviewCard>
     <Footer></Footer>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
-    <Vidget></Vidget>
+    <!-- <Vidget></Vidget> -->
 </template>
 
 <script>
@@ -213,7 +216,7 @@
     import ReviewCard from './UI_components/ReviewCard.vue'
     import Footer from './UI_components/Footer.vue'
     import PopUp from './UI_components/PopUp.vue'
-    import Vidget from './UI_components/Vidget.vue'
+    // import Vidget from './UI_components/Vidget.vue'
     import axios from 'axios'
     export default {
         components: {
@@ -224,7 +227,7 @@
             ReviewCard,
             Footer,
             PopUp,
-            Vidget
+            // Vidget
         },
         data() {
             return {
