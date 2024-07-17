@@ -28,7 +28,7 @@ library.add(far);
 library.add(faL);
 
 const router = createRouter({
-    // mode: 'hash',
+    mode: 'history',
     routes: [{
         path: '/',
         component: Home,
@@ -63,7 +63,6 @@ const router = createRouter({
         path: '/teachpage/:id',
         component: TeacherPage,
         name: 'teacherpage',
-        // props: route => ({ teacher: JSON.parse(route.query.teacher) })
     }],
     history: createWebHistory()
 })

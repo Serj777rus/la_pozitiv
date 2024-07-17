@@ -8,7 +8,7 @@
                 <img src="../assets/photos/teachers/fon.png">
             </div>
             <div class="line"></div>
-            <div class="teachers_block">
+            <div class="teachers_block" :class="{nonactive: isShowCard !== null}">
                 <div class="teacher_card" v-for="card in teachers" :key="card.id">
                     <div class="back_grad">
                         <img :src="card.attributes.image.data.attributes.url">
@@ -17,60 +17,59 @@
                         <div class="names">{{ card.attributes.name }} {{ card.attributes.lastname }}</div>
                         <h3>{{ card.attributes.study }}</h3>
                     </div>
-                    <!-- <Button @click="showTeachCard(card)"><slot>Подробнее</slot></Button> -->
-                    <Button @click="routTeachPage(card.id)"><slot>Подробнее</slot></Button>
+                    <Button @click="showTeachCard(card.id)"><slot>Подробнее</slot></Button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="teacher_modal" :class="{active: isShowCard}">
+    <div class="teacher_modal" :class="{active: isShowCard == morecards.id}" v-for="morecards in teachers" :key="morecards.id">
         <div class="teacher_modal_div">
             <div class="card_left_side">
                 <div class="teacher_card_big">
                     <div class="back_grad_big">
-                        <img :src="teachcard.attributes.image.data.attributes.url">
+                        <img :src="morecards.attributes.image.data.attributes.url">
                     </div>
-                    <p>{{ teachcard.attributes.article }}</p>
+                    <p>{{ morecards.attributes.article }}</p>
                     <div class="about_teacher_big">
-                        <p>Имя: <span>{{ teachcard.attributes.name }} {{ teachcard.attributes.lastname }}</span></p>
-                        <p>Возраст: <span>{{ teachcard.attributes.age }}</span></p>
-                        <p>Специализация: <span>{{ teachcard.attributes.study }}</span></p>
+                        <p>Имя: <span>{{ morecards.attributes.name }} {{ morecards.attributes.lastname }}</span></p>
+                        <p>Возраст: <span>{{ morecards.attributes.age }}</span></p>
+                        <p>Специализация: <span>{{ morecards.attributes.study }}</span></p>
                     </div>
                     <div class="socials">
-                            <a :href="teachcard.attributes.inst" target="_blank"><img src="@/assets/photos/teachers/instagram.svg"></a>
-                            <a :href="teachcard.attributes.vk" target="_blank"><img src="@/assets/photos/teachers/vk.svg"></a>
+                            <a :href="morecards.attributes.inst" target="_blank"><img src="@/assets/photos/teachers/instagram.svg"></a>
+                            <a :href="morecards.attributes.vk" target="_blank"><img src="@/assets/photos/teachers/vk.svg"></a>
                     </div>
                 </div>
             </div>
             <div class="card_right_side">
                 <div class="right_up">
                     <h4>Обо мне:</h4>
-                    <p>{{ teachcard.attributes.bio }}</p>
+                    <p>{{ morecards.attributes.bio }}</p>
                 </div>
                 <div class="right_down">
                     <div class="right_down_left">
                         <div class="skills">
                             <p>Достижения</p>
                             <ul>
-                                <li v-for="skill in teachcard.attributes.skills" :key="skill">{{ skill.skill }}</li>
+                                <li v-for="skill in morecards.attributes.skills" :key="skill">{{ skill.skill }}</li>
                             </ul>
                         </div>
                         <div class="skillses">
                             <p>Skills</p>
                             <ul>
-                                <li v-for="dost in teachcard.attributes.dost" :key="dost">{{ dost.dostigenia }}</li>
+                                <li v-for="dost in morecards.attributes.dost" :key="dost">{{ dost.dostigenia }}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="right_down_right">
                         <p>Видеовизитка</p>
-                        <video :src="teachcard.attributes.video.data.attributes.url || teachcard.attributes.video.data" controls></video>
+                        <video :src="morecards.attributes?.video?.data?.attributes?.url || 'google.com'" controls></video>
                     </div>
                 </div>
             </div>
             <font-awesome-icon :icon="['fas', 'xmark']" style="color: #000; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeCard" />
         </div>
-    </div> -->
+    </div>
     <Footer></Footer>
 </template>
 
@@ -89,73 +88,18 @@ export default {
   data() {
     return {
       teachers: [],
-    //   teachcard: {
-    //     attributes: {
-    //       age: '',
-    //       article: '',
-    //       bio: '',
-    //       createdAt: '',
-    //       dost: [],
-    //       image: { data: { attributes: { url: '' } } },
-    //       inst: '',
-    //       lastname: '',
-    //       name: '',
-    //       publishedAt: '',
-    //       skills: [],
-    //       study: '',
-    //       updatedAt: '',
-    //       video: { 
-    //         data: 
-    //             {attributes: 
-    //                 {url: ''}
-    //             } 
-    //         },
-    //       vk: ''
-    //     }
-    //   },
-      isShowCard: false,
+      isShowCard: null,
       url: process.env.VUE_APP_SERVER
     };
   },
   methods: {
-//     showTeachCard(card) {
-//         this.teachcard = {
-//     attributes: {
-//       age: card.attributes.age || 'Неизвестно',
-//       article: card.attributes.article || 'Нет данных',
-//       bio: card.attributes.bio || 'Нет данных',
-//       createdAt: card.attributes.createdAt || '',
-//       dost: card.attributes.dost || [],
-//       image: {
-//         data: {
-//           attributes: {
-//             url: card.attributes.image?.data?.attributes?.url || 'default-image-url.jpg'
-//           }
-//         }
-//       },
-//       inst: card.attributes.inst || '#',
-//       lastname: card.attributes.lastname || '',
-//       name: card.attributes.name || 'Неизвестно',
-//       publishedAt: card.attributes.publishedAt || '',
-//       skills: card.attributes.skills || [],
-//       study: card.attributes.study || 'Неизвестно',
-//       updatedAt: card.attributes.updatedAt || '',
-//       video: {
-//         data: {
-//           attributes: {
-//             url: card.attributes.video?.data?.attributes?.url || ''
-//           }
-//         } || 'google.com'
-//       },
-//       vk: card.attributes.vk || '#'
-//     }
-//   };
-//       this.isShowCard = true;
-//       console.log(this.teachcard);
-//     },
-    // closeCard() {
-    //   this.isShowCard = false;
-    // },
+    showTeachCard(card) {
+    this.isShowCard = card;
+    console.log(this.teachcard);
+    },
+    closeCard() {
+      this.isShowCard = null;
+    },
     async getTeachersData() {
       try {
         // const response = await axios.get(`${this.url}/getteachers`);
@@ -163,18 +107,15 @@ export default {
         if (response.status == 200) {
           this.teachers = response.data.data;
           console.log(response.data.data);
+        } else {
+            console.log(response.data)
         }
       } catch (error) {
         console.log(error);
       }
     },
-    routTeachPage(id) {
-        // localStorage.clear();
-        localStorage.setItem('teacher', JSON.stringify(this.teachers))
-        this.$router.push({name: 'teacherpage', params: {id: id}})
-        }
   },
-  beforeMount() {
+  created() {
     this.getTeachersData();
   }
 };
@@ -187,6 +128,13 @@ export default {
     justify-content: center;
     align-items: center;
     margin-top: 80px;
+    transition: all 500ms ease;
+    z-index: 999;
+}
+.nonactive {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
 }
 .teachers_div {
     width: 1200px;
@@ -277,42 +225,40 @@ export default {
 }
 .teacher_modal {
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-    opacity: 0;
-    background: rgba(0, 0, 0, .7);
     color: #333;
     transition: all 500ms ease;
 }
 .active {
     opacity: 1;
-    z-index: 997;
+    z-index: 999;
+    position: relative;
 }
 .teacher_modal_div {
     width: 1200px;
-    height: 700px;
+    /* height: 700px; */
     position: relative;
-    background: #fff;
+    background: rgba(255, 255, 255);
+    backdrop-filter: blur(10px);
     border: none;
-    border-radius: 32px;
+    border-radius: 16px;
     padding: 32px;
     box-shadow: 8px 8px 16px rgba(255, 255, 255, .3);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     gap: 80px;
+    box-sizing: border-box;
 }
 .card_left_side {
     display: flex;
-    height: 100%;
-    align-items: center;
 }
 .teacher_card_big {
     width: 460px;
@@ -381,7 +327,6 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     gap: 60px;
 }
 .right_up {
