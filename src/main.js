@@ -8,6 +8,7 @@ import Teachers from './components/Teachers.vue'
 import Price from './components/Price.vue'
 import Concerts from './components/Concerts.vue'
 import Contact from './components/Contact.vue'
+import TeacherPage from './components/UI_components/TeacherPage.vue';
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -27,7 +28,7 @@ library.add(far);
 library.add(faL);
 
 const router = createRouter({
-    mode: 'history',
+    // mode: 'hash',
     routes: [{
         path: '/',
         component: Home,
@@ -57,6 +58,12 @@ const router = createRouter({
         path: '/contact',
         component: Contact,
         name: 'contact'
+    },
+    {
+        path: '/teachpage/:id',
+        component: TeacherPage,
+        name: 'teacherpage',
+        // props: route => ({ teacher: JSON.parse(route.query.teacher) })
     }],
     history: createWebHistory()
 })

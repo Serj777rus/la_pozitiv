@@ -17,12 +17,13 @@
                         <div class="names">{{ card.attributes.name }} {{ card.attributes.lastname }}</div>
                         <h3>{{ card.attributes.study }}</h3>
                     </div>
-                    <Button @click="showTeachCard(card)"><slot>Подробнее</slot></Button>
+                    <!-- <Button @click="showTeachCard(card)"><slot>Подробнее</slot></Button> -->
+                    <Button @click="routTeachPage(card.id)"><slot>Подробнее</slot></Button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="teacher_modal" :class="{active: isShowCard}">
+    <!-- <div class="teacher_modal" :class="{active: isShowCard}">
         <div class="teacher_modal_div">
             <div class="card_left_side">
                 <div class="teacher_card_big">
@@ -69,7 +70,7 @@
             </div>
             <font-awesome-icon :icon="['fas', 'xmark']" style="color: #000; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeCard" />
         </div>
-    </div>
+    </div> -->
     <Footer></Footer>
 </template>
 
@@ -88,76 +89,77 @@ export default {
   data() {
     return {
       teachers: [],
-      teachcard: {
-        attributes: {
-          age: '',
-          article: '',
-          bio: '',
-          createdAt: '',
-          dost: [],
-          image: { data: { attributes: { url: '' } } },
-          inst: '',
-          lastname: '',
-          name: '',
-          publishedAt: '',
-          skills: [],
-          study: '',
-          updatedAt: '',
-          video: { 
-            data: 
-                {attributes: 
-                    {url: ''}
-                } 
-            },
-          vk: ''
-        }
-      },
+    //   teachcard: {
+    //     attributes: {
+    //       age: '',
+    //       article: '',
+    //       bio: '',
+    //       createdAt: '',
+    //       dost: [],
+    //       image: { data: { attributes: { url: '' } } },
+    //       inst: '',
+    //       lastname: '',
+    //       name: '',
+    //       publishedAt: '',
+    //       skills: [],
+    //       study: '',
+    //       updatedAt: '',
+    //       video: { 
+    //         data: 
+    //             {attributes: 
+    //                 {url: ''}
+    //             } 
+    //         },
+    //       vk: ''
+    //     }
+    //   },
       isShowCard: false,
       url: process.env.VUE_APP_SERVER
     };
   },
   methods: {
-    showTeachCard(card) {
-        this.teachcard = {
-    attributes: {
-      age: card.attributes.age || 'Неизвестно',
-      article: card.attributes.article || 'Нет данных',
-      bio: card.attributes.bio || 'Нет данных',
-      createdAt: card.attributes.createdAt || '',
-      dost: card.attributes.dost || [],
-      image: {
-        data: {
-          attributes: {
-            url: card.attributes.image?.data?.attributes?.url || 'default-image-url.jpg'
-          }
-        }
-      },
-      inst: card.attributes.inst || '#',
-      lastname: card.attributes.lastname || '',
-      name: card.attributes.name || 'Неизвестно',
-      publishedAt: card.attributes.publishedAt || '',
-      skills: card.attributes.skills || [],
-      study: card.attributes.study || 'Неизвестно',
-      updatedAt: card.attributes.updatedAt || '',
-      video: {
-        data: {
-          attributes: {
-            url: card.attributes.video?.data?.attributes?.url || ''
-          }
-        } || 'google.com'
-      },
-      vk: card.attributes.vk || '#'
-    }
-  };
-      this.isShowCard = true;
-      console.log(this.teachcard);
-    },
-    closeCard() {
-      this.isShowCard = false;
-    },
+//     showTeachCard(card) {
+//         this.teachcard = {
+//     attributes: {
+//       age: card.attributes.age || 'Неизвестно',
+//       article: card.attributes.article || 'Нет данных',
+//       bio: card.attributes.bio || 'Нет данных',
+//       createdAt: card.attributes.createdAt || '',
+//       dost: card.attributes.dost || [],
+//       image: {
+//         data: {
+//           attributes: {
+//             url: card.attributes.image?.data?.attributes?.url || 'default-image-url.jpg'
+//           }
+//         }
+//       },
+//       inst: card.attributes.inst || '#',
+//       lastname: card.attributes.lastname || '',
+//       name: card.attributes.name || 'Неизвестно',
+//       publishedAt: card.attributes.publishedAt || '',
+//       skills: card.attributes.skills || [],
+//       study: card.attributes.study || 'Неизвестно',
+//       updatedAt: card.attributes.updatedAt || '',
+//       video: {
+//         data: {
+//           attributes: {
+//             url: card.attributes.video?.data?.attributes?.url || ''
+//           }
+//         } || 'google.com'
+//       },
+//       vk: card.attributes.vk || '#'
+//     }
+//   };
+//       this.isShowCard = true;
+//       console.log(this.teachcard);
+//     },
+    // closeCard() {
+    //   this.isShowCard = false;
+    // },
     async getTeachersData() {
       try {
-        const response = await axios.get(`${this.url}/getteachers`);
+        // const response = await axios.get(`${this.url}/getteachers`);
+        const response = await axios.get('https://supportive-heart-1886e94650.strapiapp.com/api/teachers?populate=*');
         if (response.status == 200) {
           this.teachers = response.data.data;
           console.log(response.data.data);
@@ -165,9 +167,14 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+    routTeachPage(id) {
+        // localStorage.clear();
+        localStorage.setItem('teacher', JSON.stringify(this.teachers))
+        this.$router.push({name: 'teacherpage', params: {id: id}})
+        }
   },
-  mounted() {
+  beforeMount() {
     this.getTeachersData();
   }
 };
@@ -556,7 +563,6 @@ export default {
 }
 .teacher_card_big {
     width: 100%;
-    height: 480px;
     background-color: #fff;
     border-radius: 4px;
     border: none;
@@ -674,12 +680,8 @@ export default {
     text-align: start;
 }
 .right_down_right video {
-    width: 100%;
     border-radius: 16px;
     object-fit: contain;
-}
-* {
-    box-sizing: border-box;
 }
 }
 </style>
