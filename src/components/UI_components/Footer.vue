@@ -112,7 +112,7 @@
             async sendForm() {
                 this.buttonChange = 'sending';
                 try {
-                    const response = await axios.post(`${this.url}`, this.footerform);
+                    const response = await axios.post(`${this.url}/sendform`, this.footerform);
                     if (response.status == 200) {
                         this.message = response.data.message;
                         console.log(response.data);
