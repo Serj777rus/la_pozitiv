@@ -102,8 +102,7 @@ export default {
     },
     async getTeachersData() {
       try {
-        // const response = await axios.get(`${this.url}/getteachers`);
-        const response = await axios.get('https://supportive-heart-1886e94650.strapiapp.com/api/teachers?populate=*');
+        const response = await axios.get(`${this.url}/getteachers`);
         if (response.status == 200) {
           this.teachers = response.data.data;
           console.log(response.data.data);
@@ -262,7 +261,7 @@ export default {
 }
 .teacher_card_big {
     width: 460px;
-    height: 660px;
+    /* height: 660px; */
     background-color: #fff;
     border-radius: 4px;
     border: none;
@@ -273,6 +272,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
 }
 .teacher_card_big p {
     font-size: 16px;
@@ -390,6 +390,14 @@ export default {
     align-items: center;
     margin-top: 80px;
     padding: 0px 10px;
+    box-sizing: border-box;
+    transition: all 500ms ease;
+    z-index: 999;
+}
+.nonactive {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
 }
 .teachers_div {
     width: 100%;
@@ -474,30 +482,37 @@ export default {
 }
 .teacher_modal {
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, .7);
     color: #333;
-    padding: 10px;
+    transition: all 500ms ease;
+}
+.active {
+    opacity: 1;
+    z-index: 999;
+    position: relative;
 }
 .teacher_modal_div {
     width: 100%;
-    height: 80vh;
-    background: #fff;
+    /* height: 700px; */
+    position: relative;
+    background: rgba(255, 255, 255);
+    backdrop-filter: blur(10px);
     border: none;
-    border-radius: 20px;
-    padding: 12px;
+    border-radius: 16px;
+    padding: 32px;
     box-shadow: 8px 8px 16px rgba(255, 255, 255, .3);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    overflow-y: scroll;
+    justify-content: space-between;
+    gap: 40px;
+    box-sizing: border-box;
 }
 .card_left_side {
     display: flex;

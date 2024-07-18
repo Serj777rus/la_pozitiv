@@ -32,14 +32,14 @@
                     </div>
                     <div class="inputs_sel">
                         <label for="phone">Возраст</label>
-                        <select>
+                        <select v-model="footerform.age">
                             <option value="Ребенок">Ребенок</option>
                             <option value="Взрослый">Взрослый</option>
                         </select>
                     </div>
                     <div class="inputs_sel">
                         <label for="phone">Программа обучения</label>
-                        <select>
+                        <select v-model="footerform.education">
                             <option value="Вокал">Вокал</option>
                             <option value="Вокал онлайн">Вокал онлайн</option>
                             <option value="Гитара">Гитара</option>
@@ -52,6 +52,7 @@
                         </select>
                     </div>
                     <button type="submit">Отправить</button>
+                    <div>{{ message }}</div>
                 </form>
             </div>
             <div class="footer_right">
@@ -94,16 +95,42 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         data() {
             return {
                 footerform: {
                     name: '',
-                    phone: ''
+                    phone: '',
+                    age: '',
+                    education: ''
+                },
+                message: ''
+            }
+        },
+        methods: {
+            async sendForm() {
+                this.buttonChange = 'sending';
+                try {
+                    const response = await axios.post(`${this.url}`, this.footerform);
+                    if (response.status == 200) {
+                        this.message = response.data.message;
+                        console.log(response.data);
+                        this.footerform.name = '',
+                        this.footerform.phone = '',
+                        this.footerform.age = '',
+                        this.footerform.education = ''
+                        setTimeout(() => {
+                            this.message = '';
+                        }, 1500)
+                    } else {
+                        this.message = `Ошибка ${response.data}`;
+                    }
+                } catch (error) {
+                    console.log('ощибка');
                 }
             }
         }
-        
     }
 </script>
 

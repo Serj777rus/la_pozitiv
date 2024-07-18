@@ -3,22 +3,11 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const nodemailer = require('nodemailer');
 
-const hostname = '127.0.0.1';
+const hostname = '192.168.0.102';
 const PORT = 3000;
 const app = express();
 const server = http.createServer(app);
-
-let transporter = nodemailer.createTransport({
-    host: 'smtp.office365.com',
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.POST_USER,
-        pass: process.env.POST_PASS
-    }
-})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -117,29 +106,29 @@ app.get('/getaboutmedia', async(req, res) => {
 })
 
 app.post('/sendform', async (req, res) => {
-    try {
-        const { name, phone, age, education } = req.body;
-        if (!name || !phone || !age || !education) {
-            return res.status(400).json({ message: 'Все поля обязательны' });
+        try {
+            const { name, phone, age, education } = req.body;
+            if (!name || !phone || !age || !education) {
+                return res.status(400).json({ message: 'Все поля обязательны' });
+            }
+            let fields = {
+                name: name,
+                phone: phone,
+                note: `Возраст: ${age}, направление обучения ${education}`
+            }
+            const response = await axios.post(`https://lapozitiv.s20.online/api/1/lead/create?token=${process.env.ALFA_TOKEN}`, fields);
+            if (response) {
+                res.status(200).json({message: 'Данные успешно отправлены'})
+                console.log('ok')
+            }
+            else {
+                console.log(response.data)
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Ошибка сервера' });
+            console.error(error);
         }
-        let sended = await transporter.sendMail({
-            from: '"Сайт Ля Позитив" <gvsergey89@hotmail.com>',
-            to: 'gvsergey89@gmail.com',
-            subject: 'Заявка с сайта',
-            text: `Имя: ${name}\nТелефон: ${phone}\nВозраст: ${age}\nПрограмма обучения: ${education}`
-        });
-        if (sended) {
-            res.status(200).json({ message: 'Письмо успешно отправлено' });
-            console.log('письмо ушло');
-        } else {
-            res.status(500).json({ message: 'Ошибка при отправке письма' });
-            console.log('что-то пошло не так');
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Ошибка сервера' });
-        console.error(error);
-    }
-});
+    });
 
 server.listen(PORT, hostname, () => {
     console.log(`Сервер запущен на ${hostname} ${PORT}`)

@@ -74,7 +74,7 @@
              async sendPopForm() {
                 this.buttonChange = 'sending';
                 try {
-                    const response = await axios.post(`${this.url}/sendform`, this.popupform);
+                    const response = await axios.post(`${this.url}`, this.popupform);
                     if (response.status == 200) {
                         this.buttonChange = 'done';
                         this.message = response.data.message;
