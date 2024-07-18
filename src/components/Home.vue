@@ -3,7 +3,7 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <HeadMenu></HeadMenu>
+    <HeadMenu @openVidget="toggle"></HeadMenu>
     <div class="main_main">
         <div class="main_div">
             <div class="right_side_main">
@@ -131,7 +131,7 @@
             <div class="who_all_blocks">
                 <div class="for_who_block">
                     <div class="who_img">
-                        <img src="../assets/photos/for_who/girl.png">
+                        <img src="../assets/photos/for_who/girl.jpg">
                     </div>
                     <div class="who_text">
                         <h3>Дети от 5-х лет</h3>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="for_who_block">
                     <div class="who_img">
-                        <img src="../assets/photos/for_who/podrostok.png">
+                        <img src="../assets/photos/for_who/podrostok.jpg">
                     </div>
                     <div class="who_text">
                         <h3>Подростки</h3>
@@ -205,7 +205,7 @@
     <ReviewCard></ReviewCard>
     <Footer></Footer>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
-    <Vidget></Vidget>
+    <Vidget ref="vidgetComponent"></Vidget>
 </template>
 
 <script>
@@ -328,6 +328,9 @@
                 } catch (error) {
                     console.log(error)
                 }
+            },
+            toggle() {
+                this.$refs.vidgetComponent.toggleActive();
             }
         },
         mounted() {
@@ -723,7 +726,7 @@ video {
     justify-content: center;
     align-items: center;
     width: 50%;
-    width: auto;
+    /* width: auto; */
 }
 .who_img img {
     width: 100%;
@@ -775,7 +778,7 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 44px;
+    margin-top: 80px;
     position: relative;
     padding: 0px 10px;
 }
@@ -842,12 +845,15 @@ video {
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-self: flex-start;
+    padding: 4px 12px;
+    line-height: 100%;
 }
 .slogan {
     width: 95%;
     padding: 16px 32px;
     border-radius: 32px;
-    background: rgb(0,0,0, 0.7);
+    background: rgb(0,0,0, 0.9);
     margin-top: 48px;
     margin-bottom: 24px;
     z-index: 3;

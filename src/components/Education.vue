@@ -261,7 +261,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 40px;
+        margin-top: 80px;
         padding: 0px 10px;
     }
     .education_div {

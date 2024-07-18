@@ -22,7 +22,7 @@
         <div class="menu_mobile">
             <img src="~@/assets/photos/logo80x80.png">
             <div class="booking_button">
-                <button class="button-33">Записаться</button>
+                <button class="button-33" @click="$emit('openVidget')">Записаться</button>
             </div>
             <font-awesome-icon :icon="['faL', 'bars']" style="font-size: 32px; " @click="isShowMenu = true"/>
         </div>
@@ -139,9 +139,16 @@
     }
     .headmenu_mobile {
         width: 100%;
-        padding: 0px 10px;
+        padding: 8px 10px;
         display: flex;
         justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1100;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, .7);
+        border-radius: 0px 0px 12px 12px;
     }
     .menu_mobile {
         width: 100%;

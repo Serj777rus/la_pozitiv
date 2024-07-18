@@ -828,7 +828,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     .concerts_main {
         width: 100%;
         padding: 0px 10px;
-        margin-top: 40px;
+        margin-top: 80px;
     }
     .concerts_div {
         width: 100%;
@@ -836,7 +836,7 @@ import HeadMenu from './UI_components/HeadMenu.vue';
         flex-direction: column;
     }
     .concerts_div h3 {
-        font-size: 32px;
+        font-size: 28px;
         text-align: center;
     }
     .photo_video_block {

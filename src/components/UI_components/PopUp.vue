@@ -110,7 +110,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 33;
+        z-index: 1101;
     }
     .popup_modal {
         padding: 48px;
