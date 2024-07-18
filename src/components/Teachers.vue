@@ -262,6 +262,7 @@ export default {
 .teacher_card_big {
     width: 460px;
     /* height: 660px; */
+    height: fit-content;
     background-color: #fff;
     border-radius: 4px;
     border: none;
@@ -271,7 +272,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     gap: 16px;
 }
 .teacher_card_big p {
@@ -523,6 +523,7 @@ export default {
 }
 .teacher_card_big {
     width: 100%;
+    height: fit-content;
     background-color: #fff;
     border-radius: 4px;
     border: none;
