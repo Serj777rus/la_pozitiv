@@ -8,7 +8,7 @@
             </div>
             <div class="posts">
                 <div class="post" v-for="post in posts" :key="post.id">
-                <img :src="post.attributes.image.data.attributes.url">
+                <img :src="`${urlmedia}` + post.attributes.image.data.attributes.url">
                 <div class="line_post"></div>
                 <div class="post_text">
                     <h4>{{ post.attributes.name }}</h4>
@@ -62,7 +62,8 @@
                     }
                 },
                 isPostModalActive: false,
-                serverUrl: process.env.VUE_APP_SERVER
+                serverUrl: process.env.VUE_APP_SERVER,
+                urlmedia: 'https://admin.la-pozitiv.ru'
             }
         },
         methods: {
@@ -76,7 +77,8 @@
             },
             async testGet() {
                 try {
-                    const response = await axios.get(`${this.serverUrl}/testroute`);
+                    // const response = await axios.get(`${this.serverUrl}/testroute`);
+                    const response = await axios.get('https://admin.la-pozitiv.ru/api/posts?populate=*');
                     if (response.status == 200) {
                         console.log(response.data.data);
                         this.posts = response.data.data;
