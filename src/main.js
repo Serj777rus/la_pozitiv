@@ -59,10 +59,9 @@ const router = createRouter({
         name: 'contact'
     },
     {
-        path: '/lesson/:posts',
+        path: '/lesson',
         component: EducationCopy,
         name: 'lesson',
-        props: true
     }],
     history: createWebHistory()
 })

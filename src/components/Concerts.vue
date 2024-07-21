@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-<HeadMenu></HeadMenu>
+<HeadMenu @openVidget="toggle"></HeadMenu>
 <!-- <div class="concerts_main">
     <div class="years">
         <div class="year"><p v-for="years in year" :key="years" @click="sortMonth(years)" :class="{ yearactive: years == this.yearsmonth.year }">{{ years }}</p></div>
@@ -66,6 +66,7 @@
     </div>
 </div>
 <Footer></Footer>
+<Vidget ref="vidgetComponent"></Vidget>
 </template>
 
 <!-- <script>
@@ -308,10 +309,12 @@ import HeadMenu from './UI_components/HeadMenu.vue';
     import axios from 'axios';
     import HeadMenu from './UI_components/HeadMenu.vue';
     import Footer from './UI_components/Footer.vue';
+import Vidget from './UI_components/Vidget.vue';
     export default {
         components: {
             HeadMenu,
-            Footer
+            Footer,
+            Vidget
         },
         data() {
             return {
@@ -352,6 +355,9 @@ import HeadMenu from './UI_components/HeadMenu.vue';
             },
             closePhotoModal() {
                 this.isShowPhoto = ''
+            },
+            toggle() {
+                this.$refs.vidgetComponent.toggleActive();
             }
         },
         mounted() {

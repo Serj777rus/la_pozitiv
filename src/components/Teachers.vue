@@ -1,11 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <HeadMenu></HeadMenu>
+    <HeadMenu @openVidget="toggle"></HeadMenu>
     <div class="teachers_main">
         <div class="teachers_div">
             <h2>Наши преподаватели</h2>
-            <div class="teachers_back">
+            <!-- <div class="teachers_back">
                 <img src="../assets/photos/teachers/fon.png">
+            </div> -->
+            <div class="teachers_back">
+                <div class="teacher" v-for="img in teachers" :key="img.id">
+                    <img :src="`${urlmedia}` + img.attributes.image.data.attributes.url">
+                </div>
             </div>
             <div class="line"></div>
             <div class="teachers_block" :class="{nonactive: isShowCard !== null}">
@@ -71,6 +76,7 @@
         </div>
     </div>
     <Footer></Footer>
+    <Vidget ref="vidgetComponent"></Vidget>
 </template>
 
 <script>
@@ -78,12 +84,14 @@ import axios from 'axios';
 import Button from './UI_components/Button.vue';
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
+import Vidget from './UI_components/Vidget.vue';
 
 export default {
   components: {
     HeadMenu,
     Footer,
-    Button
+    Button,
+    Vidget
   },
   data() {
     return {
@@ -114,6 +122,9 @@ export default {
         console.log(error);
       }
     },
+    toggle() {
+                this.$refs.vidgetComponent.toggleActive();
+            }
   },
   created() {
     this.getTeachersData();
@@ -147,7 +158,7 @@ export default {
     font-weight: 400;
     margin-bottom: 40px;
 }
-.teachers_back {
+/* .teachers_back {
     width: 100%;
     background: linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4) no-repeat;;
     height: 500px;
@@ -162,6 +173,31 @@ export default {
     width: 100%;
     max-height: 480px;
     object-fit: cover;
+} */
+.teachers_back {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-top: 40px;
+}
+.teacher {
+    display: flex;
+    position: relative;
+    width: 240px;
+    height: 240px;
+    border-radius: 100%;
+    background: rgb(171, 233, 117);
+    margin-bottom: 40px;
+    border: 2px solid #fff;
+}
+.teacher img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 300px;
+    border-radius: 0 0 40% 40%;
 }
 .line {
     width: 100%;

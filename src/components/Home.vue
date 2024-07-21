@@ -406,9 +406,11 @@
     font-size: 64px;
     font-weight: 600;
     line-height: 100%;
-    background: -webkit-linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4); background: linear-gradient(90deg, #9f6cd3,#5ca1cb,#2bc7c4) no-repeat;
+    background: linear-gradient(270deg, #9f6cd3,#5ca1cb,#2bc7c4) no-repeat;
     background-clip: text;
     color: transparent;
+    text-stroke: 1px #fff;
+    -webkit-text-stroke: .5px #fff;
 }
 .slogan {
     line-height: 100%;
@@ -926,8 +928,9 @@ video {
     font-weight: 300;
 }
 .descript_card p {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 200;
+    line-height: 100%;
 }
 .tabs {
     display: flex;

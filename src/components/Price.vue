@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <HeadMenu></HeadMenu>
+    <HeadMenu @openVidget="toggle"></HeadMenu>
     <div class="price_main">
         <div class="price_div">
             <h2>Цены на услуги</h2>
@@ -31,6 +31,7 @@
     </div>
     <Footer></Footer>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
+    <Vidget ref="vidgetComponent"></Vidget>
 </template>
 
 <script>
@@ -38,12 +39,14 @@ import axios from 'axios';
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
 import PopUp from './UI_components/PopUp.vue';
+import Vidget from './UI_components/Vidget.vue';
 
     export default {
         components: {
             HeadMenu,
             Footer,
-            PopUp
+            PopUp,
+            Vidget
         },
         data() {
             return {
@@ -127,6 +130,9 @@ import PopUp from './UI_components/PopUp.vue';
             },
             closePop() {
                 this.isShowPopUp = false
+            },
+            toggle() {
+                this.$refs.vidgetComponent.toggleActive();
             }
         },
         mounted() {

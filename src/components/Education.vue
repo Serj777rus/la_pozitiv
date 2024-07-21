@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <HeadMenu></HeadMenu>
+    <HeadMenu @openVidget="toggle"></HeadMenu>
     <div class="education_main">
         <div class="education_div">
             <h3>Направления обучения</h3>
@@ -15,6 +15,7 @@
     </div>
     <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
     <Footer></Footer>
+    <Vidget ref="vidgetComponent"></Vidget>
     </template>
 
 <script>
@@ -22,11 +23,13 @@
     import Footer from './UI_components/Footer.vue';
     import PopUp from './UI_components/PopUp.vue';
     import axios from 'axios';
+import Vidget from './UI_components/Vidget.vue';
     export default {
         components: {
             HeadMenu,
             Footer,
-            PopUp
+            PopUp,
+            Vidget
         },
         data() {
             return {
@@ -52,19 +55,20 @@
                 }
             },
             transferId(card) {
+                localStorage.clear();
                 if (card) {
-                    const cardString = encodeURIComponent(JSON.stringify(card))
+                    localStorage.setItem('card', JSON.stringify(card))
                     console.log('Transferring card:', card);
                     this.$router.push({
-                    name: 'lesson',
-                    params: {
-                        posts: cardString, // Сериализуем объект card
-                    },
+                    name: 'lesson'
                     });
                 } else {
                     console.error('card is undefined');
                 }
             },
+            toggle() {
+                this.$refs.vidgetComponent.toggleActive();
+            }
         },
         mounted() {
             this.getEducation();

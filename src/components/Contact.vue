@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <HeadMenu></HeadMenu>
+    <HeadMenu @openVidget="toggle"></HeadMenu>
         <div class="contact_main">
             <div class="contact_div">
                 <img src="@/assets/photos/logo300x300.png">
@@ -37,16 +37,24 @@
             </div>
         </div>
     <Footer></Footer>
+    <Vidget ref="vidgetComponent"></Vidget>
 </template>
 
 <script>
 import Footer from './UI_components/Footer.vue';
 import HeadMenu from './UI_components/HeadMenu.vue';
+import Vidget from './UI_components/Vidget.vue';
 
     export default {
         components: {
             HeadMenu,
-            Footer
+            Footer,
+            Vidget
+        },
+        methods: {
+            toggle() {
+                this.$refs.vidgetComponent.toggleActive();
+            }
         }
     }
 </script>
