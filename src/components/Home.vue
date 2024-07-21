@@ -69,14 +69,14 @@
                     <div class="video_text">
                         <h3>Видеообзор</h3>
                     </div>
-                    <video v-for="video in aboutvideo" :key="video.id" :src="video.video" controls></video>
+                    <video v-for="video in aboutvideo" :key="video.id" :src="`${urlmedia}` + video.video" controls></video>
                 </div>
                 <div class="about_photo">
                     <div class="video_text">
                         <h3>Фото нашей студии</h3>
                     </div>
                     <div class="carusel" v-for="(img, index) in aboutphoto" :key="img.id" :class="{ activec: isShowPhoto == index }">
-                        <img :src="img.image">
+                        <img :src="`${urlmedia}` + img.image">
                         <div class="carusel_tab_prew" @click="tabsPrew">
                             <img src="@/assets/photos/about/prew.svg">
                         </div>
@@ -268,7 +268,8 @@
                 isShowCard: 1,
                 isShowPhoto: 0,
                 isShowPopUp: false,
-                url: process.env.VUE_APP_SERVER
+                url: process.env.VUE_APP_SERVER,
+                urlmedia: 'https://admin.la-pozitiv.ru'
             }
         },
         methods: {
@@ -295,9 +296,10 @@
             },
             async getAboutMedia() {
                 try {
-                    const response = await axios.get(`${this.url}/getaboutmedia`)
+                    const response = await axios.get('https://www.la-pozitiv.ru:3000/getaboutmedia')
                     if (response.status == 200) {
                         let data = response.data.data;
+                        console.log(data);
                         let newArrPh = [];
                         let newArrVi =[];
                         for (let i = 0; i < data.length; i++) {

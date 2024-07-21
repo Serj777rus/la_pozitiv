@@ -8,6 +8,7 @@ import Teachers from './components/Teachers.vue'
 import Price from './components/Price.vue'
 import Concerts from './components/Concerts.vue'
 import Contact from './components/Contact.vue'
+import EducationCopy from './components/EducationCopy.vue'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -27,7 +28,6 @@ library.add(far);
 library.add(faL);
 
 const router = createRouter({
-    mode: 'history',
     routes: [{
         path: '/',
         component: Home,
@@ -57,7 +57,13 @@ const router = createRouter({
         path: '/contact',
         component: Contact,
         name: 'contact'
-    },],
+    },
+    {
+        path: '/lesson/:posts',
+        component: EducationCopy,
+        name: 'lesson',
+        props: true
+    }],
     history: createWebHistory()
 })
 const app = createApp(App);

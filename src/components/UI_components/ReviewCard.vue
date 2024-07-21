@@ -3,8 +3,9 @@
         <div class="reviews_div">
             <h2>Отзывы наших учеников</h2>
             <div class="all_cards">
-                <div class="review_card" v-for="video in reviews" :key="video.id">
-                    <video v-for="url in video.attributes.video.data" :key="url" :src="url.attributes.url" controls></video>
+                <div class="review_card">
+                    <!-- <video v-for="url in video.attributes.video.data" :key="url" :src="`${urlmedia}` + url.attributes.url" controls></video> -->
+                    <video v-for="video in reviews" :key="video.id" :src="`${urlmedia}` + video.attributes.video.data.attributes.url" controls></video>
                 </div>
             </div>
         </div>
@@ -18,7 +19,8 @@ import axios from 'axios';
         data() {
             return {
                 reviews: [],
-                server: process.env.VUE_APP_SERVER
+                server: process.env.VUE_APP_SERVER,
+                urlmedia: 'https://admin.la-pozitiv.ru'
             }
         },
         methods: {

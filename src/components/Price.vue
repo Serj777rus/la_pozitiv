@@ -231,6 +231,7 @@ import PopUp from './UI_components/PopUp.vue';
         width: 100%;
         flex-direction: row;
         justify-content: space-evenly;
+        flex-wrap: wrap;
     }
     .card {
         width: 360px;

@@ -1,91 +1,48 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-<HeadMenu></HeadMenu>
-<div class="education_main">
-    <div class="education_div">
-        <h3>Направления обучения</h3>
-        <div class="line"></div>
-        <div class="education_cards">
-            <div class="education_card" v-for="card in educations" :key="card.id">
-                <img v-for="image in card.attributes.image.data" :key="image" :src="image.attributes.url">
-                <div class="descr_div">
+    <HeadMenu></HeadMenu>
+    <div class="education_main">
+        <div class="education_div">
+            <h3>Направления обучения</h3>
+            <div class="line"></div>
+            <div class="education_cards">
+                <div class="education_card" v-for="card in educations" :key="card.id" @click="transferId(card)">
+                    <img :src="`${urlmedia}` + card.attributes.image.data.attributes.formats.medium.url">
                     <h3>{{ card.attributes.name }}</h3>
-                    <h4>{{ card.attributes.price }}</h4>
-                    <h5>{{ card.attributes.description }}</h5>
                 </div>
-                <Button @click="showCardCourse(card)"><slot>Подробнее</slot></Button>
             </div>
         </div>
     </div>
-</div>
-<div class="big_card" :class="{active: isShowCard}">
-    <div class="big_card_body">
-        <img v-for="image in bigcard.attributes.image.data" :key="image" :src="image.attributes.url">
-        <h3>{{ bigcard.attributes.name }}</h3>
-        <h4>{{ bigcard.attributes.price }}</h4>
-        <div class="big_card_desc">
-            <h5>{{ bigcard.attributes.description }}</h5>
-        </div>
-        <Button class="btn" @click="showPop"><slot>Попробовать</slot></Button>
-        <font-awesome-icon :icon="['fas', 'xmark']" style="color: #ffffff; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closeCard" />
-    </div>
-</div>
-<PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
-<Footer></Footer>
-</template>
+    <PopUp v-show="isShowPopUp" @closePop="closePop"></PopUp>
+    <Footer></Footer>
+    </template>
 
 <script>
     import HeadMenu from '@/components/UI_components/HeadMenu.vue'
     import Footer from './UI_components/Footer.vue';
-    import Button from './UI_components/Button.vue';
     import PopUp from './UI_components/PopUp.vue';
     import axios from 'axios';
     export default {
         components: {
             HeadMenu,
             Footer,
-            Button,
             PopUp
         },
         data() {
             return {
                 educations: [],
-                bigcard: {
-                    attributes: {
-                        image: '',
-                        name: '',
-                        price: '',
-                        description: ''
-                    }
-                },
-                isShowCard: false,
                 isShowPopUp: false,
-                url: process.env.VUE_APP_SERVER
+                url: process.env.VUE_APP_SERVER,
+                urlmedia: 'https://admin.la-pozitiv.ru'
             }
         },
         methods: {
-            showCardCourse(card) {
-                this.bigcard = card;
-                this.isShowCard = true;
-                console.log(this.bigcard)
-            },
-            closeCard() {
-                this.isShowCard = false
-            },
-            showPop() {
-                if (this.isShowCard == true) {
-                    this.isShowCard = false
-                }
-                this.isShowPopUp = true
-            },
-            closePop() {
-                this.isShowPopUp = false
-            },
             async getEducation() {
                 try {
-                    const response = await axios.get(`${this.url}/geteducation`);
+                    // const response = await axios.get(`${this.url}/geteducation`);
+                    const response = await axios.get('https://admin.la-pozitiv.ru/api/educations?populate[0]=image&populate[1]=bigimage&populate[2]=napravlenia.img&populate[3]=napravlenia.osobennosti&populate[4]=napravlenia.img.formats&populate[5]=navik&populate[6]=proba');
                     if (response.status == 200) {
-                        console.log(response.data);
+                        console.log(response.data.data);
                         this.educations = response.data.data;
                     } else {
                         // console.log(response.data);
@@ -94,7 +51,21 @@
                 catch(error) {
                     console.log(`Ошибка ${error}`)
                 }
-            }
+            },
+            transferId(card) {
+                if (card) {
+                    const cardString = encodeURIComponent(JSON.stringify(card))
+                    console.log('Transferring card:', card);
+                    this.$router.push({
+                    name: 'lesson',
+                    params: {
+                        posts: cardString, // Сериализуем объект card
+                    },
+                    });
+                } else {
+                    console.error('card is undefined');
+                }
+                },
         },
         mounted() {
             this.getEducation();
@@ -119,7 +90,7 @@
     .education_div h3 {
         font-size: 48px;
         text-align: center;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
     }
     .line {
         width: 100%;
@@ -137,132 +108,41 @@
         box-sizing: border-box;
     }
     .education_card {
-        width: 370px;
-        height: 480px;
-        border-radius: 32px;
-        background: rgba(0, 0, 0, .5);
-        backdrop-filter: blur(10px);
-        box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .7);
-        box-sizing: border-box;
+        width: 380px;
+        height: 180px;
         display: flex;
-        flex-direction: column;
-        padding: 10px;
-        align-items: center;
-        justify-content: space-between;
+        position: relative;
+        border-radius: 24px;
         box-sizing: border-box;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
     .education_card img {
         width: 100%;
-        border-radius: 22px 22px 0px 0px;
-    }
-    .descr_div {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        gap: 8px;
-    }
-    .education_card:nth-child(9) h3 {
-        font-size: 24px;
-    }
-    .education_card:nth-child(5) h3 {
-        font-size: 24px;
+        object-fit: cover;
+        transition: all 300ms ease;
     }
     .education_card h3 {
-        font-size: 32px;
-        text-align: start;
-        margin-bottom: 0px;
         line-height: 100%;
-    }
-    .education_card h4 {
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 100%;
-    }
-    .education_card h5 {
-        font-size: 16px;
-        font-weight: 200;
-        line-height: 100%;
-        max-height: 80px;
-        overflow: hidden;
-        -webkit-line-clamp: 3;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    }
-    .btn {
-        align-self: center;
-        justify-self: center;
-    }
-
-    .big_card {
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, .7);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        opacity: 0;
-        transition: all 500ms ease;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-    .active {
-        z-index: 999;
-        opacity: 1;
-    }
-    .big_card_body {
-        width: 600px;
-        border-radius: 32px;
-        border: 1px solid #494949;
-        background: #333;
-        display: grid;
-        flex-direction: column;
-        padding: 10px;
-        justify-content: flex-start;
-        box-sizing: border-box;
-    }
-    .big_card_body img {
-        width: 100%;
-        border-radius: 22px 22px 0px 0px;
-        margin-bottom: 12px;
-    }
-    .big_card_body h3 {
-        font-size: 32px;
-        text-align: start;
-        margin-bottom: 0px;
-        margin-bottom: 12px;
-        line-height: 100%;
-    }
-    .big_card_body h4 {
-        font-size: 24px;
-        margin-bottom: 12px;
-        font-weight: 500;
-        line-height: 100%;
-    }
-    .big_card_desc {
-        max-height: 240px;
-        overflow-y: scroll;
-    }
-    .btn {
-        align-self: center;
-        justify-self: center;
-        margin-top: 32px;
-    }
-    .big_card:nth-child(9) h3 {
-        font-size: 24px;
-    }
-    .big_card:nth-child(5) h3 {
-        font-size: 24px;
+    .education_card img:hover {
+        transform: scale(1.2);
     }
     @media all and (max-width: 430px) {
-        .education_main {
+    .education_main {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 80px;
         padding: 0px 10px;
+        box-sizing: border-box;
     }
     .education_div {
         width: 100%;
@@ -291,114 +171,27 @@
     }
     .education_card {
         width: 100%;
-        height: 480px;
-        border-radius: 32px;
+        height: 180px;
         display: flex;
-        flex-direction: column;
-        padding: 10px;
-        justify-content: space-between;
+        position: relative;
+        border-radius: 24px;
         box-sizing: border-box;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
     .education_card img {
         width: 100%;
-        border-radius: 22px 22px 0px 0px;
+        object-fit: cover;
+        transition: all 300ms ease;
     }
-    .descr_div {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        gap: 8px;
-    }
-    .education_card:nth-child(9) h3 {
-        font-size: 24px;
-    }
-    .education_card:nth-child(5) h3 {
-        font-size: 24px;
-    }
-    .education_card h3 {
-        font-size: 32px;
-        text-align: start;
-        margin-bottom: 0px;
+    h3 {
         line-height: 100%;
-    }
-    .education_card h4 {
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 100%;
-    }
-    .education_card h5 {
-        font-size: 16px;
-        font-weight: 200;
-        line-height: 100%;
-        max-height: 80px;
-        overflow: hidden;
-        -webkit-line-clamp: 3;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    }
-    button {
-        align-self: center;
-        justify-self: center;
-    }
+        font-size: 48px;
 
-    .big_card {
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, .7);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
     }
-    .big_card_body {
-        width: 370px;
-        border-radius: 32px;
-        border: 1px solid #494949;
-        background: #333;
-        display: grid;
-        flex-direction: column;
-        padding: 10px;
-        justify-content: flex-start;
-        box-sizing: border-box;
+    .education_card img:hover {
+        transform: scale(1.2);
     }
-    .big_card_body img {
-        width: 100%;
-        border-radius: 22px 22px 0px 0px;
-        margin-bottom: 12px;
-    }
-    .big_card_body h3 {
-        font-size: 32px;
-        text-align: start;
-        margin-bottom: 0px;
-        margin-bottom: 12px;
-        line-height: 100%;
-    }
-    .big_card_body h4 {
-        font-size: 24px;
-        margin-bottom: 12px;
-        font-weight: 500;
-        line-height: 100%;
-    }
-    .big_card_body h5 {
-        font-size: 16px;
-        font-weight: 200;
-        line-height: 100%;
-    }
-    .big_card_body button {
-        align-self: center;
-        justify-self: center;
-        margin-top: 32px;
-    }
-    .big_card:nth-child(9) h3 {
-        font-size: 24px;
-    }
-    .big_card:nth-child(5) h3 {
-        font-size: 24px;
-    }
-    * {
-    box-sizing: border-box;
-}
     }
 </style>

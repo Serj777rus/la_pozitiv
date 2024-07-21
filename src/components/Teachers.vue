@@ -11,7 +11,7 @@
             <div class="teachers_block" :class="{nonactive: isShowCard !== null}">
                 <div class="teacher_card" v-for="card in teachers" :key="card.id">
                     <div class="back_grad">
-                        <img :src="card.attributes.image.data.attributes.url">
+                        <img :src="`${urlmedia}` + card.attributes.image.data.attributes.url">
                     </div>
                     <div class="about_teacher">
                         <div class="names">{{ card.attributes.name }} {{ card.attributes.lastname }}</div>
@@ -27,7 +27,7 @@
             <div class="card_left_side">
                 <div class="teacher_card_big">
                     <div class="back_grad_big">
-                        <img :src="morecards.attributes.image.data.attributes.url">
+                        <img :src="`${urlmedia}` + morecards.attributes.image.data.attributes.url">
                     </div>
                     <p>{{ morecards.attributes.article }}</p>
                     <div class="about_teacher_big">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="right_down_right">
                         <p>Видеовизитка</p>
-                        <video :src="morecards.attributes?.video?.data?.attributes?.url || 'google.com'" controls></video>
+                        <video :src="`${urlmedia}` + morecards.attributes?.video?.data?.attributes?.url || 'google.com'" controls></video>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,8 @@ export default {
     return {
       teachers: [],
       isShowCard: null,
-      url: process.env.VUE_APP_SERVER
+      url: process.env.VUE_APP_SERVER,
+      urlmedia: 'https://admin.la-pozitiv.ru'
     };
   },
   methods: {

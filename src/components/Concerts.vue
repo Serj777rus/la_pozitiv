@@ -47,13 +47,13 @@
             <div class="concerts_video_block">
             <p>Видео</p>
             <div class="video">
-                <video v-for="video in videos" :key="video.id" :src="video.attributes.url" controls></video>
+                <video v-for="video in videos" :key="video.id" :src="`${urlmedia}` + video.attributes.url" controls></video>
             </div>
             </div>
             <div class="concerts_photo_block">
                 <p>Фотографии</p>
                 <div class="photo">
-                    <img v-for="photo in photos" :key="photo.id" :src="photo.attributes.url" @click="showBigPhoto(photo)">
+                    <img v-for="photo in photos" :key="photo.id" :src="`${urlmedia}` + photo.attributes.url" @click="showBigPhoto(photo)">
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
 </div>
 <div :class="{active: this.isShowPhoto !== ''}" class="big_photo_modal">
     <div class="big_photo_modal_div">
-        <img :src="isShowPhoto">
+        <img :src="`${urlmedia}` + isShowPhoto">
         <font-awesome-icon :icon="['fas', 'xmark']" style="color: #fff; font-size: 32px; position: absolute; top: 24px; right: 24px; cursor: pointer;" @click="closePhotoModal" />
     </div>
 </div>
@@ -318,7 +318,8 @@ import HeadMenu from './UI_components/HeadMenu.vue';
                 videos: [],
                 photos: [],
                 url: process.env.VUE_APP_SERVER,
-                isShowPhoto: ''
+                isShowPhoto: '',
+                urlmedia: 'https://admin.la-pozitiv.ru'
             }
         },
         methods: {

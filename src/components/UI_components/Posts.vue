@@ -24,7 +24,7 @@
         <div class="modal_div">
             <div class="text">
                 <div class="img_date">
-                    <img :src="postModal.attributes.image.data.attributes.url">
+                    <img :src="`${urlmedia}` + postModal.attributes.image.data.attributes.url">
                     <p>{{ postModal.attributes.date }}</p>
                 </div>
                 <h5>{{ postModal.attributes.name }}</h5>
@@ -77,8 +77,8 @@
             },
             async testGet() {
                 try {
-                    // const response = await axios.get(`${this.serverUrl}/testroute`);
-                    const response = await axios.get('https://admin.la-pozitiv.ru/api/posts?populate=*');
+                    const response = await axios.get('https://www.la-pozitiv.ru:3000/testroute');
+                    // const response = await axios.get('https://admin.la-pozitiv.ru/api/posts?populate=*');
                     if (response.status == 200) {
                         console.log(response.data.data);
                         this.posts = response.data.data;
