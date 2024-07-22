@@ -19,8 +19,8 @@
 
 <script>
 import axios from 'axios';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-  import { fetchFile } from '@ffmpeg/util';
+// import { FFmpeg } from '@ffmpeg/ffmpeg';
+//   import { fetchFile } from '@ffmpeg/util';
 
 export default {
   data() {
@@ -34,7 +34,7 @@ export default {
   methods: {
     async getReviews() {
       try {
-        const response = await axios.get('https://admin.la-pozitiv.ru/api/reviews?populate=*');
+        const response = await axios.get(`${this.server}/getreviws`);
         if (response.status === 200) {
           this.reviews = response.data.data;
           console.log(this.reviews);
@@ -44,62 +44,76 @@ export default {
         console.error('Error fetching reviews:', error);
       }
     },
-    async generatePosters() {
-  const ffmpeg = new FFmpeg({ log: true });
-  await ffmpeg.load();
-  console.log('FFmpeg loaded');
+//     async generatePosters() {
+//   const ffmpeg = new FFmpeg({ log: true });
+//   await ffmpeg.load();
+//   console.log('FFmpeg loaded');
 
-  for (let review of this.reviews) {
-    try {
-      const url = `${this.urlmedia}${review.attributes.video.data.attributes.url}`;
-      console.log(`Fetching video from ${url}`);
-      const videoData = await fetchFile(url);
-      console.log('Video fetched');
+//   for (let review of this.reviews) {
+//     try {
+//       const url = `${this.urlmedia}${review.attributes.video.data.attributes.url}`;
+//       console.log(`Fetching video from ${url}`);
+//       const videoResponse = await fetchFile(url);
+//       console.log('Video fetched, length:', videoResponse.byteLength);
 
-      ffmpeg.writeFile('input.mp4', videoData);
-      console.log('Video written to virtual filesystem');
+//       if (videoResponse.byteLength === 0) {
+//         console.error('Error: Video file is empty.');
+//         continue;
+//       }
 
-      let result = await ffmpeg.exec('-i', 'input.mp4', '-vf', 'scale=320:-1', '-b:v', '500k', 'compressed.mp4');
-      console.log('Video compressed result:', result);
+//       await ffmpeg.writeFile('input.mp4', new Uint8Array(videoResponse));
+//       console.log('Video written to virtual filesystem');
 
-      // Захват вывода ошибок
-      const errorOutput = await ffmpeg.getErrorOutput();
-      if (errorOutput) {
-        console.error('FFmpeg error output:', errorOutput);
-      }
+//       const writtenFile = await ffmpeg.readFile('input.mp4');
+//       console.log('Written file length:', writtenFile.byteLength);
+//       console.log('Written file:', writtenFile);
 
-      result = await ffmpeg.exec('-i', 'compressed.mp4', '-ss', '00:00:01.000', '-vframes', '1', 'output.png');
-      console.log('Frame captured result:', result);
+//       if (writtenFile.byteLength === 0) {
+//         console.error('Error: Video file was not written correctly.');
+//         continue;
+//       }
 
-      // Захват вывода ошибок
-      const errorOutput2 = await ffmpeg.getErrorOutput();
-      if (errorOutput2) {
-        console.error('FFmpeg error output:', errorOutput2);
-      }
+//       // Используем команду для захвата одного изображения на 2-й секунде
+//       let command = '-i input.mp4 -ss 00:00:02.000 -vframes 1 frame.jpeg';
+//       console.log(`Executing FFmpeg command: ${command}`);
+//       let result = await ffmpeg.exec(...command.split(' '));
+//       console.log('Image extraction result:', result);
 
-      const imageData = ffmpeg.readFile('output.png');
-      console.log('Image data type:', typeof imageData);
-      console.log('Image data length:', imageData.length);
-      console.log('Image data buffer length:', imageData.buffer.byteLength);
-      
-      if (imageData.length === 0 || imageData.buffer.byteLength === 0) {
-        throw new Error('Generated image data is empty');
-      }
+//       // Захват ошибок FFmpeg
+//       const errorOutput = await ffmpeg.getErrorOutput();
+//       if (errorOutput.length > 0) {
+//         console.error('FFmpeg error output:', new TextDecoder().decode(errorOutput));
+//       }
 
-      const imgBlob = new Blob([imageData.buffer], { type: 'image/png' });
-      const imgUrl = URL.createObjectURL(imgBlob);
+//       if (result !== 0) {
+//         console.error('FFmpeg image extraction failed with result code:', result);
+//         continue;
+//       }
 
-      review.poster = imgUrl;
-      console.log('Poster URL:', imgUrl);
+//       // Чтение созданного изображения
+//       const imageData = await ffmpeg.readFile('frame.jpeg');
+//       console.log('Image data type:', typeof imageData);
+//       console.log('Image data length:', imageData.byteLength);
+//       console.log('Image data buffer length:', imageData.buffer.byteLength);
 
-      ffmpeg.deleteFile('input.mp4');
-      ffmpeg.deleteFile('compressed.mp4');
-      ffmpeg.deleteFile('output.png');
-    } catch (error) {
-      console.error('Error processing review:', review, error);
-    }
-  }
-},
+//       if (imageData.byteLength === 0 || imageData.buffer.byteLength === 0) {
+//         throw new Error('Generated image data is empty');
+//       }
+
+//       const imgBlob = new Blob([imageData.buffer], { type: 'image/png' });
+//       const imgUrl = URL.createObjectURL(imgBlob);
+
+//       review.poster = imgUrl;
+//       console.log('Poster URL:', imgUrl);
+
+//       // Удаление временных файлов
+//       await ffmpeg.deleteFile('input.mp4');
+//       await ffmpeg.deleteFile('frame.jpeg');
+//     } catch (error) {
+//       console.error('Error processing review:', review, error);
+//     }
+//   }
+// }
   },
   created() {
     this.getReviews();
