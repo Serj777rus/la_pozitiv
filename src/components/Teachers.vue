@@ -7,11 +7,11 @@
             <!-- <div class="teachers_back">
                 <img src="../assets/photos/teachers/fon.png">
             </div> -->
-            <div class="teachers_back">
+            <!-- <div class="teachers_back">
                 <div class="teacher" v-for="img in teachers" :key="img.id">
                     <img :src="`${urlmedia}` + img.attributes.image.data.attributes.url">
                 </div>
-            </div>
+            </div> -->
             <div class="line"></div>
             <div class="teachers_block" :class="{nonactive: isShowCard !== null}">
                 <div class="teacher_card" v-for="card in teachers" :key="card.id">
@@ -123,8 +123,8 @@ export default {
       }
     },
     toggle() {
-                this.$refs.vidgetComponent.toggleActive();
-            }
+        this.$refs.vidgetComponent.toggleActive();
+    }
   },
   created() {
     this.getTeachersData();

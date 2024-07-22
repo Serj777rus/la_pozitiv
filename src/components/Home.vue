@@ -218,6 +218,8 @@
     import PopUp from './UI_components/PopUp.vue'
     import axios from 'axios'
     import Vidget from './UI_components/Vidget.vue'
+    // import { FFmpeg } from '@ffmpeg/ffmpeg';
+    // import { fetchFile } from '@ffmpeg/util';
     export default {
         components: {
             HeadMenu,
@@ -269,7 +271,8 @@
                 isShowPhoto: 0,
                 isShowPopUp: false,
                 url: process.env.VUE_APP_SERVER,
-                urlmedia: 'https://admin.la-pozitiv.ru'
+                urlmedia: 'https://admin.la-pozitiv.ru',
+                ffmpeg: null,
             }
         },
         methods: {
@@ -296,7 +299,7 @@
             },
             async getAboutMedia() {
                 try {
-                    const response = await axios.get('https://www.la-pozitiv.ru:3000/getaboutmedia')
+                    const response = await axios.get(`${this.url}/getaboutmedia`)
                     if (response.status == 200) {
                         let data = response.data.data;
                         console.log(data);
@@ -326,16 +329,54 @@
                         }
                         this.aboutphoto = newArrPh;
                         this.aboutvideo = newArrVi;
+                        console.log(this.aboutvideo);
+                        // await this.generatePosters();
                     }
                 } catch (error) {
                     console.log(error)
                 }
             },
+    //         async generatePosters() {
+    //   if (!this.ffmpeg) {
+    //     // Создание экземпляра FFmpeg
+    //     this.ffmpeg = new FFmpeg({ log: true });
+    //     await this.ffmpeg.load();
+    //   }
+
+    //   for (let about of this.aboutvideo) {
+    //     const videoUrl = `${this.urlmedia}${about.video}`;
+
+    //     try {
+    //       // Загрузка видео
+    //       const response = await fetch(videoUrl);
+    //       const videoBlob = await response.blob();
+    //       const videoFile = new File([videoBlob], 'input.mp4', { type: 'video/mp4' });
+
+    //       // Запись файла в файловую систему FFmpeg
+    //       await this.ffmpeg.writeFile('input.mp4', await fetchFile(videoFile));
+
+    //       // Запуск команды FFmpeg для создания кадра
+    //       await this.ffmpeg.exec(['-i', 'input.mp4', '-ss', '00:00:10', '-frames:v', '1', 'output.jpg']);
+
+    //       // Чтение файла изображения из файловой системы FFmpeg
+    //       const data = this.ffmpeg.readFile('output.jpg');
+    //       const blob = new Blob([data.buffer], { type: 'image/jpeg' });
+    //       const posterUrl = URL.createObjectURL(blob);
+
+    //       // Установка URL как poster для видео
+    //       about.poster = posterUrl;
+
+    //       console.log('Это постер', about.poster); // Для отладки
+    //     } catch (error) {
+    //       console.error('Ошибка при обработке видео:', error);
+    //     }
+    //   }
+    // },
             toggle() {
                 this.$refs.vidgetComponent.toggleActive();
             }
         },
-        mounted() {
+        created() {
             this.getAboutMedia();
         }
     }
