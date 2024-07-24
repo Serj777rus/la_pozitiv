@@ -34,11 +34,12 @@ export default {
   methods: {
     async getReviews() {
       try {
-        const response = await axios.get(`${this.server}/getreviws`);
+        //const response = await axios.get(`${this.server}/getreviws`);
+        const response = await axios.get('https://admin.la-pozitiv.ru/api/reviews?populate=*');
         if (response.status === 200) {
           this.reviews = response.data.data;
           console.log(this.reviews);
-          await this.generatePosters();
+          // await this.generatePosters();
         }
       } catch (error) {
         console.error('Error fetching reviews:', error);
