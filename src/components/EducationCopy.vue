@@ -153,7 +153,7 @@ created() {
         width: 500px;
         height: 500px;
         border-radius: 50%;
-        position: relative;
+        /* position: relative; */
         display: flex;
         overflow: hidden;
         background: #337AB7;
@@ -161,11 +161,9 @@ created() {
         box-sizing: border-box;
     }
     .photo_block img {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        height: 500px;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
     }
     .name_desc_block {
         width: 500px;
@@ -352,6 +350,7 @@ created() {
         gap: 4px;
         flex-wrap: wrap;
         margin-top: 40px;
+        justify-content: center;
     }
     .card_prob {
         display: flex;

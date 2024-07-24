@@ -42,8 +42,7 @@ import Vidget from './UI_components/Vidget.vue';
         methods: {
             async getEducation() {
                 try {
-                    // const response = await axios.get(`${this.url}/geteducation`);
-                    const response = await axios.get('https://admin.la-pozitiv.ru/api/educations?populate[0]=image&populate[1]=bigimage&populate[2]=napravlenia.img&populate[3]=napravlenia.osobennosti&populate[4]=napravlenia.img.formats&populate[5]=navik&populate[6]=proba');
+                    const response = await axios.get(`${this.url}/geteducation`);
                     if (response.status == 200) {
                         console.log(response.data.data);
                         this.educations = response.data.data;
@@ -101,12 +100,11 @@ import Vidget from './UI_components/Vidget.vue';
     }
     .education_cards {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto;
-        row-gap: 40px;
+        display: flex;
         justify-content: space-between;
         box-sizing: border-box;
+        flex-wrap: wrap;
+        row-gap: 32px;
     }
     .education_card {
         width: 380px;
