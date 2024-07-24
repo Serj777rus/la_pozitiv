@@ -20,8 +20,8 @@
                             <div class="card_desc">
                                 <h3>{{ napr.name }}</h3>
                                 <blockquote class='blockquote-7'>{{ napr.article }}</blockquote>
-                                <h4>Кому подойдет? <span>{{ napr.forwho }}</span></h4>
-                                <h5>Особенности направления: 
+                                <h4 v-if="napr.forwho">Кому подойдет? <span>{{ napr.forwho }}</span></h4>
+                                <h5 v-if="napr.osobennosti.length > 0">Особенности направления: 
                                     <ul>
                                         <li v-for="list in napr.osobennosti" :key="list.id">{{ list.text }}</li>
                                     </ul>
