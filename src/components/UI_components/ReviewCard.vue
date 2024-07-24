@@ -8,6 +8,7 @@
             v-for="video in reviews"
             :key="video.id"
             :src="`${urlmedia}${video.attributes.video.data.attributes.url}`"
+            poster="@/assets/videos/review.jpg"
             controls
           ></video>
         </div>

@@ -69,7 +69,7 @@
                     <div class="video_text">
                         <h3>Видеообзор</h3>
                     </div>
-                    <video v-for="video in aboutvideo" :key="video.id" :src="`${urlmedia}` + video.video" controls></video>
+                    <video v-for="video in aboutvideo" :key="video.id" :src="`${urlmedia}` + video.video" poster="../assets//videos/about.jpg" controls></video>
                 </div>
                 <div class="about_photo">
                     <div class="video_text">
@@ -198,7 +198,7 @@
     <div class="concert_video">
         <div class="concert_video_div">
             <h3>Welcome video</h3>
-            <video src="../assets/videos/about_video.mp4" controls></video>
+            <video src="../assets/videos/about_video.mp4" poster="../assets/videos/welcome.jpg" controls></video>
         </div>
     </div>
     <Questions></Questions>
@@ -330,48 +330,11 @@
                         this.aboutphoto = newArrPh;
                         this.aboutvideo = newArrVi;
                         console.log(this.aboutvideo);
-                        // await this.generatePosters();
                     }
                 } catch (error) {
                     console.log(error)
                 }
             },
-    //         async generatePosters() {
-    //   if (!this.ffmpeg) {
-    //     // Создание экземпляра FFmpeg
-    //     this.ffmpeg = new FFmpeg({ log: true });
-    //     await this.ffmpeg.load();
-    //   }
-
-    //   for (let about of this.aboutvideo) {
-    //     const videoUrl = `${this.urlmedia}${about.video}`;
-
-    //     try {
-    //       // Загрузка видео
-    //       const response = await fetch(videoUrl);
-    //       const videoBlob = await response.blob();
-    //       const videoFile = new File([videoBlob], 'input.mp4', { type: 'video/mp4' });
-
-    //       // Запись файла в файловую систему FFmpeg
-    //       await this.ffmpeg.writeFile('input.mp4', await fetchFile(videoFile));
-
-    //       // Запуск команды FFmpeg для создания кадра
-    //       await this.ffmpeg.exec(['-i', 'input.mp4', '-ss', '00:00:10', '-frames:v', '1', 'output.jpg']);
-
-    //       // Чтение файла изображения из файловой системы FFmpeg
-    //       const data = this.ffmpeg.readFile('output.jpg');
-    //       const blob = new Blob([data.buffer], { type: 'image/jpeg' });
-    //       const posterUrl = URL.createObjectURL(blob);
-
-    //       // Установка URL как poster для видео
-    //       about.poster = posterUrl;
-
-    //       console.log('Это постер', about.poster); // Для отладки
-    //     } catch (error) {
-    //       console.error('Ошибка при обработке видео:', error);
-    //     }
-    //   }
-    // },
             toggle() {
                 this.$refs.vidgetComponent.toggleActive();
             }
