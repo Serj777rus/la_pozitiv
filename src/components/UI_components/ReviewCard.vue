@@ -8,7 +8,6 @@
             v-for="video in reviews"
             :key="video.id"
             :src="`${urlmedia}${video.attributes.video.data.attributes.url}`"
-            :poster="`${urlmedia}${video.poster}`"
             controls
           ></video>
         </div>
@@ -34,7 +33,7 @@ export default {
         const response = await axios.get(`${this.server}/getreviws`);
         if (response.status === 200) {
           // this.reviews = response.data.data;
-          this.reviews = response.data;
+          this.reviews = response.data.data;
           console.log(this.reviews);
         }
       } catch (error) {
@@ -73,21 +72,21 @@ export default {
     flex-direction: row;
     gap: 32px;
     padding: 16px 0px;
-    overflow: auto;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
   }
   .review_card {
     width: 100%;
     display: flex;
     flex-direction: row;
     gap: 32px;
-    scroll-snap-align: start;
+    overflow: auto;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
   }
   .review_card video {
     width: 500px;
     border-radius: 32px;
     box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, .3);
+    scroll-snap-align: start;
   }
   @media all and (max-width: 440px) {
     .reviews {
