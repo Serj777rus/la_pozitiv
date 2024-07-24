@@ -272,7 +272,6 @@
                 isShowPopUp: false,
                 url: process.env.VUE_APP_SERVER,
                 urlmedia: 'https://admin.la-pozitiv.ru',
-                ffmpeg: null,
             }
         },
         methods: {

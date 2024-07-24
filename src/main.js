@@ -9,7 +9,7 @@ import Price from './components/Price.vue'
 import Concerts from './components/Concerts.vue'
 import Contact from './components/Contact.vue'
 import EducationCopy from './components/EducationCopy.vue'
-
+import store from './store'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -70,5 +70,6 @@ const app = createApp(App);
 // Регистрируем компонент fontawesome globally
 app.component('font-awesome-icon', FontAwesomeIcon);
 
-app.use(router)
+app.use(router);
+app.use(store)
 app.mount('#app')

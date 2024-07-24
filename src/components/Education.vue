@@ -55,13 +55,10 @@ import Vidget from './UI_components/Vidget.vue';
                 }
             },
             transferId(card) {
-                localStorage.clear();
                 if (card) {
-                    localStorage.setItem('card', JSON.stringify(card))
+                    this.$store.dispatch('updateCard', card)
                     console.log('Transferring card:', card);
-                    this.$router.push({
-                    name: 'lesson'
-                    });
+                    this.$router.push({ name: 'lesson' });
                 } else {
                     console.error('card is undefined');
                 }

@@ -96,16 +96,22 @@ export default {
       isShowPopUp: false
     };
   },
+  computed: {
+    card() {
+        return this.$store.getters.getCard;
+    }
+  },
+  watch: {
+    card(newCard) {
+      this.post = newCard;
+    }
+  },
 created() {
-    if (localStorage.getItem('card')) {
-      try {
-        this.post = JSON.parse(localStorage.getItem('card')); // Десериализуем строку JSON в объект
+    if (this.card) {
+        this.post = this.card;
         console.log(this.post);
-      } catch (e) {
-        console.error('Failed to parse posts:', e);
-      }
     } else {
-      console.error('posts is undefined');
+        console.error('не определяется')
     }
   },
   methods: {
