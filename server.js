@@ -3,6 +3,9 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+// const ffmpeg = require('fluent-ffmpeg');
+const path = require('path');
+const { exec } = require('child_process');
 
 const hostname = '192.168.0.102';
 const PORT = 3000;
@@ -11,10 +14,10 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const SERVER_APP = process.env.SERVER_APP
+// const SERVER_APP = process.env.SERVER_APP
 app.use(cors({
     credentials: true,
-    origin: SERVER_APP
+    origin: '*'
 }));
 
 app.get('/api/testroute', async (req, res) => {
@@ -50,16 +53,40 @@ app.get('/getquest', async(req, res) => {
         console.error(error)
     }
 })
-app.get('/getreviws', async(req, res) => {
-    const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/reviews?populate=*';
+app.get('/getreviews', async (req, res) => {
+    const url = 'https://admin.la-pozitiv.ru/api/reviews?populate=*';
     try {
         const response = await axios.get(url);
-        res.status(200).json(response.data);
-        console.log(response.data);
+        // res.status(200).json(response.data);
+        // console.log(response.data);
+        
+        const data = response.data.data;
+
+        for (let el of data) {
+            let timeSt = Date.now()
+            const outputFilePath = path.join(__dirname, 'posters', `${timeSt}.jpg`);
+            const videoUrl = `https://admin.la-pozitiv.ru${el.attributes.video.data.attributes.url}`;
+            const command = `ffmpeg -i "${videoUrl}" -ss 00:00:05 -vframes 1 -q:v 1 "${outputFilePath}"`;
+
+            exec(command, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Ошибка при извлечении кадра: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                }
+                console.log(`Кадр сохранен как: ${outputFilePath}`);
+            });
+            el.poster = outputFilePath;
+        }
+        // console.log(data)
+        res.status(200).json(data);
     } catch (error) {
-        console.error(error)
+        console.error(error);
+        res.status(500).json({ error: 'Ошибка при получении отзывов' });
     }
-})
+});
 
 app.get('/getteachers', async(req, res) => {
     const url = 'https://supportive-heart-1886e94650.strapiapp.com/api/teachers?populate=*';
