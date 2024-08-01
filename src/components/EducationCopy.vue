@@ -63,7 +63,7 @@
                 <span>Оставьте заявку на консультацию или запишитесь на пробный урок</span>
                 <div class="buttons">
                     <Button @click="showPop"><slot>Консультация</slot></Button>
-                    <Button><slot>Запись</slot></Button>
+                    <Button @click="toggle"><slot>Запись</slot></Button>
                 </div>
             </div>
         </div>
